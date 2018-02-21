@@ -17,8 +17,6 @@
     </thead>
     <tbody>
     <tr th:each="user: ${users}">
-        <td th:text="${user.id}"/>
-        <!--/*@thymesVar id="user" type="at.kuchel.model.User"*/-->
         <td th:text="${{user.username}}"/>
         <td th:text="${{user.password}}"/>
         <td th:text="${{user.birthday}}"/>
@@ -26,5 +24,5 @@
     </tr>
     </tbody>
 </table>
-</tbody>
 </body>
+</html>
