@@ -25,6 +25,9 @@ public class User extends AbstractEntity<Long> {
     @Column(name = "BIRTHDAY")
     private LocalDate birthday;
 
+    @Column(name = "MAIL_ADDRESS")
+    private String mailAddress;
+
     @Override
     protected Long getId() {
         return id;
@@ -56,5 +59,13 @@ public class User extends AbstractEntity<Long> {
 
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
+    }
+
+    public String getMailAddress() {
+        return mailAddress;
+    }
+
+    public void setMailAddress(String mailAddress) {
+        this.mailAddress = mailAddress;
     }
 }
