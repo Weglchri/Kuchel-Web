@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User List</title>
+</head>
+<body>
+<h1>Student List</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th th:text="Id"/>
+        <th th:text="Username"/>
+        <th th:text="Password"/>
+        <th th:text="Birthday"/>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user: ${users}">
+        <td th:text="${user.id}"/>
+        <!--/*@thymesVar id="user" type="at.kuchel.model.User"*/-->
+        <td th:text="${{user.username}}"/>
+        <td th:text="${{user.password}}"/>
+        <td th:text="${{user.birthday}}"/>
+
+    </tr>
+    </tbody>
+</table>
+</tbody>
+</body>
