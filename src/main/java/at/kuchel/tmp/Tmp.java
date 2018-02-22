@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 
 @Component
-public class TmpTestClass {
+public class Tmp {
 
     @Autowired
     private UserRepository userRepository;
@@ -18,7 +18,7 @@ public class TmpTestClass {
     private UserService userService;
 
     @Autowired
-    public TmpTestClass(UserRepository userRepository, UserService userService){
+    public Tmp(UserRepository userRepository, UserService userService){
         User newUser = new User();
         newUser.setUsername("tempuser");
         newUser.setBirthday(LocalDate.now());

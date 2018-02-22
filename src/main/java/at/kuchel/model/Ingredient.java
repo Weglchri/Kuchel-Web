@@ -3,6 +3,8 @@ package at.kuchel.model;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "INGREDIENT")
@@ -20,13 +22,13 @@ public class Ingredient extends AbstractEntity<Long> {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "recipe_id", nullable = false, insertable = false, updatable = false)
-    private Recipe recipe;
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @JoinTable(name = "RECIPE_INGREDIENT", joinColumns = {@JoinColumn(name = "INGREDIENT_ID", nullable = true, updatable = true)}, inverseJoinColumns = {@JoinColumn(name = "RECIPE_ID", nullable = true, updatable = true)})
+    private Set<Recipe> recipes = new HashSet<>(0);
 
     @Override
     protected Long getId() {
-        return null;
+        return id;
     }
 
     public void setId(Long id) {
@@ -49,11 +51,11 @@ public class Ingredient extends AbstractEntity<Long> {
         this.description = description;
     }
 
-    public Recipe getRecipe() {
-        return recipe;
+    public Set<Recipe> getRecipe() {
+        return recipes;
     }
 
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
+    public void setRecipe(Set<Recipe> recipes) {
+        this.recipes = recipes;
     }
 }

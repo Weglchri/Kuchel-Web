@@ -13,16 +13,20 @@ public class Recipe extends AbstractEntity<Long> {
     @GeneratedValue
     private Long id;
 
-    @OneToMany(mappedBy = "recipe")
-    private Set<Ingredient> ingredients;
-
     @NotBlank
     @Column(name = "INSTRUCTION")
     private String instruction;
 
+    @NotBlank
+    @Column(name = "NAME")
+    private String name;
+
+    @ManyToMany(mappedBy = "recipes")
+    private Set<Ingredient> ingredients;
+
     @Override
     protected Long getId() {
-        return null;
+        return id;
     }
 
     public void setId(Long id) {
@@ -43,5 +47,13 @@ public class Recipe extends AbstractEntity<Long> {
 
     public void setInstruction(String instruction) {
         this.instruction = instruction;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
