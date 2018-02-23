@@ -1,12 +1,10 @@
 package at.kuchel.tmp;
 
-import at.kuchel.model.User;
+import at.kuchel.repostitory.RoleRepository;
 import at.kuchel.repostitory.UserRepository;
 import at.kuchel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDate;
 
 @Component
 public class Tmp {
@@ -18,19 +16,17 @@ public class Tmp {
     private UserService userService;
 
     @Autowired
-    public Tmp(UserRepository userRepository, UserService userService){
-        User newUser = new User();
-        newUser.setUsername("tempuser");
-        newUser.setBirthday(LocalDate.now());
-        newUser.setPassword("gemheim");
+    private RoleRepository roleRepository;
 
-
-        System.out.println(newUser);
-        userService.addUser(newUser);
-
-        System.out.println(userRepository.findOneByUsername("tempuser"));
-        System.out.println(userRepository.findAll().size());
-
-    }
-
+//    @Autowired
+//    public Tmp(UserRepository userRepository, UserService userService,RoleRepository roleRepository){
+//        User newUser = new User();
+//        newUser.setUsername("bob");
+//        newUser.setBirthday(LocalDate.now());
+//        Role userRole = roleRepository.findByRole("USER");
+//        newUser.setRoles(new HashSet<>(Arrays.asList(userRole)));
+//        newUser.setPassword("pass");
+//
+//        userService.addUser(newUser);
+//    }
 }

@@ -6,15 +6,17 @@ import at.kuchel.repostitory.RoleRepository;
 import at.kuchel.repostitory.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
+@Service("userService")
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private RoleRepository roleRepository;
@@ -23,7 +25,7 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public User getUserByUsername(String username) {
-        return userRepository.findOneByUsername(username);
+        return userRepository.getUserByUsername(username);
     }
 
     public void addUser(User user) {
