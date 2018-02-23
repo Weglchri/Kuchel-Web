@@ -43,15 +43,15 @@ public class LoginController {
         if (Objects.nonNull(userExists)) {
             bindingResult
                     .rejectValue("username", "error.user",
-                            "There is already a user registered with the username provided");
+                            "Es existiert bereits ein Benutzer mit diesem Usernamen");
         }
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("registration");
         } else {
             userService.addUser(user);
-            modelAndView.addObject("successMessage", "User has been registered successfully");
+            modelAndView.addObject("successMessage", "Benutzer hat sich erfolgreich registriert");
             modelAndView.addObject("user", new User());
-            modelAndView.setViewName("registration");
+            modelAndView.setViewName("login");
 
         }
         return modelAndView;
@@ -62,9 +62,16 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.getUserByUsername(auth.getName());
-        modelAndView.addObject("username", "Welcome " + user.getUsername() + " " + user.getMailAddress());
-        modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
+        modelAndView.addObject("username", "Hallo " + user.getUsername());
+        modelAndView.addObject("userMessage", "Content Available Only for Users with Admin Role");
         modelAndView.setViewName("user/home");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = { "/logout"}, method = RequestMethod.GET)
+    public ModelAndView logout() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("login");
         return modelAndView;
     }
 }

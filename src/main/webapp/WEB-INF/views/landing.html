@@ -2,10 +2,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>User List</title>
+    <title>User Liste</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h1>User List</h1>
+<form th:action="@{/logout}" method="get">
+    <button class="btn btn-md btn-warning btn-block" type="Submit">Aussteigen</button>
+</form>
+
+<h1>User Liste</h1>
 <table border="1">
     <thead>
     <tr>
