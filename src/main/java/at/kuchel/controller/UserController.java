@@ -13,11 +13,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    @RequestMapping(value = "/landing", method = RequestMethod.GET)
     public String listStudent(Model model) {
 
         model.addAttribute("users", userService.getAllUsers());
 
-        return "users";
+        return "landing";
     }
 }

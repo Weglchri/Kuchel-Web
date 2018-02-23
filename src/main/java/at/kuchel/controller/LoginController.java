@@ -27,14 +27,6 @@ public class LoginController {
         return modelAndView;
     }
 
-    @RequestMapping(value = {"/", "/login"}, method = RequestMethod.POST)
-    public ModelAndView loginPost() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("users");
-        return modelAndView;
-    }
-
-
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView registration() {
         ModelAndView modelAndView = new ModelAndView();
