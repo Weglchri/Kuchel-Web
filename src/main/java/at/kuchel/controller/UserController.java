@@ -1,8 +1,7 @@
 package at.kuchel.controller;
 
-import at.kuchel.repostitory.UserRepository;
-import at.kuchel.util.UserRetriever;
 import at.kuchel.service.UserService;
+import at.kuchel.util.UserRetriever;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +20,6 @@ public class UserController {
     @RequestMapping(value = "/landing", method = RequestMethod.GET)
     public String listStudent(Model model) {
         model.addAttribute("users", userService.getAllUsers());
-       System.out.println(userRetriever.getCurrentUser().toString());
         return "landing";
     }
 }
