@@ -16,6 +16,10 @@ public class Instruction extends AbstractEntity<Long> {
     @Column(name = "INSTRUCTION_DESCRIPTION")
     private String instructionDescription;
 
+    @NotBlank
+    @Column(name = "STEP")
+    private String step;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "RECIPE_ID")
     public Recipe recipe;
@@ -39,5 +43,13 @@ public class Instruction extends AbstractEntity<Long> {
 
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
+    }
+
+    public String getStep() {
+        return step;
+    }
+
+    public void setStep(String step) {
+        this.step = step;
     }
 }

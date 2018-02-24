@@ -32,7 +32,7 @@
     <div th:each="instruction : ${recipe.getInstructions()}" class="recipe-instructions margin-0-auto">
 
         <div class="step">
-            <div class="title-text" th:inline="text">Schritt [[${instruction.id}]]</div>
+            <div class="title-text" th:inline="text">Schritt [[${instruction.step}]]</div>
             <p></p>
             <p th:utext="${instruction.getInstruction()}">[[${instruction.instructionDescription}]]</p>
         </div>
