@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface IngredientService {
     List<Ingredient> getAllIngredient();
-    List<Ingredient> getIngredientsStartsWith(String start);
+    List<Ingredient> getIngredientsStartsWith(String search);
 }

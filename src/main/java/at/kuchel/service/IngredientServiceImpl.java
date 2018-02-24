@@ -26,11 +26,11 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
-    public List<Ingredient> getIngredientsStartsWith(String start) {
+    public List<Ingredient> getIngredientsStartsWith(String search) {
         if (ingredients.isEmpty()) {
             setIngredients(ingredientRepository.findAll());
         }
-        return ingredients.stream().filter(ingredient -> ingredient.getName().startsWith(start)).collect(Collectors.toList());
+        return ingredients.stream().filter(ingredient -> ingredient.getName().startsWith(search)).collect(Collectors.toList());
     }
 
     public List<Ingredient> getIngredients() {

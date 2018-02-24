@@ -16,7 +16,7 @@ public class IngredientController {
 
     @RequestMapping(value = "/ingredient", method = RequestMethod.GET)
     public String getIngredientsStartWith(Model model) {
-//TODO fix this
+//        TODO fix this
 //        System.out.println("searchString: " + searchString);
 //        model.addAttribute("ingredient", ingredientService.getIngredientsStartsWith());
         return "ingredient";
