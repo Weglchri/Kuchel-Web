@@ -46,6 +46,7 @@ public class User extends AbstractEntity<Long> {
         this.username = username;
     }
 
+    //TODO remove this setter after test refactored
     public void setId(Long id) {
         this.id = id;
     }

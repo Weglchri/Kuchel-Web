@@ -29,10 +29,6 @@ public class Recipe extends AbstractEntity<Long> {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Set<Ingredient> getIngredients() {
         return ingredients;
     }
