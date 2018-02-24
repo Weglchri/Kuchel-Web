@@ -13,7 +13,6 @@ public class IngredientController {
     @Autowired
     private IngredientService ingredientService;
 
-
     @RequestMapping(value = "/ingredient", method = RequestMethod.GET)
     public String getIngredientsStartWith(Model model) {
 //        TODO fix this
