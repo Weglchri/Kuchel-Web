@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>User Liste</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{static/css/style.css}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -17,26 +17,29 @@
 </form>
 
 <h1 th:utext="${recipe.name}"></h1>
-<div class="recipe-steps padded-mobile padding-8-top float-left grid-item grid-3-of-16">
-    <h2 class="margin-0-auto">Zutaten</h2>
-    <div th:each="ingredient : ${recipe.getIngredients()}" class="recipe-instructions margin-0-auto">
+<div>
+    <div class="col-md-3">
+        <h2 class="margin-0-auto">Zutaten</h2>
+        <div th:each="ingredient : ${recipe.getIngredients()}" class="recipe-instructions margin-0-auto">
 
-        <div class="step">
-            <p th:utext="${ingredient.getName()}"></p>
+            <div class="step">
+                <p th:utext="${ingredient.getName()}"></p>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="recipe-steps padded-mobile padding-8-top float-left grid-item grid-9-of-16">
+    <div class="col-md-9">
     <h2 class="margin-0-auto">Zubereitung</h2>
     <div th:each="instruction : ${recipe.getInstructions()}" class="recipe-instructions margin-0-auto">
 
-        <div class="step">
+        <div class="col-md-2">
             <div class="title-text" th:inline="text">Schritt [[${instruction.step}]]</div>
-            <p></p>
+        </div>
+        <div class="col-md-10">
             <p th:utext="${instruction.getInstruction()}">[[${instruction.instructionDescription}]]</p>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>
