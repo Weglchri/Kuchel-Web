@@ -3,6 +3,7 @@ package at.kuchel.model;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,9 +14,8 @@ public class Recipe extends AbstractEntity<Long> {
     @GeneratedValue
     private Long id;
 
-    @NotBlank
-    @Column(name = "INSTRUCTION")
-    private String instruction;
+    @OneToMany(mappedBy = "recipe")
+    private List<Instruction> instructions;
 
     @NotBlank
     @Column(name = "NAME")
@@ -41,13 +41,6 @@ public class Recipe extends AbstractEntity<Long> {
         this.ingredients = ingredients;
     }
 
-    public String getInstruction() {
-        return instruction;
-    }
-
-    public void setInstruction(String instruction) {
-        this.instruction = instruction;
-    }
 
     public String getName() {
         return name;
@@ -55,5 +48,13 @@ public class Recipe extends AbstractEntity<Long> {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Instruction> getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(List<Instruction> instructions) {
+        this.instructions = instructions;
     }
 }

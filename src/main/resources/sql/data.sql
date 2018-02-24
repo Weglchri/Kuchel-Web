@@ -7,7 +7,9 @@ INSERT INTO Ingredient(name,description) VALUES ('Feige','Frucht');
 INSERT INTO Ingredient(name,description) VALUES ('Apfel','Frucht');
 INSERT INTO Ingredient(name,description) VALUES ('Weintrauben','Frucht');
 
-INSERT INTO Recipe(name,instruction) VALUES ('Obstkuchen','Banane und Apfel mixen.');
+INSERT INTO Recipe(name) VALUES ('Obstkuchen');
+
+INSERT INTO INSTRUCTION(INSTRUCTION_DESCRIPTION,recipe_id) VALUES ('Banane und Apfel mixen.',1);
 
 INSERT INTO RECIPE_INGREDIENT (INGREDIENT_ID,RECIPE_ID) VALUES (1,1);
 
