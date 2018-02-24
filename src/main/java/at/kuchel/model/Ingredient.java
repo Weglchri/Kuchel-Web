@@ -27,7 +27,7 @@ public class Ingredient extends AbstractEntity<Long> {
     private Set<Recipe> recipes = new HashSet<>(0);
 
     @Override
-    protected Long getId() {
+    public Long getId() {
         return id;
     }
 

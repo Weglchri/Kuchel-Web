@@ -21,7 +21,7 @@ public class Instruction extends AbstractEntity<Long> {
     public Recipe recipe;
 
     @Override
-    protected Long getId() {
+    public Long getId() {
         return id;
     }
 

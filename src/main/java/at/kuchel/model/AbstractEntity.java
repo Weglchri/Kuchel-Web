@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public abstract class AbstractEntity<T extends Serializable> {
 
-    protected abstract T getId();
+    public abstract T getId();
 
     @Override
     public boolean equals(final Object o) {

@@ -25,7 +25,7 @@ public class Recipe extends AbstractEntity<Long> {
     private Set<Ingredient> ingredients;
 
     @Override
-    protected Long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -36,7 +36,6 @@ public class Recipe extends AbstractEntity<Long> {
     public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
-
 
     public String getName() {
         return name;

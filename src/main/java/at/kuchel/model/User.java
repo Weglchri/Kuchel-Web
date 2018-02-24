@@ -34,7 +34,7 @@ public class User extends AbstractEntity<Long> {
     private Set<Role> roles;
 
     @Override
-    protected Long getId() {
+    public Long getId() {
         return id;
     }
 

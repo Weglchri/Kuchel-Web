@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service("userService")
+@Service("recipeService")
 public class RecipeServiceImpl implements RecipeService {
 
     @Autowired
@@ -16,5 +16,10 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public List<Recipe> getAllRecipes() {
         return recipeRepository.findAll();
+    }
+
+    @Override
+    public Recipe getRecipeById(Long id) {
+        return recipeRepository.findOne(id);
     }
 }

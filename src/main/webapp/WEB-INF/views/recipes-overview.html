@@ -13,22 +13,11 @@
     <button class="btn btn-md btn-warning btn-block" type="Submit">Aussteigen</button>
 </form>
 
-<h1>User Liste</h1>
-<table border="1">
-    <thead>
-    <tr>
-        <th th:text="Username"/>
-        <th th:text="Password"/>
-        <th th:text="Birthday"/>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="user: ${users}">
-        <td th:text="${user.username}"/>
-        <td th:text="${user.password}"/>
-        <td th:text="${user.birthday}"/>
-    </tr>
-    </tbody>
-</table>
+<h1>Rezept Übersicht</h1>
+<ul th:each="recipe : ${recipes}">
+    <a th:href="@{/recipes(id=${recipe.id})}" th:text="${recipe.name}"/>
+
+</ul>
+
 </body>
 </html>
