@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Set;
 
-public class UserTest {
+public class UserUnitTest {
 
 
     private User user;
