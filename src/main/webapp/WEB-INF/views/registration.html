@@ -3,12 +3,10 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Registrierungsformular</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <div th:replace="../fragments/head :: head"></div>
 </head>
 <body>
+
 <form th:action="@{/}" method="get">
     <button class="btn btn-md btn-warning btn-block" type="Submit">Anmeldeseite</button>
 </form>
@@ -49,5 +47,6 @@
     </div>
 </div>
 
+<div th:replace="../fragments/footer :: footer"></div>
 </body>
 </html>
