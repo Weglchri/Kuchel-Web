@@ -26,6 +26,15 @@ public class Ingredient extends AbstractEntity<Long> {
     @JoinTable(name = "RECIPE_INGREDIENT", joinColumns = {@JoinColumn(name = "INGREDIENT_ID", nullable = true, updatable = true)}, inverseJoinColumns = {@JoinColumn(name = "RECIPE_ID", nullable = true, updatable = true)})
     private Set<Recipe> recipes = new HashSet<>(0);
 
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    public enum Status {
+        APPROVED,
+        NEW,
+        REJECTED
+    }
+
     @Override
     public Long getId() {
         return id;

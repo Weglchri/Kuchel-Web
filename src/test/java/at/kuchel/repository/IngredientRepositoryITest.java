@@ -1,7 +1,7 @@
 package at.kuchel.repository;
 
-import at.kuchel.model.User;
-import at.kuchel.repostitory.UserRepository;
+import at.kuchel.model.Ingredient;
+import at.kuchel.repostitory.IngredientRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,17 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
+import static org.hamcrest.Matchers.hasSize;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserRepositoryIntegrationTest {
+public class IngredientRepositoryITest {
 
     @Autowired
-    UserRepository userRepository;
+    IngredientRepository ingredientRepository;
 
     @Test
     public void getUserByUsername() {
-        User user = userRepository.getUserByUsername("bernhard");
-        Assert.assertEquals("bernhard", user.getUsername());
+        List<Ingredient> ingredients = ingredientRepository.findByStatus(Ingredient.Status.NEW);
+        Assert.assertThat(ingredients, hasSize(1));
     }
-
 }

@@ -2,7 +2,7 @@ INSERT INTO User(username, password, birthday) values ('bernhard', '$2a$10$ZY8AZ
 INSERT INTO User(username, password, birthday) values ('wegl', '$2a$10$ZY8AZ8Nkskn7mMdg8AKAAuHxdeJQmqO3bn6lPn7x0KW/Yogt7dlVy', '1969-01-02');
 INSERT INTO User(username, password, birthday) values ('jasi', '$2a$10$ZY8AZ8Nkskn7mMdg8AKAAuHxdeJQmqO3bn6lPn7x0KW/Yogt7dlVy', '1995-12-31');
 
-INSERT INTO Ingredient(name,description) VALUES ('Bananen','Frucht');
+INSERT INTO Ingredient(name,description,status) VALUES ('Bananen','Frucht','NEW');
 INSERT INTO Ingredient(name,description) VALUES ('Feige','Frucht');
 INSERT INTO Ingredient(name,description) VALUES ('Apfel','Frucht');
 INSERT INTO Ingredient(name,description) VALUES ('Weintrauben','Frucht');
