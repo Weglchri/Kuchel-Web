@@ -3,16 +3,22 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>User Liste</title>
-    <link rel="stylesheet" href="/resources/css/style.css" />
+    <link rel="stylesheet" href="/resources/css/recipe-detailed.css" />
     <div th:replace="../fragments/head :: head"></div>
 </head>
 <body>
+<div th:replace="../fragments/header :: header"></div>
+<div class="container">
+<!--
+
 <form th:action="@{/logout}" method="get">
     <button class="btn btn-md btn-warning btn-block" type="Submit">Aussteigen</button>
 </form>
 <form th:action="@{/recipes}" method="get">
     <button class="btn btn-md btn-warning btn-block" type="Submit">Rezept Übersicht</button>
 </form>
+
+-->
 
 <h1 th:utext="${recipe.name}"></h1>
 <div>
@@ -38,6 +44,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>
