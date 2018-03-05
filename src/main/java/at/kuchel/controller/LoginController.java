@@ -67,10 +67,11 @@ public class LoginController {
         return modelAndView;
     }
 
-    @RequestMapping(value = { "/logout"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/logout"}, method = RequestMethod.GET)
     public ModelAndView logout() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
         return modelAndView;
     }
+
 }
