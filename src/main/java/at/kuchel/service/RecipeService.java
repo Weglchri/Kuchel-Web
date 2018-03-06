@@ -9,4 +9,7 @@ public interface RecipeService {
 
     List<Recipe> getAllRecipes();
     Recipe getRecipeById(Long id);
+
+    //TODO: get recipe of user!
+    List<Recipe> getRecipeByUsername(String username);
 }

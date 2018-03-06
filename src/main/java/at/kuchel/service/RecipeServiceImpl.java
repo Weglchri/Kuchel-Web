@@ -4,6 +4,7 @@ import at.kuchel.model.Recipe;
 import at.kuchel.repostitory.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
 
@@ -21,5 +22,10 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public Recipe getRecipeById(Long id) {
         return recipeRepository.findOne(id);
+    }
+
+    @Override
+    public List<Recipe> getRecipeByUsername(String username) {
+        throw new NotImplementedException();
     }
 }
