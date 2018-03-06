@@ -3,7 +3,9 @@
 ###Fragen
 - Geht es das einer zb Android oder IOS App macht und der 2. mit Thymeleaf die Anwendung für Browser?
 - Backend würd außen vor bleiben damit beide es als Datenquelle nutzen können?
-
+- REST API zur Verfügung stellen - stateless
+- Social Media - Facebook?
+- Google Auth?
 
 
 ###Was ist wissenschaftlich genug?
