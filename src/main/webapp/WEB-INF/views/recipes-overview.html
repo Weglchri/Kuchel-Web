@@ -7,6 +7,10 @@
 </head>
 <body>
 <div th:replace="../fragments/header :: header"></div>
+<div align="center" th:if="${param.error}">
+    <p style="font-size: 20; color: #FF1C19;">Benutername oder Password stimmen nicht überein</p>
+</div>
+
 <div class="container">
 <h1>Rezept Übersicht</h1>
 <ul th:each="recipe : ${recipes}">

@@ -7,12 +7,14 @@ import at.kuchel.util.SessionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.Objects;
 
 @Controller
 public class RecipeController {
@@ -35,13 +37,32 @@ public class RecipeController {
         return "recipes-detailed";
     }
 
-    @RequestMapping(value = "/recipes", method = RequestMethod.PUT)
-    public String putRecipes(@Valid Recipe recipe) {
+    @RequestMapping(value = "/recipes", method = RequestMethod.POST)
+    public String putRecipes(@Valid Recipe recipe, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
+        Recipe existingRecipe = recipeService.getRecipeByName(recipe.getName());
+        if (!Objects.isNull(existingRecipe)) {
+            bindingResult
+                    .rejectValue("recipe", "error.recipe",
+                            "Es existiert bereits ein Rezept mit diesem Namen");
+        }
+        recipe.setUser(sessionHelper.getCurrentUser());
+
         recipeService.createRecipe(recipe);
+        modelAndView.addObject("recipe", recipe);
         modelAndView.addObject("successMessage", String.format("Rezept %s wurde erfolgreich hinzugefügt", recipe.getName()));
         return "recipes-detailed";
     }
+
+    @RequestMapping(value = "/recipes/new", method = RequestMethod.GET)
+    public ModelAndView getNewRecipe() {
+        ModelAndView modelAndView = new ModelAndView();
+        Recipe recipe = new Recipe();
+        modelAndView.addObject("recipe", recipe);
+        modelAndView.setViewName("create-recipe");
+        return modelAndView;
+    }
+
 
     @RequestMapping(value = "/my-recipes", method = RequestMethod.GET)
     public String listmyRecipes(Model model) {

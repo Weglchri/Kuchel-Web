@@ -11,5 +11,6 @@ public interface RecipeService {
     void createRecipe(Recipe recipe);
     List<Recipe> getAllRecipes();
     Recipe getRecipeById(Long id);
+    Recipe getRecipeByName(String name);
     List<Recipe> getRecipeByUser(User user);
 }

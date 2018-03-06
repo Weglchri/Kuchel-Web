@@ -25,7 +25,7 @@ public class Recipe extends AbstractEntity<Long> {
 
     @NotBlank
     @Size(min = 6)
-    @Column(name = "NAME")
+    @Column(name = "NAME",unique = true)
     private String name;
 
     @Size(min = 2)

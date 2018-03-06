@@ -10,29 +10,36 @@
 <div th:replace="../fragments/header :: header"></div>
 
 <div class="container">
-<h1>Rezept erstellen</h1>
 <div>
     <div class="col-md-3">
-        <h2>Zutaten</h2>
-        <div th:each="ingredient : ${recipe.getIngredients()}" class="recipe-instructions margin-0-auto">
-
-            <div class="step">
-                <p th:utext="${ingredient.getName()}"></p>
+        <form autocomplete="off" action="#" th:action="@{/recipes}"
+              th:object="${recipe}" method="post" class="form-horizontal"
+              role="form">
+            <h2>Rezept erstellen</h2>
+            <div class="form-group">
+                <div class="col-sm-9">
+                    <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                           class="validation-message"></label>
+                    <input type="text" th:field="*{name}" placeholder="Name"
+                           class="form-control" />
+                </div>
             </div>
-        </div>
-    </div>
+            <!--<div class="form-group">-->
+                <!--<div class="col-sm-9">-->
+                    <!--<input type="password" th:field="*{password}"-->
+                           <!--placeholder="Password" class="form-control" /> <label-->
+                        <!--th:if="${#fields.hasErrors('password')}" th:errors="*{password}"-->
+                        <!--class="validation-message"></label>-->
+                <!--</div>-->
+            <!--</div>-->
 
-    <div class="col-md-9">
-        <h2>Zubereitung</h2>
-        <div th:each="instruction : ${recipe.getInstructions()}" class="recipe-instructions margin-0-auto">
+            <div class="form-group">
+                <div class="col-sm-9">
+                    <button type="submit" class="btn btn-primary btn-block">Rezept hinzufügen</button>
+                </div>
+            </div>
 
-            <div class="col-md-2">
-                <div class="title-text" th:inline="text">Schritt [[${instruction.step}]]</div>
-            </div>
-            <div class="col-md-10">
-                <p th:utext="${instruction.getInstruction()}">[[${instruction.instructionDescription}]]</p>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 </div>
