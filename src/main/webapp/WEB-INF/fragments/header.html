@@ -21,13 +21,13 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li sec:authorize="isAuthenticated()"><a>  <span sec:authentication="name"> Logged user:</span></a></li>
                     <li sec:authorize="isAuthenticated()"><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                    <!--<li sec:authorize="hasRole('ROLE_USER')"><a href="/h2"><span class="glyphicon glyphicon-log-in"></span>H2</a></li>-->
                     <li sec:authorize="isAnonymous()"><a href="/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     <li sec:authorize="isAnonymous()"><a href="/registration"><span class="glyphicon glyphicon-registration-mark"></span> Registration</a></li>
                 </ul>
             </div>
         </nav>
     </div>
-
 </div>
 </body>
 </html>
