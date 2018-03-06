@@ -1,9 +1,9 @@
 package at.kuchel.controller;
 
+import at.kuchel.model.User;
 import at.kuchel.service.RecipeService;
+import at.kuchel.util.SessionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +15,9 @@ public class RecipeController {
 
     @Autowired
     private RecipeService recipeService;
+
+    @Autowired
+    private SessionHelper sessionHelper;
 
     @RequestMapping(value = "/recipes", method = RequestMethod.GET)
     public String listRecipes(Model model) {
@@ -28,16 +31,10 @@ public class RecipeController {
         return "recipes-detailed";
     }
 
-    @RequestMapping(value = "/my-recipes", method = RequestMethod.GET ,params = "id")
-    public String listmyRecipes(Model model, @RequestParam("id") long id) {
-
-        //dirty session management (same as in Dashboard)
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-
-        model.addAttribute("my-recipes", recipeService.getRecipeByUsername(username));
-        System.out.println(recipeService.getRecipeByUsername(username));
-
+    @RequestMapping(value = "/my-recipes", method = RequestMethod.GET)
+    public String listmyRecipes(Model model) {
+        User user = sessionHelper.getCurrentUser();
+        model.addAttribute("my-recipes", recipeService.getRecipeByUser(user));
         return "my-recipes-overview";
     }
 }

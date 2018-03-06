@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
-    //List<Recipe> findByUsername(String username);
+    //TODO: implement individual search method
+    //List<Recipe> findRecipeByUser(User user);
 }

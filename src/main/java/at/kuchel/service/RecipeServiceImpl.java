@@ -1,6 +1,7 @@
 package at.kuchel.service;
 
 import at.kuchel.model.Recipe;
+import at.kuchel.model.User;
 import at.kuchel.repostitory.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,8 +32,8 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public List<Recipe> getRecipeByUsername(String username) {
-       //return recipeRepository.findByUsername(username);
-         throw new NotImplementedException();
+    public List<Recipe> getRecipeByUser(User user) {
+        throw new NotImplementedException();
     }
+
 }
