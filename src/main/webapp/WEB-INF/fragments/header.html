@@ -19,14 +19,10 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <!-- <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
-                    <!-- <li><a href="">
-                    <span class="glyphicon glyphicon-user"></span>
-                    <span>Logged in as user</span>
-                    <span th:text=" ${user} "></span>
-                    </a></li> -->
+                    <li sec:authorize="isAuthenticated()"><a>  <span sec:authentication="name"> Logged user:</span></a></li>
                     <li sec:authorize="isAuthenticated()"><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-                    <li sec:authorize="isAnonymous()"><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <li sec:authorize="isAnonymous()"><a href="/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <li sec:authorize="isAnonymous()"><a href="/registration"><span class="glyphicon glyphicon-registration-mark"></span> Registration</a></li>
                 </ul>
             </div>
         </nav>
