@@ -17,7 +17,8 @@
                     <li><a href="#">Neuigkeiten</a></li>
                     <li><a href="/recipes">Suche</a></li>
                     <li><a href="#">Über uns</a></li>
-                    <li><a href="#">Meine Rezepte</a></li>
+                    <li><a sec:authorize="isAnonymous()" href="#"><font color="#d9d4dc">Meine Rezepte</font></a></li>
+                    <li><a sec:authorize="isAuthenticated()" href="#">Meine Rezepte</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">

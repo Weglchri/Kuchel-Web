@@ -3,6 +3,7 @@ package at.kuchel.model;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Set;
 
@@ -19,12 +20,15 @@ public class Recipe extends AbstractEntity<Long> {
     private User user;
 
     @OneToMany(mappedBy = "recipe")
+    @Size(min = 1)
     private List<Instruction> instructions;
 
     @NotBlank
+    @Size(min = 6)
     @Column(name = "NAME")
     private String name;
 
+    @Size(min = 2)
     @ManyToMany(mappedBy = "recipes")
     private Set<Ingredient> ingredients;
 
@@ -55,5 +59,13 @@ public class Recipe extends AbstractEntity<Long> {
 
     public void setInstructions(List<Instruction> instructions) {
         this.instructions = instructions;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

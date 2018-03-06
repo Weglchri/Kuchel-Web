@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Rezept erstellen</title>
+    <link rel="stylesheet" href="/resources/css/style.css" />
+    <div th:replace="../fragments/head :: head"></div>
+</head>
+<body>
+<div th:replace="../fragments/header :: header"></div>
+
+<div class="container">
+<h1>Rezept erstellen</h1>
+<div>
+    <div class="col-md-3">
+        <h2>Zutaten</h2>
+        <div th:each="ingredient : ${recipe.getIngredients()}" class="recipe-instructions margin-0-auto">
+
+            <div class="step">
+                <p th:utext="${ingredient.getName()}"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <h2>Zubereitung</h2>
+        <div th:each="instruction : ${recipe.getInstructions()}" class="recipe-instructions margin-0-auto">
+
+            <div class="col-md-2">
+                <div class="title-text" th:inline="text">Schritt [[${instruction.step}]]</div>
+            </div>
+            <div class="col-md-10">
+                <p th:utext="${instruction.getInstruction()}">[[${instruction.instructionDescription}]]</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
