@@ -1,7 +1,6 @@
 package at.kuchel.controller;
 
 import at.kuchel.service.RecipeService;
-import at.kuchel.util.UserRetriever;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,9 +15,6 @@ public class RecipeController {
 
     @Autowired
     private RecipeService recipeService;
-
-    @Autowired
-    private UserRetriever userRetriever;
 
     @RequestMapping(value = "/recipes", method = RequestMethod.GET)
     public String listRecipes(Model model) {

@@ -10,22 +10,29 @@ import org.springframework.stereotype.Component;
 import org.thymeleaf.util.StringUtils;
 
 @Component
-public class UserRetriever {
+public class SessionHelper {
 
     @Autowired
     private UserRepository userRepository;
 
     public User getCurrentUser() {
-        String currentUserName=null;
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (!(authentication instanceof AnonymousAuthenticationToken)) {
-            currentUserName = authentication.getName();
-        }
+        String currentUserName = getUserNameFromSecuritySession();
 
-        if(!StringUtils.isEmpty(currentUserName)){
+        if (!StringUtils.isEmpty(currentUserName)) {
             return userRepository.getUserByUsername(currentUserName);
         }
         throw new IllegalStateException("User have to be set");
     }
 
+    public boolean isUserLoggedIn() {
+        return getUserNameFromSecuritySession() != null;
+    }
+
+    private String getUserNameFromSecuritySession() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            return authentication.getName();
+        }
+        return null;
+    }
 }

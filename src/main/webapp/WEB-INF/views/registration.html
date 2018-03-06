@@ -6,14 +6,12 @@
     <div th:replace="../fragments/head :: head"></div>
 </head>
 <body>
-
-<form th:action="@{/}" method="get">
-    <button class="btn btn-md btn-warning btn-block" type="Submit">Anmeldeseite</button>
-</form>
+<div th:replace="../fragments/header :: header"></div>
 
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
+            <!--/*@thymesVar id="user" type="at.kuchel.model.User"*/-->
             <form autocomplete="off" action="#" th:action="@{/registration}"
                   th:object="${user}" method="post" class="form-horizontal"
                   role="form">
@@ -46,7 +44,6 @@
         </div>
     </div>
 </div>
-
 <div th:replace="../fragments/footer :: footer"></div>
 </body>
 </html>

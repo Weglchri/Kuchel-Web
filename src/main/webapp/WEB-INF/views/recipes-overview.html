@@ -5,24 +5,14 @@
     <title>User Liste</title>
     <div th:replace="../fragments/head :: head"></div>
 </head>
-
-
-
 <body>
 <div th:replace="../fragments/header :: header"></div>
 <div class="container">
-    <h1>Rezept Übersicht</h1>
-    <ul th:each="recipe : ${recipes}">
-        <a th:href="@{/recipes(id=${recipe.id})}" th:text="${recipe.name}"/>
+<h1>Rezept Übersicht</h1>
+<ul th:each="recipe : ${recipes}">
+    <a th:href="@{/recipes(id=${recipe.id})}" th:text="${recipe.name}"/>
 
-    </ul>
+</ul>
 </div>
-<!--
-<form th:action="@{/logout}" method="get">
-    <button class="btn btn-md btn-warning btn-block" type="Submit">Aussteigen</button>
-</form>
--->
-
-
 </body>
 </html>
