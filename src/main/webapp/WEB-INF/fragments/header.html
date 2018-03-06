@@ -4,22 +4,6 @@
 </head>
 <body>
 <div th:fragment="header">
-    <!--<div sec:authorize="isAuthenticated()">-->
-        <!--<form th:action="@{/logout}" method="get">-->
-            <!--<button class="btn btn-md btn-warning btn-block" type="Submit">Aussteigen</button>-->
-        <!--</form>-->
-    <!--</div>-->
-    <!--<div sec:authorize="isAnonymous()">-->
-        <!--<form th:action="@{/registration}" method="get">-->
-            <!--<button class="btn btn-md btn-warning btn-block" type="Submit">Registrieren</button>-->
-        <!--</form>-->
-    <!--</div>-->
-    <!--<div sec:authorize="isAnonymous()">-->
-        <!--<form th:action="@{/}" method="get">-->
-            <!--<button class="btn btn-md btn-warning btn-block" type="Submit">Anmeldeseite</button>-->
-        <!--</form>-->
-    <!--</div>-->
-    <div></div>
     <div class="navbar navbar-fixed-top">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -41,7 +25,8 @@
                     <span>Logged in as user</span>
                     <span th:text=" ${user} "></span>
                     </a></li> -->
-                    <li sec:authorize="isAuthenticated()"><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                    <li sec:authorize="isAuthenticated()"><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                    <li sec:authorize="isAnonymous()"><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 </ul>
             </div>
         </nav>
