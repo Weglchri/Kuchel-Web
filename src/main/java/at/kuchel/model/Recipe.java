@@ -14,6 +14,10 @@ public class Recipe extends AbstractEntity<Long> {
     @GeneratedValue
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @OneToMany(mappedBy = "recipe")
     private List<Instruction> instructions;
 

@@ -15,6 +15,12 @@ public class RecipeServiceImpl implements RecipeService {
     private RecipeRepository recipeRepository;
 
     @Override
+    public void createRecipe(Recipe recipe) {
+        //logic for validating the recipe comes <here>
+        recipeRepository.saveAndFlush(recipe);
+    }
+
+    @Override
     public List<Recipe> getAllRecipes() {
         return recipeRepository.findAll();
     }
@@ -26,6 +32,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public List<Recipe> getRecipeByUsername(String username) {
-        throw new NotImplementedException();
+       //return recipeRepository.findByUsername(username);
+         throw new NotImplementedException();
     }
 }

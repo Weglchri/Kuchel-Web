@@ -7,8 +7,8 @@ INSERT INTO Ingredient(name,description) VALUES ('Feige','Frucht');
 INSERT INTO Ingredient(name,description) VALUES ('Apfel','Frucht');
 INSERT INTO Ingredient(name,description) VALUES ('Weintrauben','Frucht');
 
-INSERT INTO Recipe(name) VALUES ('Obstkuchen');
-INSERT INTO Recipe(name) VALUES ('Wiener Schnitzel');
+INSERT INTO Recipe(name, user_id) VALUES ('Obstkuchen', 1);
+INSERT INTO Recipe(name, user_id) VALUES ('Wiener Schnitzel', 2);
 
 INSERT INTO INSTRUCTION(INSTRUCTION_DESCRIPTION,step,recipe_id) VALUES ('Banane und Apfel mixen.',1,1);
 INSERT INTO INSTRUCTION(INSTRUCTION_DESCRIPTION,step,recipe_id) VALUES ('Servieren.',2,1);
