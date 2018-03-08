@@ -37,34 +37,8 @@ public class RecipeServiceImpl implements RecipeService {
         tmp.setStep("1");
 
         recipe.addInstruction(tmp);
-        tmp.setRecipe(recipe);
-//
-//        for (Ingredient ingredient : recipe.getIngredients()) {
-//            System.out.println(String.format("Ingrdient: %s ", ingredient.getName()));
-//        }
-//
-//
-//        //Instruction Persist
-//        for (Instruction instruction : recipe.getInstructions()) {
-//            instructionRepository.save(instruction);
-//        }
-//
-//        //Ingredient Persist
-//        for (Ingredient ingredient : recipe.getIngredients()) {
-//            Ingredient existingIngredient = ingredientRepository.findByName(ingredient.getName());
-//            if (Objects.isNull(existingIngredient)) {
-//                ingredient.addRecipe(recipe);
-//                ingredientRepository.save(ingredient);
-//            } else {
-//                existingIngredient.addRecipe(recipe);
-//                //todo replace created ingredient with ingredient from db in recipe.ingridients
-//
-//                ingredientRepository.save(existingIngredient);
-//            }
-//        }
 
         recipeRepository.save(recipe);
-
     }
 
     @Override
