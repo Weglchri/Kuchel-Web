@@ -8,7 +8,6 @@ import at.kuchel.service.RecipeService;
 import at.kuchel.util.SessionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,20 +31,25 @@ public class RecipeController {
     private SessionHelper sessionHelper;
 
     @RequestMapping(value = "/recipes", method = RequestMethod.GET)
-    public String listRecipes(Model model) {
-        model.addAttribute("recipes", recipeService.getAllRecipes());
-        return "recipes-overview";
+    public ModelAndView listRecipes() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("recipes", recipeService.getAllRecipes());
+        modelAndView.setViewName("recipes-overview");
+        return modelAndView;
     }
 
     @RequestMapping(value = "/recipes", method = RequestMethod.GET, params = "id")
-    public String listRecipes(Model model, @RequestParam("id") long id) {
-        model.addAttribute("recipe", recipeService.getRecipeById(id));
-        return "recipes-detailed";
+    public ModelAndView listRecipes(@RequestParam("id") long id) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("recipe", recipeService.getRecipeById(id));
+        modelAndView.setViewName("recipes-detailed");
+        return modelAndView;
     }
 
     @RequestMapping(value = "/recipes", method = RequestMethod.POST)
-    public String createRecipe(@Valid Recipe recipe, BindingResult bindingResult) {
+    public ModelAndView createRecipe(@Valid Recipe recipe, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
+        //todo check befor upload if name exist
         Recipe existingRecipe = recipeService.getRecipeByName(recipe.getName());
         if (!Objects.isNull(existingRecipe)) {
             bindingResult
@@ -53,19 +57,17 @@ public class RecipeController {
                             "Es existiert bereits ein Rezept mit diesem Namen");
         }
         recipe.setUser(sessionHelper.getCurrentUser());
-
         recipeService.createRecipe(recipe);
         modelAndView.addObject("recipe", recipe);
         modelAndView.addObject("successMessage", String.format("Rezept %s wurde erfolgreich hinzugefügt", recipe.getName()));
-        return "recipes-detailed";
+        modelAndView.setViewName("recipes-detailed");
+        return modelAndView;
     }
 
     @RequestMapping(value = "/recipes/new", method = RequestMethod.GET)
     public ModelAndView getNewRecipe() {
         ModelAndView modelAndView = new ModelAndView();
         Recipe recipe = new Recipe();
-//        recipe.setName("Rezept Name");
-
         recipe.addIngredients(new Ingredient());
         modelAndView.addObject("recipe", recipe);
         modelAndView.addObject("acceptedIngredients", ingredientService.getIngredientsWithStatus(Ingredient.Status.APPROVED));
@@ -74,7 +76,7 @@ public class RecipeController {
     }
 
     @RequestMapping(value = "/recipes", params = {"addRowIngredient"})
-    public ModelAndView addRowIngredient(Recipe recipe, final BindingResult bindingResult, @RequestParam("addRowIngredient") String id) {
+    public ModelAndView addRowIngredient(Recipe recipe) {
         ModelAndView modelAndView = new ModelAndView();
         recipe.getIngredients().add(new Ingredient());
         modelAndView.addObject("acceptedIngredients", ingredientService.getIngredientsWithStatus(Ingredient.Status.APPROVED));
@@ -84,10 +86,10 @@ public class RecipeController {
     }
 
     @RequestMapping(value = "/recipes", params = {"removeRowIngredient"})
-    public ModelAndView removeRowIngredient(Recipe recipe, final BindingResult bindingResult,
+    public ModelAndView removeRowIngredient(Recipe recipe,
                                             final HttpServletRequest req, @RequestParam("removeRowIngredient") String id) {
         ModelAndView modelAndView = new ModelAndView();
-        final Integer rowId = Integer.valueOf(req.getParameter("removeRowIngredient"));
+        final Integer rowId = Integer.valueOf(id);
         Ingredient ingredient = recipe.getIngredients().get(rowId);
         recipe.getIngredients().remove(ingredient);
         modelAndView.addObject("acceptedIngredients", ingredientService.getIngredientsWithStatus(Ingredient.Status.APPROVED));
@@ -97,9 +99,11 @@ public class RecipeController {
     }
 
     @RequestMapping(value = "/my-recipes", method = RequestMethod.GET)
-    public String listmyRecipes(Model model) {
+    public ModelAndView listmyRecipes() {
+        ModelAndView modelAndView = new ModelAndView();
         User user = sessionHelper.getCurrentUser();
-        model.addAttribute("my-recipes", recipeService.getRecipeByUser(user));
-        return "my-recipes-overview";
+        modelAndView.addObject("my-recipes", recipeService.getRecipeByUser(user));
+        modelAndView.setViewName("my-recipes-overview");
+        return modelAndView;
     }
 }
