@@ -18,12 +18,10 @@ public class Ingredient extends AbstractEntity<Long> {
     @Column(name = "NAME")
     private String name;
 
-    @NotBlank
     @Column(name = "DESCRIPTION")
     private String description;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    @JoinTable(name = "RECIPE_INGREDIENT", joinColumns = {@JoinColumn(name = "INGREDIENT_ID", nullable = true, updatable = true)}, inverseJoinColumns = {@JoinColumn(name = "RECIPE_ID", nullable = true, updatable = true)})
+    @ManyToMany(mappedBy = "ingredients")
     private Set<Recipe> recipes = new HashSet<>(0);
 
     @Enumerated(EnumType.STRING)
@@ -60,7 +58,7 @@ public class Ingredient extends AbstractEntity<Long> {
         return recipes;
     }
 
-    public void setRecipe(Set<Recipe> recipes) {
-        this.recipes = recipes;
+    public void addRecipe(Recipe recipes) {
+        this.recipes.add(recipes);
     }
 }

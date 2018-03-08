@@ -68,7 +68,7 @@ public class RecipeController {
     public ModelAndView getNewRecipe() {
         ModelAndView modelAndView = new ModelAndView();
         Recipe recipe = new Recipe();
-        recipe.addIngredients(new Ingredient());
+        recipe.addIngredient(new Ingredient());
         modelAndView.addObject("recipe", recipe);
         modelAndView.addObject("acceptedIngredients", ingredientService.getIngredientsWithStatus(Ingredient.Status.APPROVED));
         modelAndView.setViewName("create-recipe");
@@ -78,7 +78,7 @@ public class RecipeController {
     @RequestMapping(value = "/recipes", params = {"addRowIngredient"})
     public ModelAndView addRowIngredient(Recipe recipe) {
         ModelAndView modelAndView = new ModelAndView();
-        recipe.getIngredients().add(new Ingredient());
+        recipe.addIngredient(new Ingredient());
         modelAndView.addObject("acceptedIngredients", ingredientService.getIngredientsWithStatus(Ingredient.Status.APPROVED));
         modelAndView.addObject("recipe", recipe);
         modelAndView.setViewName("create-recipe");

@@ -1,7 +1,5 @@
 package at.kuchel.model;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -19,17 +17,17 @@ public class Recipe extends AbstractEntity<Long> {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(mappedBy = "recipe",  cascade={CascadeType.ALL})
     @Size(min = 1)
     private List<Instruction> instructions = new ArrayList<>();
 
-    @NotBlank
     @Size(min = 6)
     @Column(name = "NAME",unique = true)
     private String name;
 
     @Size(min = 2)
-    @ManyToMany(mappedBy = "recipes")
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @JoinTable(name = "RECIPE_INGREDIENT", joinColumns = {@JoinColumn(name = "RECIPE_ID", nullable = true, updatable = true)}, inverseJoinColumns = {@JoinColumn(name = "INGREDIENT_ID", nullable = true, updatable = true)})
     private List<Ingredient> ingredients = new ArrayList<>();
 
     @Override
@@ -41,7 +39,7 @@ public class Recipe extends AbstractEntity<Long> {
         return ingredients;
     }
 
-    public void addIngredients(Ingredient ingredient) {
+    public void addIngredient(Ingredient ingredient) {
         this.ingredients.add(ingredient);
     }
 
@@ -57,8 +55,8 @@ public class Recipe extends AbstractEntity<Long> {
         return instructions;
     }
 
-    public void setInstructions(List<Instruction> instructions) {
-        this.instructions = instructions;
+    public void addInstruction(Instruction instructions) {
+        this.instructions.add(instructions);
     }
 
     public User getUser() {
