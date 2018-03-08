@@ -21,7 +21,7 @@ public class Recipe extends AbstractEntity<Long> {
 
     @OneToMany(mappedBy = "recipe")
     @Size(min = 1)
-    private List<Instruction> instructions;
+    private List<Instruction> instructions = new ArrayList<>();
 
     @NotBlank
     @Size(min = 6)

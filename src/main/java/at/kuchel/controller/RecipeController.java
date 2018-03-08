@@ -64,12 +64,11 @@ public class RecipeController {
     public ModelAndView getNewRecipe() {
         ModelAndView modelAndView = new ModelAndView();
         Recipe recipe = new Recipe();
-        recipe.setName("Rezept Name");
+//        recipe.setName("Rezept Name");
 
         recipe.addIngredients(new Ingredient());
         modelAndView.addObject("recipe", recipe);
         modelAndView.addObject("acceptedIngredients", ingredientService.getIngredientsWithStatus(Ingredient.Status.APPROVED));
-        System.out.println(recipe.getIngredients().size());
         modelAndView.setViewName("create-recipe");
         return modelAndView;
     }
@@ -78,7 +77,6 @@ public class RecipeController {
     public ModelAndView addRowIngredient(Recipe recipe, final BindingResult bindingResult, @RequestParam("addRowIngredient") String id) {
         ModelAndView modelAndView = new ModelAndView();
         recipe.getIngredients().add(new Ingredient());
-
         modelAndView.addObject("acceptedIngredients", ingredientService.getIngredientsWithStatus(Ingredient.Status.APPROVED));
         modelAndView.addObject("recipe", recipe);
         modelAndView.setViewName("create-recipe");
@@ -86,12 +84,16 @@ public class RecipeController {
     }
 
     @RequestMapping(value = "/recipes", params = {"removeRowIngredient"})
-    public String removeRowIngredient(Recipe recipe, final BindingResult bindingResult,
-                                      final HttpServletRequest req, @RequestParam("removeRowIngredient") String id) {
-        System.out.println("removeRowIngredient");
+    public ModelAndView removeRowIngredient(Recipe recipe, final BindingResult bindingResult,
+                                            final HttpServletRequest req, @RequestParam("removeRowIngredient") String id) {
+        ModelAndView modelAndView = new ModelAndView();
         final Integer rowId = Integer.valueOf(req.getParameter("removeRowIngredient"));
-        recipe.getIngredients().remove(rowId);
-        return "create-recipe";
+        Ingredient ingredient = recipe.getIngredients().get(rowId);
+        recipe.getIngredients().remove(ingredient);
+        modelAndView.addObject("acceptedIngredients", ingredientService.getIngredientsWithStatus(Ingredient.Status.APPROVED));
+        modelAndView.addObject("recipe", recipe);
+        modelAndView.setViewName("create-recipe");
+        return modelAndView;
     }
 
     @RequestMapping(value = "/my-recipes", method = RequestMethod.GET)
