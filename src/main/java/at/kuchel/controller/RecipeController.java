@@ -1,7 +1,9 @@
 package at.kuchel.controller;
 
+import at.kuchel.model.Ingredient;
 import at.kuchel.model.Recipe;
 import at.kuchel.model.User;
+import at.kuchel.service.IngredientService;
 import at.kuchel.service.RecipeService;
 import at.kuchel.util.SessionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Objects;
 
@@ -21,6 +24,9 @@ public class RecipeController {
 
     @Autowired
     private RecipeService recipeService;
+
+    @Autowired
+    private IngredientService ingredientService;
 
     @Autowired
     private SessionHelper sessionHelper;
@@ -38,7 +44,7 @@ public class RecipeController {
     }
 
     @RequestMapping(value = "/recipes", method = RequestMethod.POST)
-    public String putRecipes(@Valid Recipe recipe, BindingResult bindingResult) {
+    public String createRecipe(@Valid Recipe recipe, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         Recipe existingRecipe = recipeService.getRecipeByName(recipe.getName());
         if (!Objects.isNull(existingRecipe)) {
@@ -58,11 +64,35 @@ public class RecipeController {
     public ModelAndView getNewRecipe() {
         ModelAndView modelAndView = new ModelAndView();
         Recipe recipe = new Recipe();
+        recipe.setName("Rezept Name");
+
+        recipe.addIngredients(new Ingredient());
+        modelAndView.addObject("recipe", recipe);
+        modelAndView.addObject("acceptedIngredients", ingredientService.getIngredientsWithStatus(Ingredient.Status.APPROVED));
+        System.out.println(recipe.getIngredients().size());
+        modelAndView.setViewName("create-recipe");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/recipes", params = {"addRowIngredient"})
+    public ModelAndView addRowIngredient(Recipe recipe, final BindingResult bindingResult, @RequestParam("addRowIngredient") String id) {
+        ModelAndView modelAndView = new ModelAndView();
+        recipe.getIngredients().add(new Ingredient());
+
+        modelAndView.addObject("acceptedIngredients", ingredientService.getIngredientsWithStatus(Ingredient.Status.APPROVED));
         modelAndView.addObject("recipe", recipe);
         modelAndView.setViewName("create-recipe");
         return modelAndView;
     }
 
+    @RequestMapping(value = "/recipes", params = {"removeRowIngredient"})
+    public String removeRowIngredient(Recipe recipe, final BindingResult bindingResult,
+                                      final HttpServletRequest req, @RequestParam("removeRowIngredient") String id) {
+        System.out.println("removeRowIngredient");
+        final Integer rowId = Integer.valueOf(req.getParameter("removeRowIngredient"));
+        recipe.getIngredients().remove(rowId);
+        return "create-recipe";
+    }
 
     @RequestMapping(value = "/my-recipes", method = RequestMethod.GET)
     public String listmyRecipes(Model model) {

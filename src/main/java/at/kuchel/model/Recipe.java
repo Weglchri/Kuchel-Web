@@ -4,8 +4,8 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "RECIPE")
@@ -30,19 +30,19 @@ public class Recipe extends AbstractEntity<Long> {
 
     @Size(min = 2)
     @ManyToMany(mappedBy = "recipes")
-    private Set<Ingredient> ingredients;
+    private List<Ingredient> ingredients = new ArrayList<>();
 
     @Override
     public Long getId() {
         return id;
     }
 
-    public Set<Ingredient> getIngredients() {
+    public List<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(Set<Ingredient> ingredients) {
-        this.ingredients = ingredients;
+    public void addIngredients(Ingredient ingredient) {
+        this.ingredients.add(ingredient);
     }
 
     public String getName() {

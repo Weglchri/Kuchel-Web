@@ -33,6 +33,11 @@ public class IngredientServiceImpl implements IngredientService {
         return ingredients.stream().filter(ingredient -> ingredient.getName().startsWith(search)).collect(Collectors.toList());
     }
 
+    @Override
+    public List<Ingredient> getIngredientsWithStatus(Ingredient.Status status) {
+        return ingredientRepository.findByStatus(status);
+    }
+
     public List<Ingredient> getIngredients() {
         return ingredients;
     }

@@ -5,9 +5,9 @@ INSERT INTO User(username, password, birthday) values ('admin', '$2a$10$ZY8AZ8Nk
 
 
 INSERT INTO Ingredient(name,description,status) VALUES ('Bananen','Frucht','NEW');
-INSERT INTO Ingredient(name,description) VALUES ('Feige','Frucht');
-INSERT INTO Ingredient(name,description) VALUES ('Apfel','Frucht');
-INSERT INTO Ingredient(name,description) VALUES ('Weintrauben','Frucht');
+INSERT INTO Ingredient(name,description,status) VALUES ('Feige','Frucht','APPROVED');
+INSERT INTO Ingredient(name,description,status) VALUES ('Apfel','Frucht','APPROVED');
+INSERT INTO Ingredient(name,description,status) VALUES ('Weintrauben','Frucht','APPROVED');
 
 INSERT INTO Recipe(name, user_id) VALUES ('Obstkuchen', 1);
 INSERT INTO Recipe(name, user_id) VALUES ('Wiener Schnitzel', 2);

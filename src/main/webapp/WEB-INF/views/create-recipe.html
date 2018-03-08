@@ -3,45 +3,113 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Rezept erstellen</title>
-    <link rel="stylesheet" href="/resources/css/style.css" />
+    <link rel="stylesheet" href="/resources/css/style.css"/>
     <div th:replace="../fragments/head :: head"></div>
 </head>
 <body>
 <div th:replace="../fragments/header :: header"></div>
 
 <div class="container">
-<div>
-    <div class="col-md-3">
-        <form autocomplete="off" action="#" th:action="@{/recipes}"
-              th:object="${recipe}" method="post" class="form-horizontal"
-              role="form">
-            <h2>Rezept erstellen</h2>
-            <div class="form-group">
-                <div class="col-sm-9">
-                    <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
-                           class="validation-message"></label>
-                    <input type="text" th:field="*{name}" placeholder="Name"
-                           class="form-control" />
+    <div>
+        <div class="col-md-12">
+            <form autocomplete="off" action="#" th:action="@{/recipes}"
+                  th:object="${recipe}" method="post" class="form-horizontal"
+                  role="form">
+                <h2>Rezept erstellen</h2>
+                <div class="form-group">
+                    <div class="col-sm-3">
+                        <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                               class="validation-message"></label>
+                        <input type="text" th:field="*{name}" placeholder="Name"
+                               class="form-control"/>
+                    </div>
                 </div>
-            </div>
-            <!--<div class="form-group">-->
-                <!--<div class="col-sm-9">-->
-                    <!--<input type="password" th:field="*{password}"-->
-                           <!--placeholder="Password" class="form-control" /> <label-->
-                        <!--th:if="${#fields.hasErrors('password')}" th:errors="*{password}"-->
-                        <!--class="validation-message"></label>-->
-                <!--</div>-->
-            <!--</div>-->
 
-            <div class="form-group">
-                <div class="col-sm-9">
-                    <button type="submit" class="btn btn-primary btn-block">Rezept hinzufügen</button>
+                <div class="table-responsive col-md-4">
+                <table>
+                    <h2>Zutaten</h2>
+                    <thead>
+                    <tr>
+                        <th>Menge</th>
+                        <th>Zutat</th>
+                        <th>
+                            <button type="submit" th:method="get" name="addRowIngredient">Zutat hinzufügen</button>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="ingredient : ${recipe.ingredients}">
+                        <td>
+                            <input type="text" th:value="${ingredient.id}" th:placeholder="Menge"
+                                   class="form-control"/>
+                        </td>
+                        <td>
+                            <select th:field="*{ingredients[__${ingredientStat.index}__].name}">
+                                <option
+                                        th:each="acceptedIngredient : ${acceptedIngredients}"
+                                        th:value="${acceptedIngredient.name}"
+                                        th:text="${acceptedIngredient.name}">
+                                </option>
+                            </select>
+                        </td>
+                        <td>
+                            <button type="submit" name="removeRowIngredient" th:value="${ingredient.id}"
+                            >Zutat entfernen
+                            </button>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
                 </div>
-            </div>
+                <div class="table-responsive col-md-8">
+                    <table>
+                        <h2>Schritte</h2>
+                        <thead>
+                        <tr>
+                            <th>Schritt</th>
+                            <th>Zutat</th>
+                            <th>
+                                <button type="submit" th:method="get" name="addRowIngredient">Schritte hinzufügen</button>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="ingredient : ${recipe.ingredients}">
+                            <td>
+                                <input type="text" th:value="${ingredient.id}" th:placeholder="Menge"
+                                       class="form-control"/>
+                            </td>
+                            <td>
+                                <select th:field="*{ingredients[__${ingredientStat.index}__].name}">
+                                    <option
+                                            th:each="acceptedIngredient : ${acceptedIngredients}"
+                                            th:value="${acceptedIngredient.name}"
+                                            th:text="${acceptedIngredient.name}">
+                                    </option>
+                                </select>
+                            </td>
+                            <td>
+                                <button type="submit" name="removeRowIngredient" th:value="${ingredient.id}"
+                                >Schritte entfernen
+                                </button>
+                            </td>
+                        </tr>
 
-        </form>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <button type="submit" th:method="post" class="btn btn-primary btn-block">Rezept hinzufügen
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
     </div>
-</div>
 </div>
 </body>
 </html>
