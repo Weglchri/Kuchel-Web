@@ -2,6 +2,7 @@ package at.kuchel.controller;
 
 import at.kuchel.model.Ingredient;
 import at.kuchel.model.Recipe;
+import at.kuchel.model.RecipeIngredient;
 import at.kuchel.model.User;
 import at.kuchel.service.IngredientService;
 import at.kuchel.service.RecipeService;
@@ -68,7 +69,7 @@ public class RecipeController {
     public ModelAndView getNewRecipe() {
         ModelAndView modelAndView = new ModelAndView();
         Recipe recipe = new Recipe();
-        recipe.addIngredient(new Ingredient());
+        recipe.addRecipeIngredient(buildDummyRecipeIngredient());
         modelAndView.addObject("recipe", recipe);
         modelAndView.addObject("acceptedIngredients", ingredientService.getIngredientsWithStatus(Ingredient.Status.APPROVED));
         modelAndView.setViewName("create-recipe");
@@ -78,7 +79,7 @@ public class RecipeController {
     @RequestMapping(value = "/recipes", params = {"addRowIngredient"})
     public ModelAndView addRowIngredient(Recipe recipe) {
         ModelAndView modelAndView = new ModelAndView();
-        recipe.addIngredient(new Ingredient());
+        recipe.addRecipeIngredient(buildDummyRecipeIngredient());
         modelAndView.addObject("acceptedIngredients", ingredientService.getIngredientsWithStatus(Ingredient.Status.APPROVED));
         modelAndView.addObject("recipe", recipe);
         modelAndView.setViewName("create-recipe");
@@ -90,8 +91,8 @@ public class RecipeController {
                                             final HttpServletRequest req, @RequestParam("removeRowIngredient") String id) {
         ModelAndView modelAndView = new ModelAndView();
         final Integer rowId = Integer.valueOf(id);
-        Ingredient ingredient = recipe.getIngredients().get(rowId);
-        recipe.getIngredients().remove(ingredient);
+        RecipeIngredient recipeIngredient = recipe.getRecipeIngredients().get(rowId);
+        recipe.getRecipeIngredients().remove(recipeIngredient);
         modelAndView.addObject("acceptedIngredients", ingredientService.getIngredientsWithStatus(Ingredient.Status.APPROVED));
         modelAndView.addObject("recipe", recipe);
         modelAndView.setViewName("create-recipe");
@@ -105,5 +106,15 @@ public class RecipeController {
         modelAndView.addObject("my-recipes", recipeService.getRecipeByUser(user));
         modelAndView.setViewName("my-recipes-overview");
         return modelAndView;
+    }
+
+    //todo extract later in builder package
+    private RecipeIngredient buildDummyRecipeIngredient() {
+        Ingredient ingredient = new Ingredient();
+        RecipeIngredient recipeIngredient = new RecipeIngredient();
+        recipeIngredient.setIngredient(ingredient);
+        recipeIngredient.setAmount("3");
+        recipeIngredient.setQualifier(RecipeIngredient.Type.Stück);
+        return recipeIngredient;
     }
 }

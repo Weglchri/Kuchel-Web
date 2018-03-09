@@ -17,30 +17,20 @@ public class Recipe extends AbstractEntity<Long> {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "recipe",  cascade={CascadeType.ALL})
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     @Size(min = 1)
     private List<Instruction> instructions = new ArrayList<>();
 
     @Size(min = 6)
-    @Column(name = "NAME",unique = true)
+    @Column(name = "NAME", unique = true)
     private String name;
 
-    @Size(min = 2)
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    @JoinTable(name = "RECIPE_INGREDIENT", joinColumns = {@JoinColumn(name = "RECIPE_ID", nullable = true, updatable = true)}, inverseJoinColumns = {@JoinColumn(name = "INGREDIENT_ID", nullable = true, updatable = true)})
-    private List<Ingredient> ingredients = new ArrayList<>();
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
+    private List<RecipeIngredient> recipeIngredients = new ArrayList<>();
 
     @Override
     public Long getId() {
         return id;
-    }
-
-    public List<Ingredient> getIngredients() {
-        return ingredients;
-    }
-
-    public void addIngredient(Ingredient ingredient) {
-        this.ingredients.add(ingredient);
     }
 
     public String getName() {
@@ -55,9 +45,9 @@ public class Recipe extends AbstractEntity<Long> {
         return instructions;
     }
 
-    public void addInstruction(Instruction instructions) {
-        this.instructions.add(instructions);
-        instructions.setRecipe(this);
+    public void addInstruction(Instruction instruction) {
+        instructions.add(instruction);
+        instruction.setRecipe(this);
     }
 
     public User getUser() {
@@ -66,5 +56,13 @@ public class Recipe extends AbstractEntity<Long> {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<RecipeIngredient> getRecipeIngredients() {
+        return recipeIngredients;
+    }
+
+    public void addRecipeIngredient(RecipeIngredient recipeIngredient) {
+        recipeIngredients.add(recipeIngredient);
     }
 }

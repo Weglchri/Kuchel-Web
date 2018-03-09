@@ -13,10 +13,10 @@
 <div>
     <div class="col-md-3">
         <h2>Zutaten</h2>
-        <div th:each="ingredient : ${recipe.getIngredients()}" class="recipe-instructions margin-0-auto">
+        <div th:each="recipeIngredient : ${recipe.getRecipeIngredients()}" class="recipe-instructions margin-0-auto">
 
             <div class="step">
-                <p th:utext="${ingredient.getName()}"></p>
+                <p th:utext="${recipeIngredient.ingredient.name}"></p>
             </div>
         </div>
     </div>

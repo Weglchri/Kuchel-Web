@@ -21,8 +21,8 @@ public class Ingredient extends AbstractEntity<Long> {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    @ManyToMany(mappedBy = "ingredients")
-    private Set<Recipe> recipes = new HashSet<>(0);
+    @OneToMany(mappedBy = "ingredient")
+    private Set<RecipeIngredient> recipeIngredients = new HashSet<>(0);
 
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -54,11 +54,4 @@ public class Ingredient extends AbstractEntity<Long> {
         this.description = description;
     }
 
-    public Set<Recipe> getRecipe() {
-        return recipes;
-    }
-
-    public void addRecipe(Recipe recipes) {
-        this.recipes.add(recipes);
-    }
 }
