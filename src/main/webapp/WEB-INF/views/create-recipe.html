@@ -53,13 +53,14 @@
                             </select>
                         </td>
                         <td>
-                            <select th:field="*{recipeIngredients[__${recipeIngredientStat.index}__].ingredient.name}">
+                            <input list="acceptedIngredients" th:field="*{recipeIngredients[__${recipeIngredientStat.index}__].ingredient.name}"/>
+                            <datalist id="acceptedIngredients" >
                                 <option
                                         th:each="acceptedIngredient : ${acceptedIngredients}"
                                         th:value="${acceptedIngredient.name}"
                                         th:text="${acceptedIngredient.name}">
                                 </option>
-                            </select>
+                            </datalist>
                         </td>
                         <td>
                             <button type="submit" name="removeRowIngredient" th:value="${recipeIngredientStat.index}">entfernen</button>
