@@ -29,15 +29,14 @@ public class RecipeServiceImpl implements RecipeService {
 
         recipe.addInstruction(tmp);
 
+
         //this must be done inside thymeleaf or controller
         for (RecipeIngredient recipeIngredient : recipe.getRecipeIngredients()) {
-            recipeIngredient.setAmount("1");
-            recipeIngredient.setQualifier(RecipeIngredient.Type.dag);
             recipeIngredient.setRecipe(recipe);
         }
 
         for (RecipeIngredient recipeIngredient : recipe.getRecipeIngredients()) {
-            System.out.println("amount: " + recipeIngredient.getAmount());
+            System.out.println("amount: " + recipeIngredient.getQuantity());
             System.out.println("qualifier: " + recipeIngredient.getQualifier());
             System.out.println("recipe: " + recipeIngredient.getRecipe());
 

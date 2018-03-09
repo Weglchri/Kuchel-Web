@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.Objects;
 
 @Controller
@@ -72,6 +73,7 @@ public class RecipeController {
         recipe.addRecipeIngredient(buildDummyRecipeIngredient());
         modelAndView.addObject("recipe", recipe);
         modelAndView.addObject("acceptedIngredients", ingredientService.getIngredientsWithStatus(Ingredient.Status.APPROVED));
+        modelAndView.addObject("recipeIngredientTypes", Arrays.asList(RecipeIngredient.Type.values()));
         modelAndView.setViewName("create-recipe");
         return modelAndView;
     }
@@ -81,6 +83,7 @@ public class RecipeController {
         ModelAndView modelAndView = new ModelAndView();
         recipe.addRecipeIngredient(buildDummyRecipeIngredient());
         modelAndView.addObject("acceptedIngredients", ingredientService.getIngredientsWithStatus(Ingredient.Status.APPROVED));
+        modelAndView.addObject("recipeIngredientTypes", Arrays.asList(RecipeIngredient.Type.values()));
         modelAndView.addObject("recipe", recipe);
         modelAndView.setViewName("create-recipe");
         return modelAndView;
@@ -94,6 +97,7 @@ public class RecipeController {
         RecipeIngredient recipeIngredient = recipe.getRecipeIngredients().get(rowId);
         recipe.getRecipeIngredients().remove(recipeIngredient);
         modelAndView.addObject("acceptedIngredients", ingredientService.getIngredientsWithStatus(Ingredient.Status.APPROVED));
+        modelAndView.addObject("recipeIngredientTypes", Arrays.asList(RecipeIngredient.Type.values()));
         modelAndView.addObject("recipe", recipe);
         modelAndView.setViewName("create-recipe");
         return modelAndView;
@@ -113,8 +117,6 @@ public class RecipeController {
         Ingredient ingredient = new Ingredient();
         RecipeIngredient recipeIngredient = new RecipeIngredient();
         recipeIngredient.setIngredient(ingredient);
-        recipeIngredient.setAmount("3");
-        recipeIngredient.setQualifier(RecipeIngredient.Type.Stück);
         return recipeIngredient;
     }
 }

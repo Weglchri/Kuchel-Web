@@ -40,8 +40,17 @@
                     <tbody>
                     <tr th:each="recipeIngredient : ${recipe.recipeIngredients}">
                         <td>
-                            <input type="text" th:value="${recipeIngredient.id}" th:placeholder="Menge"
+                            <input th:field="*{recipeIngredients[__${recipeIngredientStat.index}__].quantity}" type="text" th:value="${recipeIngredient.quantity}" th:placeholder="Menge"
                                    class="form-control"/>
+                        </td>
+                        <td>
+                            <select th:field="*{recipeIngredients[__${recipeIngredientStat.index}__].qualifier}">
+                                <option
+                                        th:each="recipeIngredientType : ${recipeIngredientTypes}"
+                                        th:value="${recipeIngredientType}"
+                                        th:text="${recipeIngredientType}">
+                                </option>
+                            </select>
                         </td>
                         <td>
                             <select th:field="*{recipeIngredients[__${recipeIngredientStat.index}__].ingredient.name}">

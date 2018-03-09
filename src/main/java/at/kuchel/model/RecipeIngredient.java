@@ -10,8 +10,8 @@ public class RecipeIngredient extends AbstractEntity<Long> {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "AMOUNT")
-    private String amount;
+    @Column(name = "QUANTITY")
+    private String quantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "RECIPE_ID")
@@ -34,12 +34,12 @@ public class RecipeIngredient extends AbstractEntity<Long> {
         return id;
     }
 
-    public String getAmount() {
-        return amount;
+    public String getQuantity() {
+        return quantity;
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 
     public Type getQualifier() {
