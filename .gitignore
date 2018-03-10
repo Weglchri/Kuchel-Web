@@ -1,3 +1,5 @@
 
 .idea/
 kuchel.iml
+log/
+target/
