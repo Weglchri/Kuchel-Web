@@ -1,5 +1,6 @@
 package at.kuchel.controller;
 
+import at.kuchel.Context;
 import at.kuchel.model.*;
 import at.kuchel.service.IngredientService;
 import at.kuchel.service.RecipeService;
@@ -19,6 +20,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @Controller
+@RequestMapping(Context.GUI_API)
 public class RecipeController {
 
     @Autowired
