@@ -26,87 +26,91 @@
                 </div>
 
                 <div class="table-responsive col-md-4">
-                <table>
-                    <h2>Zutaten</h2>
-                    <thead>
-                    <tr>
-                        <th>Menge</th>
-                        <th>Zutat</th>
-                        <th>
-                            <button type="submit" th:method="get" name="addRowIngredient">Zutat hinzufügen</button>
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="recipeIngredient : ${recipe.recipeIngredients}">
-                        <td>
-                            <input th:field="*{recipeIngredients[__${recipeIngredientStat.index}__].quantity}" type="text" th:value="${recipeIngredient.quantity}" th:placeholder="Menge"
-                                   class="form-control"/>
-                        </td>
-                        <td>
-                            <select th:field="*{recipeIngredients[__${recipeIngredientStat.index}__].qualifier}">
-                                <option
-                                        th:each="recipeIngredientType : ${recipeIngredientTypes}"
-                                        th:value="${recipeIngredientType}"
-                                        th:text="${recipeIngredientType}">
-                                </option>
-                            </select>
-                        </td>
-                        <td>
-                            <input list="acceptedIngredients" th:field="*{recipeIngredients[__${recipeIngredientStat.index}__].ingredient.name}"/>
-                            <datalist id="acceptedIngredients" >
-                                <option
-                                        th:each="acceptedIngredient : ${acceptedIngredients}"
-                                        th:value="${acceptedIngredient.name}"
-                                        th:text="${acceptedIngredient.name}">
-                                </option>
-                            </datalist>
-                        </td>
-                        <td>
-                            <button type="submit" name="removeRowIngredient" th:value="${recipeIngredientStat.index}">entfernen</button>
-                        </td>
-                    </tr>
+                    <table>
+                        <h2>Zutaten</h2>
+                        <thead>
+                        <tr>
+                            <th>Menge</th>
+                            <th>Zutat</th>
+                            <th>
+                                <button type="submit" th:method="get" name="addRowIngredient">Zutat hinzufügen</button>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="recipeIngredient : ${recipe.recipeIngredients}">
+                            <td>
+                                <input th:field="*{recipeIngredients[__${recipeIngredientStat.index}__].quantity}"
+                                       type="text" th:value="${recipeIngredient.quantity}" th:placeholder="Menge"
+                                       class="form-control"/>
+                            </td>
+                            <td>
+                                <select th:field="*{recipeIngredients[__${recipeIngredientStat.index}__].qualifier}">
+                                    <option
+                                            th:each="recipeIngredientType : ${recipeIngredientTypes}"
+                                            th:value="${recipeIngredientType}"
+                                            th:text="${recipeIngredientType}">
+                                    </option>
+                                </select>
+                            </td>
+                            <td>
+                                <input list="acceptedIngredients"
+                                       th:field="*{recipeIngredients[__${recipeIngredientStat.index}__].ingredient.name}"/>
+                                <datalist id="acceptedIngredients">
+                                    <option
+                                            th:each="acceptedIngredient : ${acceptedIngredients}"
+                                            th:value="${acceptedIngredient.name}"
+                                            th:text="${acceptedIngredient.name}">
+                                    </option>
+                                </datalist>
+                            </td>
+                            <td>
+                                <button type="submit" name="removeRowInstruction"
+                                        th:value="${recipeIngredientStat.index}">entfernen
+                                </button>
+                            </td>
+                        </tr>
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
                 </div>
-                <!--<div class="table-responsive col-md-8">-->
-                    <!--<table>-->
-                        <!--<h2>Schritte</h2>-->
-                        <!--<thead>-->
-                        <!--<tr>-->
-                            <!--<th>Schritt</th>-->
-                            <!--<th>Zutat</th>-->
-                            <!--<th>-->
-                                <!--<button type="submit" th:method="get" name="addRowIngredient">Schritte hinzufügen</button>-->
-                            <!--</th>-->
-                        <!--</tr>-->
-                        <!--</thead>-->
-                        <!--<tbody>-->
-                        <!--<tr th:each="ingredient : ${recipe.ingredients}">-->
-                            <!--<td>-->
-                                <!--<input type="text" th:value="${ingredient.id}" th:placeholder="Menge"-->
-                                       <!--class="form-control"/>-->
-                            <!--</td>-->
-                            <!--<td>-->
-                                <!--<select th:field="*{ingredients[__${ingredientStat.index}__].name}">-->
-                                    <!--<option-->
-                                            <!--th:each="acceptedIngredient : ${acceptedIngredients}"-->
-                                            <!--th:value="${acceptedIngredient.name}"-->
-                                            <!--th:text="${acceptedIngredient.name}">-->
-                                    <!--</option>-->
-                                <!--</select>-->
-                            <!--</td>-->
-                            <!--<td>-->
-                                <!--<button type="submit" name="removeRowIngredient" th:value="${ingredient.id}"-->
-                                <!--&gt;Schritte entfernen-->
-                                <!--</button>-->
-                            <!--</td>-->
-                        <!--</tr>-->
+                <div class="table-responsive col-md-8">
+                    <table>
+                        <h2>Schritte</h2>
+                        <thead>
+                        <tr>
+                            <th>Schritt</th>
+                            <th>Anweisung</th>
+                            <th>
+                                <button type="submit" th:method="get" name="addRowInstruction">Schritte hinzufügen
+                                </button>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="instruction : ${recipe.instructions}">
+                            <td>
+                                <input type="text" th:field="*{instructions[__${instructionStat.index}__].step}"
+                                       th:value="${instruction.step}" th:placeholder="Schritt"
+                                       class="form-control"/>
+                            </td>
 
-                        <!--</tbody>-->
-                    <!--</table>-->
-                <!--</div>-->
+                            <td>
+                                <input type="text" th:field="*{instructions[__${instructionStat.index}__].instruction}"
+                                       th:value="${instruction.instruction}"
+                                       th:placeholder="Anweisung"
+                                       class="form-control"/>
+                            </td>
+
+                            <td>
+                                <button type="submit" name="removeRowInstruction" th:value="${instruction.id}">Schritte
+                                    entfernen
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
 
                 <div class="form-group">
                     <div class="col-sm-6">

@@ -23,28 +23,15 @@ public class RecipeServiceImpl implements RecipeService {
     public void createRecipe(Recipe recipe) {
         //TODO logic for validating the recipe comes <here>
         //START Dummy remove someday  ###########################################
-        Instruction tmp = new Instruction();
-        tmp.setInstruction("step bla");
-        tmp.setStep("1");
-
-        recipe.addInstruction(tmp);
-
 
         //this must be done inside thymeleaf or controller
         for (RecipeIngredient recipeIngredient : recipe.getRecipeIngredients()) {
             recipeIngredient.setRecipe(recipe);
         }
 
-        for (RecipeIngredient recipeIngredient : recipe.getRecipeIngredients()) {
-            System.out.println("amount: " + recipeIngredient.getQuantity());
-            System.out.println("qualifier: " + recipeIngredient.getQualifier());
-            System.out.println("recipe: " + recipeIngredient.getRecipe());
-
-
-            System.out.println("ingredientName: " + recipeIngredient.getIngredient().getName());
+        for(Instruction instruction: recipe.getInstructions()){
+            instruction.setRecipe(recipe);
         }
-
-        //END Dummy remove someday  ###########################################
 
         recipeRepository.save(recipe);
     }
@@ -66,6 +53,5 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public List<Recipe> getRecipeByUser(User user) {
-        throw new NotImplementedException();
-    }
+        throw new NotImplementedException();    }
 }

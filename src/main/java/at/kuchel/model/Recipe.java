@@ -47,7 +47,6 @@ public class Recipe extends AbstractEntity<Long> {
 
     public void addInstruction(Instruction instruction) {
         instructions.add(instruction);
-        instruction.setRecipe(this);
     }
 
     public User getUser() {

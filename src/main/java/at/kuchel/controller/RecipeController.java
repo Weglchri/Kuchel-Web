@@ -1,9 +1,6 @@
 package at.kuchel.controller;
 
-import at.kuchel.model.Ingredient;
-import at.kuchel.model.Recipe;
-import at.kuchel.model.RecipeIngredient;
-import at.kuchel.model.User;
+import at.kuchel.model.*;
 import at.kuchel.service.IngredientService;
 import at.kuchel.service.RecipeService;
 import at.kuchel.util.SessionHelper;
@@ -96,6 +93,31 @@ public class RecipeController {
         final Integer rowId = Integer.valueOf(id);
         RecipeIngredient recipeIngredient = recipe.getRecipeIngredients().get(rowId);
         recipe.getRecipeIngredients().remove(recipeIngredient);
+        modelAndView.addObject("acceptedIngredients", ingredientService.getIngredientsWithStatus(Ingredient.Status.APPROVED));
+        modelAndView.addObject("recipeIngredientTypes", Arrays.asList(RecipeIngredient.Type.values()));
+        modelAndView.addObject("recipe", recipe);
+        modelAndView.setViewName("create-recipe");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/recipes", params = {"addRowInstruction"})
+    public ModelAndView addRowInstruction(Recipe recipe) {
+        ModelAndView modelAndView = new ModelAndView();
+        recipe.addInstruction(new Instruction());
+        modelAndView.addObject("acceptedIngredients", ingredientService.getIngredientsWithStatus(Ingredient.Status.APPROVED));
+        modelAndView.addObject("recipeIngredientTypes", Arrays.asList(RecipeIngredient.Type.values()));
+        modelAndView.addObject("recipe", recipe);
+        modelAndView.setViewName("create-recipe");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/recipes", params = {"removeRowInstruction"})
+    public ModelAndView removeRowInstruction(Recipe recipe,
+                                            final HttpServletRequest req, @RequestParam("removeRowIngredient") String id) {
+        ModelAndView modelAndView = new ModelAndView();
+        final Integer rowId = Integer.valueOf(id);
+        Instruction instruction = recipe.getInstructions().get(rowId);
+        recipe.getInstructions().remove(instruction);
         modelAndView.addObject("acceptedIngredients", ingredientService.getIngredientsWithStatus(Ingredient.Status.APPROVED));
         modelAndView.addObject("recipeIngredientTypes", Arrays.asList(RecipeIngredient.Type.values()));
         modelAndView.addObject("recipe", recipe);
