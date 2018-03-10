@@ -1,5 +1,9 @@
 /* Custom Main Stylesheet */
 
-.container {
-    margin-top: 5%;
+.header {
+    margin-bottom: 5%;
+}
+
+.footer {
+    margin-top: 20%;
 }
