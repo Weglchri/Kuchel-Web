@@ -29,6 +29,8 @@ public class RecipeIngredient extends AbstractEntity<Long> {
         Stück,
         Gramm,
         ml,
+        EL,
+        TL,
         Pkg
     }
 

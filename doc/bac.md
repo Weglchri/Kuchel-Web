@@ -11,7 +11,7 @@
 | 3  |  responsive header|  |  |
 |<del>3  |  vorauswahl für ingredients reduziert wenn schon gewählt |  | in eigene service klasse |bernhard</del>
 | 4  |  RecipeServiceImpl.extractToControllerSomeDay() refactores|  |  |
-
+| 1 |  Qualifier erweitern und auch nullable| | |Bernhard
 
 ###Features
 
@@ -26,5 +26,5 @@
 | 1  |  "alle Rerepte Seite als Startseite" |Wegl
 |<del> 2  |  Logging|Bernhard</del>
 |<del> 2  |  Interceptor für logging|Bernhard</del>
-| 4  |  mehr Sampel Daten|Bernhard
+|<del> 4  |  mehr Sampel Daten|Bernhard<del>
 

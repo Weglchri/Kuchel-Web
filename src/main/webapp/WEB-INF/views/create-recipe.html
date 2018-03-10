@@ -45,13 +45,15 @@
                                        class="form-control"/>
                             </td>
                             <td>
-                                <select th:field="*{recipeIngredients[__${recipeIngredientStat.index}__].qualifier}">
+                                <input list="qualifier"
+                                       th:field="*{recipeIngredients[__${recipeIngredientStat.index}__].qualifier}"/>
+                                <datalist id="qualifier">
                                     <option
                                             th:each="recipeIngredientType : ${recipeIngredientTypes}"
                                             th:value="${recipeIngredientType}"
                                             th:text="${recipeIngredientType}">
                                     </option>
-                                </select>
+                                </datalist>
                             </td>
                             <td>
                                 <input list="acceptedIngredients"
