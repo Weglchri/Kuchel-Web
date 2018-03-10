@@ -6,7 +6,7 @@
 | Prio| Thema| Observed| Expected|Bearbeiter|
 |---|---|---|---|---|
 |<del> 0 |  Duplizierung Ingredients</del> |  |  |
-| 1  |  REST |http://localhost:8080/recipes?id=3#   |http://localhost:8080/recipes/3   |Bernhard
+|<del> 1  |  REST |http://localhost:8080/recipes?id=3#   |http://localhost:8080/recipes/3   |Bernhard</del>
 | 2  |  Dropdown für ingredients|  |  |Wegl
 | 3  |  responsive header|  |  |
 | 3  |  vorauswahl für ingredients reduziert wenn schon gewählt |  | in eigene service klasse |
