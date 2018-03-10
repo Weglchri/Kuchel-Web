@@ -24,7 +24,7 @@
 | 1  |  meine Rezepte implemenieren |Wegl
 | 2  |  Suche implementieren mit Namen des Rezeptes und Ansicht Matches | Wegl
 | 1  |  "alle Rerepte Seite als Startseite" |Wegl
-| 2  |  Logging|Bernhard
-| 2  |  Interceptor für logging|Bernhard
+|<del> 2  |  Logging|Bernhard</del>
+|<del> 2  |  Interceptor für logging|Bernhard</del>
 | 4  |  mehr Sampel Daten|Bernhard
 
