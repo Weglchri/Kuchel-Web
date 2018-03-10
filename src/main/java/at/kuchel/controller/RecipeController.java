@@ -129,7 +129,7 @@ public class RecipeController {
     }
 
     private void addObjectsForCreateRecipeView(ModelAndView modelAndView, Recipe recipe) {
-        modelAndView.addObject("acceptedIngredients", ingredientService.getIngredientsWithStatus(Ingredient.Status.APPROVED));
+        modelAndView.addObject("acceptedIngredients", ingredientService.getAllIngredientsWithStatusReducedByChosenOnes(Ingredient.Status.APPROVED,recipe));
         modelAndView.addObject("recipeIngredientTypes", Arrays.asList(RecipeIngredient.Type.values()));
         modelAndView.addObject("recipe", recipe);
         modelAndView.setViewName("create-recipe");

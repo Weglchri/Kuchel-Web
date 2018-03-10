@@ -61,6 +61,12 @@ public class Recipe extends AbstractEntity<Long> {
         return recipeIngredients;
     }
 
+    public List<Ingredient> getIngredients() {
+        List<Ingredient> ingredients = new ArrayList<>();
+        recipeIngredients.stream().forEach(recipeIngredient -> ingredients.add(recipeIngredient.getIngredient()));
+        return ingredients;
+    }
+
     public void addRecipeIngredient(RecipeIngredient recipeIngredient) {
         recipeIngredients.add(recipeIngredient);
     }
