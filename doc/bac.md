@@ -18,7 +18,7 @@
 | Prio| Thema|Bearbeiter|
 |---|---|---|
 |<del> 1  |  Neues Rezept Schritt autogeneriert im HTML (sieht new Recipe Seite) |Bernhard</del>
-| 1  |  Recept Detailseite quantity und qualifier |Bernhard
+|<del> 1  |  Recept Detailseite quantity und qualifier |Bernhard</del>
 | 1  |  DEBUG enablen |Bernhard
 | 1  |  funktionierendes Responsive Design | 
 | 1  |  meine Rezepte implemenieren |Wegl

@@ -1,6 +1,7 @@
 package at.kuchel.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "RECIPE_INGREDIENT")
@@ -65,5 +66,16 @@ public class RecipeIngredient extends AbstractEntity<Long> {
 
     public void setIngredient(Ingredient ingredient) {
         this.ingredient = ingredient;
+    }
+
+    public String getQuantityAndQualifier() {
+        StringBuilder builder = new StringBuilder();
+        if (Objects.nonNull(getQuantity())) {
+            builder.append(getQuantity()).append(" ");
+        }
+        if (Objects.nonNull(getQualifier())) {
+            builder.append(getQualifier());
+        }
+        return builder.toString();
     }
 }

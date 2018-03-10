@@ -11,17 +11,25 @@
 <div class="container">
 <h1 th:utext="${recipe.name}"></h1>
 <div>
-    <div class="col-md-3">
+    <div class="col-md-4">
         <h2>Zutaten</h2>
         <div th:each="recipeIngredient : ${recipe.getRecipeIngredients()}" class="recipe-instructions margin-0-auto">
 
-            <div class="step">
+            <div class="col-md-1">
+                <p th:utext="${recipeIngredient.quantity}"></p>
+            </div>
+
+            <div class="col-md-3">
+                <p th:utext="${recipeIngredient.qualifier}"></p>
+            </div>
+
+            <div class="col-md-7">
                 <p th:utext="${recipeIngredient.ingredient.name}"></p>
             </div>
         </div>
     </div>
 
-    <div class="col-md-9">
+    <div class="col-md-8">
         <h2>Zubereitung</h2>
         <div th:each="instruction : ${recipe.getInstructions()}" class="recipe-instructions margin-0-auto">
 
@@ -29,7 +37,7 @@
                 <div class="title-text" th:inline="text">Schritt [[${instruction.step}]]</div>
             </div>
             <div class="col-md-10">
-                <p th:utext="${instruction.getInstruction()}">[[${instruction.instructionDescription}]]</p>
+                <p th:utext="${instruction.getInstruction()}"></p>
             </div>
         </div>
     </div>
