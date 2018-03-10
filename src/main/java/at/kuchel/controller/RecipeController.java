@@ -102,7 +102,7 @@ public class RecipeController {
 
     @RequestMapping(value = "/recipes", params = {"removeRowInstruction"})
     public ModelAndView removeRowInstruction(Recipe recipe,
-                                             final HttpServletRequest req, @RequestParam("removeRowIngredient") String id) {
+                                             final HttpServletRequest req, @RequestParam("removeRowInstruction") String id) {
         ModelAndView modelAndView = new ModelAndView();
         final Integer rowId = Integer.valueOf(id);
         Instruction instruction = recipe.getInstructions().get(rowId);

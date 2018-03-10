@@ -27,7 +27,8 @@ public class RecipeIngredient extends AbstractEntity<Long> {
     public enum Type {
         Stück,
         Gramm,
-        ml
+        ml,
+        Pkg
     }
 
     public Long getId() {

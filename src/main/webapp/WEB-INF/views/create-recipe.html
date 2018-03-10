@@ -90,9 +90,7 @@
                         <tbody>
                         <tr th:each="instruction : ${recipe.instructions}">
                             <td>
-                                <input type="text" th:field="*{instructions[__${instructionStat.index}__].step}"
-                                       th:value="${instruction.step}" th:placeholder="Schritt"
-                                       class="form-control"/>
+                                <p th:utext="${instructionStat.index+1}"></p>
                             </td>
                             <td>
                                 <input type="text" th:field="*{instructions[__${instructionStat.index}__].instruction}"
