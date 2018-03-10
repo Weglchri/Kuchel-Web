@@ -68,10 +68,7 @@ public class RecipeController {
         ModelAndView modelAndView = new ModelAndView();
         Recipe recipe = new Recipe();
         recipe.addRecipeIngredient(buildDummyRecipeIngredient());
-        modelAndView.addObject("recipe", recipe);
-        modelAndView.addObject("acceptedIngredients", ingredientService.getIngredientsWithStatus(Ingredient.Status.APPROVED));
-        modelAndView.addObject("recipeIngredientTypes", Arrays.asList(RecipeIngredient.Type.values()));
-        modelAndView.setViewName("create-recipe");
+        addObjectsForCreateRecipeView(modelAndView, recipe);
         return modelAndView;
     }
 
@@ -79,10 +76,7 @@ public class RecipeController {
     public ModelAndView addRowIngredient(Recipe recipe) {
         ModelAndView modelAndView = new ModelAndView();
         recipe.addRecipeIngredient(buildDummyRecipeIngredient());
-        modelAndView.addObject("acceptedIngredients", ingredientService.getIngredientsWithStatus(Ingredient.Status.APPROVED));
-        modelAndView.addObject("recipeIngredientTypes", Arrays.asList(RecipeIngredient.Type.values()));
-        modelAndView.addObject("recipe", recipe);
-        modelAndView.setViewName("create-recipe");
+        addObjectsForCreateRecipeView(modelAndView, recipe);
         return modelAndView;
     }
 
@@ -93,10 +87,7 @@ public class RecipeController {
         final Integer rowId = Integer.valueOf(id);
         RecipeIngredient recipeIngredient = recipe.getRecipeIngredients().get(rowId);
         recipe.getRecipeIngredients().remove(recipeIngredient);
-        modelAndView.addObject("acceptedIngredients", ingredientService.getIngredientsWithStatus(Ingredient.Status.APPROVED));
-        modelAndView.addObject("recipeIngredientTypes", Arrays.asList(RecipeIngredient.Type.values()));
-        modelAndView.addObject("recipe", recipe);
-        modelAndView.setViewName("create-recipe");
+        addObjectsForCreateRecipeView(modelAndView, recipe);
         return modelAndView;
     }
 
@@ -104,24 +95,18 @@ public class RecipeController {
     public ModelAndView addRowInstruction(Recipe recipe) {
         ModelAndView modelAndView = new ModelAndView();
         recipe.addInstruction(new Instruction());
-        modelAndView.addObject("acceptedIngredients", ingredientService.getIngredientsWithStatus(Ingredient.Status.APPROVED));
-        modelAndView.addObject("recipeIngredientTypes", Arrays.asList(RecipeIngredient.Type.values()));
-        modelAndView.addObject("recipe", recipe);
-        modelAndView.setViewName("create-recipe");
+        addObjectsForCreateRecipeView(modelAndView, recipe);
         return modelAndView;
     }
 
     @RequestMapping(value = "/recipes", params = {"removeRowInstruction"})
     public ModelAndView removeRowInstruction(Recipe recipe,
-                                            final HttpServletRequest req, @RequestParam("removeRowIngredient") String id) {
+                                             final HttpServletRequest req, @RequestParam("removeRowIngredient") String id) {
         ModelAndView modelAndView = new ModelAndView();
         final Integer rowId = Integer.valueOf(id);
         Instruction instruction = recipe.getInstructions().get(rowId);
         recipe.getInstructions().remove(instruction);
-        modelAndView.addObject("acceptedIngredients", ingredientService.getIngredientsWithStatus(Ingredient.Status.APPROVED));
-        modelAndView.addObject("recipeIngredientTypes", Arrays.asList(RecipeIngredient.Type.values()));
-        modelAndView.addObject("recipe", recipe);
-        modelAndView.setViewName("create-recipe");
+        addObjectsForCreateRecipeView(modelAndView, recipe);
         return modelAndView;
     }
 
@@ -140,5 +125,12 @@ public class RecipeController {
         RecipeIngredient recipeIngredient = new RecipeIngredient();
         recipeIngredient.setIngredient(ingredient);
         return recipeIngredient;
+    }
+
+    private void addObjectsForCreateRecipeView(ModelAndView modelAndView, Recipe recipe) {
+        modelAndView.addObject("acceptedIngredients", ingredientService.getIngredientsWithStatus(Ingredient.Status.APPROVED));
+        modelAndView.addObject("recipeIngredientTypes", Arrays.asList(RecipeIngredient.Type.values()));
+        modelAndView.addObject("recipe", recipe);
+        modelAndView.setViewName("create-recipe");
     }
 }
