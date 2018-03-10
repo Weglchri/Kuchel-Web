@@ -18,7 +18,7 @@
                     <li><a href="/recipes">Suche</a></li>
                     <!--<li><a href="#">Über uns</a></li>-->
                     <li><a sec:authorize="isAnonymous()" href="/"><font color="#d9d4dc">Meine Rezepte</font></a></li>
-                    <li><a sec:authorize="isAuthenticated()" href="#">Meine Rezepte</a></li>
+                    <li><a sec:authorize="isAuthenticated()" href="/my-recipes">Meine Rezepte</a></li>
                     <li><a sec:authorize="isAnonymous()" href="/"><font color="#d9d4dc">Neues Rezept</font></a></li>
                     <li><a sec:authorize="isAuthenticated()" href="/recipes/new">Neues Rezept</a></li>
                 </ul>

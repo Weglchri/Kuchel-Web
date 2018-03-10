@@ -10,18 +10,17 @@
 <div th:replace="../fragments/header :: header"></div>
 
 <div class="container">
-    <div>
+
         <div class="col-md-12">
-            <form autocomplete="off" action="#" th:action="@{/recipes}"
-                  th:object="${recipe}" method="post" class="form-horizontal"
-                  role="form">
+            <form autocomplete="off" action="#" th:action="@{/recipes}" th:object="${recipe}" method="post" class="form-horizontal" role="form">
+
                 <h2>Rezept erstellen</h2>
+
                 <div class="form-group">
                     <div class="col-sm-3">
                         <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
                                class="validation-message"></label>
-                        <input type="text" th:field="*{name}" placeholder="Name"
-                               class="form-control"/>
+                        <input type="text" th:field="*{name}" placeholder="Name" class="form-control"/>
                     </div>
                 </div>
 
@@ -32,9 +31,7 @@
                         <tr>
                             <th>Menge</th>
                             <th>Zutat</th>
-                            <th>
-                                <button type="submit" th:method="get" name="addRowIngredient">Zutat hinzufügen</button>
-                            </th>
+                            <th><button type="submit" th:method="get" name="addRowIngredient">Zutat hinzufügen</button></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -72,8 +69,8 @@
                                 </button>
                             </td>
                         </tr>
-
                         </tbody>
+
                     </table>
                 </div>
                 <div class="table-responsive col-md-8">
@@ -110,16 +107,14 @@
                     </table>
                 </div>
 
-                <div class="form-group">
+                <div id="recipe-creation-button" class="form-group">
                     <div class="col-sm-6">
-                        <button type="submit" th:method="post" class="btn btn-primary btn-block">Rezept hinzufügen
-                        </button>
+                        <button type="submit" th:method="post" class="btn btn-primary btn-block">Rezept hinzufügen</button>
                     </div>
                 </div>
 
             </form>
         </div>
-    </div>
 </div>
 </body>
 </html>
