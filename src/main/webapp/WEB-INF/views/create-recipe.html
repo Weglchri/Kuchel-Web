@@ -94,14 +94,12 @@
                                        th:value="${instruction.step}" th:placeholder="Schritt"
                                        class="form-control"/>
                             </td>
-
                             <td>
                                 <input type="text" th:field="*{instructions[__${instructionStat.index}__].instruction}"
                                        th:value="${instruction.instruction}"
                                        th:placeholder="Anweisung"
                                        class="form-control"/>
                             </td>
-
                             <td>
                                 <button type="submit" name="removeRowInstruction" th:value="${instruction.id}">Schritte
                                     entfernen
