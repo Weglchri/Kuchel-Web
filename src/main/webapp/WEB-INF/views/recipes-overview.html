@@ -14,7 +14,8 @@
 <div class="container">
 <h1>Rezept Übersicht</h1>
 <ul th:each="recipe : ${recipes}">
-    <a th:href="@{/recipes(id=${recipe.id})}" th:text="${recipe.name}"/>
+    <a th:href="@{/recipes/__${recipe.id}__}" th:text="${recipe.name}"/>
+    <!--@{/mycontroller/} + ${type}">-->
 
 </ul>
 </div>

@@ -7,6 +7,7 @@ import at.kuchel.util.SessionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,10 +38,10 @@ public class RecipeController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/recipes", method = RequestMethod.GET, params = "id")
-    public ModelAndView listRecipes(@RequestParam("id") long id) {
+    @RequestMapping(value = "/recipes/{id}", method = RequestMethod.GET)
+    public ModelAndView listRecipes(@PathVariable String id) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("recipe", recipeService.getRecipeById(id));
+        modelAndView.addObject("recipe", recipeService.getRecipeById(Long.parseLong(id)));
         modelAndView.setViewName("recipes-detailed");
         return modelAndView;
     }
