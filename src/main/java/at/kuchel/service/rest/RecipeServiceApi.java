@@ -1,6 +1,7 @@
 package at.kuchel.service.rest;
 
-import at.kuchel.api.RecipeResponse;
+import at.kuchel.api.RecipeDetailedResponse;
+import at.kuchel.api.RecipeOverviewResponse;
 import at.kuchel.mapper.RecipeMapper;
 import at.kuchel.model.Recipe;
 import at.kuchel.service.RecipeService;
@@ -19,9 +20,14 @@ public class RecipeServiceApi {
     @Autowired
     private RecipeMapper recipeMapper;
 
-    public List<RecipeResponse> getAllRecipes() {
+    public List<RecipeOverviewResponse> getAllRecipes() {
         List<Recipe> recipes = recipeService.getAllRecipes();
 
-        return recipes.stream().map(recipe -> recipeMapper.map(recipe)).collect(Collectors.toList());
+        return recipes.stream().map(recipe -> recipeMapper.mapToOverview(recipe)).collect(Collectors.toList());
+    }
+
+    public RecipeDetailedResponse getRecipeById(String id) {
+        Recipe recipe = recipeService.getRecipeById(Long.parseLong(id));
+        return recipeMapper.mapToDetail(recipe);
     }
 }

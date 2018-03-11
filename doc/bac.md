@@ -13,7 +13,7 @@
 | 2 | Suche implementieren mit Namen des Rezeptes und Ansicht Matches | Wegl
 |<del> 2 | Logging|Bernhard</del>
 |<del> 2 | Interceptor für logging|Bernhard</del>
-|<del> 4 | mehr Sampel Daten|Bernhard<del>
+|<del> 4 | mehr Sampel Daten|Bernhard</del>
 | 1 | Valdiator für Rezepte |Wegl
 
 ###Refactoring
@@ -27,3 +27,10 @@
 |<del> 3 | vorauswahl für ingredients | reduziert wenn schon gewählt | in eigene Service-Klasse | Bernhard</del>
 | 4 | RecipeServiceImpl.extractToControllerSomeDay() refactores|  |  |
 | 1 | Qualifier erweitern und auch nullable| | | Bernhard
+
+
+###Android
+
+| Prio | Thema |  Bearbeiter |
+|---|---|---|
+| | | |
