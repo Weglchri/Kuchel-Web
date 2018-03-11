@@ -70,7 +70,8 @@ public class RecipeController {
     public ModelAndView getNewRecipe() {
         ModelAndView modelAndView = new ModelAndView();
         Recipe recipe = new Recipe();
-        recipe.addRecipeIngredient(buildDummyRecipeIngredient());
+        //todo: refactor with dummyingredient
+        //recipe.addRecipeIngredient(buildDummyRecipeIngredient());
         addObjectsForCreateRecipeView(modelAndView, recipe);
         return modelAndView;
     }

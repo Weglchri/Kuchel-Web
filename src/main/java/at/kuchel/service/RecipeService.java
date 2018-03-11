@@ -60,7 +60,7 @@ public class RecipeService {
     }
 
     public Recipe getRecipeById(Long id) {
-        return recipeRepository.findOne(id);
+        return recipeRepository.getOne(id);
     }
 
     public Recipe getRecipeByName(String name) {

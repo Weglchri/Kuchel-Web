@@ -9,11 +9,10 @@
         <nav class="navbar navbar-default">
 
             <div class="container-fluid">
-                <div class="navbar-header">
-                    <li><a class="navbar-brand" href="/dashboard">Kuchel</a></li>
-                </div>
+
 
                 <ul class="nav navbar-nav">
+                    <li class="active"><a class="navbar-brand" href="/dashboard">Kuchel</a></li>
                     <!--<li><a href="#">Neuigkeiten</a></li>-->
                     <li><a href="/recipes">Suche</a></li>
                     <!--<li><a href="#">Über uns</a></li>-->
@@ -24,11 +23,16 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li sec:authorize="isAuthenticated()"><a> <span sec:authentication="name" class="glyphicon glyphicon-user"></span></a></li>
-                    <li sec:authorize="isAuthenticated()"><a href="/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
-                    <li sec:authorize="isAnonymous()"><a href="/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                    <li sec:authorize="isAnonymous()"><a href="/registration"><span class="glyphicon glyphicon-registration-mark"> </span> Registration</a></li>
-                    <li sec:authorize="hasAuthority('ADMIN')"> <a href="/h2"><span class="glyphicon glyphicon-floppy-disk"></span>H2</a></li>
+                    <li sec:authorize="isAuthenticated()"><a> <span sec:authentication="name"
+                                                                    class="glyphicon glyphicon-user"></span></a></li>
+                    <li sec:authorize="isAuthenticated()"><a href="/logout"><span
+                            class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+                    <li sec:authorize="isAnonymous()"><a href="/"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+                    </li>
+                    <li sec:authorize="isAnonymous()"><a href="/registration"><span
+                            class="glyphicon glyphicon-registration-mark"> </span> Registration</a></li>
+                    <li sec:authorize="hasAuthority('ADMIN')"><a href="/h2"><span
+                            class="glyphicon glyphicon-floppy-disk"></span>H2</a></li>
                 </ul>
             </div>
         </nav>

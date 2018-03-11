@@ -1,0 +1,32 @@
+
+#recipe-instruction-counter {
+    display: inline;
+}
+
+#recipe-name-creation {
+    margin-top: 3%;
+}
+
+#recipe-ingredients-creation {
+    margin-top: 1%;
+}
+
+#recipe-instruction-creation {
+    margin-top: 1%;
+}
+
+#recipe-creation-button {
+    margin: 4% 0% 10% 0%;
+}
+
+div > input {
+    margin: 1%;
+}
+
+div > textarea {
+    margin: 1%;
+}
+
+.element {
+@include clearfix;
+}
