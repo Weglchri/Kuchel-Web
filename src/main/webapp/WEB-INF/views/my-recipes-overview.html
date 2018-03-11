@@ -12,12 +12,12 @@
         <h1>Meine Rezepte</h1>
 
         <div th:if="${not #lists.isEmpty(recipes)}">
-                <ul th:each="recipe : ${recipes}">
+                <div th:each="recipe : ${recipes}">
                         <a th:href="@{/recipes/__${recipe.id}__}" th:text="${recipe.name}"/>
-                </ul>
+                </div>
         </div>
         <div th:if="${#lists.isEmpty(recipes)}">
-                <p>Sieht so aus, als wären noch keine Rezepte von dir vorhanden.</p>
+                <p>Sieht so aus, als wären noch keine Rezepte von dir vorhanden :(</p>
                 <a class="btn btn-primary btn-lg btn-success"  href="/recipes/new" >Neues Rezept erstellen</a>
         </div>
 </div>

@@ -7,6 +7,7 @@
 |<del> 1 | Neues Rezept Schritt autogeneriert im HTML (sieht new Recipe Seite) | Bernhard </del>
 |<del> 1 | Rezept Detailseite quantity und qualifier | Bernhard </del>
 | 1 | DEBUG enablen | Bernhard
+| 1 | 404 Error Page | Wegl
 | 1 | funktionierendes Responsive Design detaillierte Rezepte | Wegl
 |<del> 1 | meine Rezepte implemenieren |Wegl </del>
 | 2 | Suche implementieren mit Namen des Rezeptes und Ansicht Matches | Wegl
