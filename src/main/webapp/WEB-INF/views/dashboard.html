@@ -10,6 +10,7 @@
 <div class="container">
     <h1>Willkommen in der Kuchel</h1>
     <div><p>Viel Spaß mit unseren Rezepten</p></div>
+    <a th:href="@{/recipes/__${recipe.id}__}" th:text="${recipe.name}"/>
 </div>
 
 </body>

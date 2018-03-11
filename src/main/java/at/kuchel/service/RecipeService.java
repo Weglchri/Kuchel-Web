@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 @Transactional
 @Service
@@ -54,7 +55,7 @@ public class RecipeService {
             instruction.setRecipe(recipe);
         }
     }
-
+    
     public List<Recipe> getAllRecipes() {
         return recipeRepository.findAll();
     }
@@ -69,5 +70,18 @@ public class RecipeService {
 
     public List<Recipe> getRecipeByUser(User user) {
         return recipeRepository.findRecipeByUser(user);
+    }
+
+    public Recipe getRecommendationRecipe() {
+        Recipe recommendedRecipe = getRandomRecipe();
+        return recommendedRecipe;
+    }
+
+    public Recipe getRandomRecipe() {
+        List<Recipe> recipeList = recipeRepository.findAll();
+        Random randomGenerator = new Random();
+        int index = randomGenerator.nextInt(recipeList.size());
+        Recipe randomRecipe = recipeList.get(index);
+        return randomRecipe;
     }
 }
