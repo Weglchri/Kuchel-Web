@@ -64,7 +64,7 @@ public class RecipeService {
     }
 
     public Recipe getRecipeById(Long id) {
-        Recipe recipe = recipeRepository.getOne(id);
+        Recipe recipe = recipeRepository.findOne(id);
 
         if (Objects.nonNull(recipe)) {
             return recipe;
