@@ -14,7 +14,7 @@ public class GlobalExceptionControllerAdvice {
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("exception", ex);
-        modelAndView.setViewName("error/404");
+        modelAndView.setViewName("error/error");
         return modelAndView;
     }
 
