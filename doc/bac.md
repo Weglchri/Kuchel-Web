@@ -16,6 +16,7 @@
 |<del> 2 | Interceptor für logging|Bernhard</del>
 |<del> 4 | mehr Sampel Daten|Bernhard</del>
 | 1 | Valdiator für Rezepte |Wegl
+| 3 | Recommendation of the day |Wegl
 
 ###Refactoring
 

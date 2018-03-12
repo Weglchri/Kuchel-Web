@@ -6,6 +6,7 @@ import at.kuchel.repostitory.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
 import java.util.Objects;
@@ -73,15 +74,10 @@ public class RecipeService {
     }
 
     public Recipe getRecommendationRecipe() {
-        Recipe recommendedRecipe = getRandomRecipe();
-        return recommendedRecipe;
+        throw new NotImplementedException();
     }
 
     public Recipe getRandomRecipe() {
-        List<Recipe> recipeList = recipeRepository.findAll();
-        Random randomGenerator = new Random();
-        int index = randomGenerator.nextInt(recipeList.size());
-        Recipe randomRecipe = recipeList.get(index);
-        return randomRecipe;
+        throw new NotImplementedException();
     }
 }
