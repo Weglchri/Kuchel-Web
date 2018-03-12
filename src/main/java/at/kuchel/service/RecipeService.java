@@ -1,5 +1,6 @@
 package at.kuchel.service;
 
+import at.kuchel.exception.KuchelException;
 import at.kuchel.model.*;
 import at.kuchel.repostitory.IngredientRepository;
 import at.kuchel.repostitory.RecipeRepository;
@@ -10,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
+
+import static at.kuchel.exception.KuchelErrorCode.RECIPE_NOT_FOUND;
 
 @Transactional
 @Service
@@ -55,13 +58,19 @@ public class RecipeService {
             instruction.setRecipe(recipe);
         }
     }
-    
+
     public List<Recipe> getAllRecipes() {
         return recipeRepository.findAll();
     }
 
     public Recipe getRecipeById(Long id) {
-        return recipeRepository.getOne(id);
+        Recipe recipe = recipeRepository.getOne(id);
+
+        if (Objects.nonNull(recipe)) {
+            return recipe;
+        }
+
+        throw new KuchelException(RECIPE_NOT_FOUND);
     }
 
     public Recipe getRecipeByName(String name) {
