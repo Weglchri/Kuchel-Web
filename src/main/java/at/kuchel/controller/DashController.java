@@ -16,7 +16,8 @@ public class DashController {
     @RequestMapping(value = {"/dashboard"}, method = RequestMethod.GET)
     public ModelAndView dashboard() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("recipe", recipeService.getRecommendationRecipe());
+        //todo implement recommendationservice
+        //modelAndView.addObject("recipe", recipeService.getRecommendationRecipe());
         modelAndView.setViewName("dashboard");
         return modelAndView;
     }
