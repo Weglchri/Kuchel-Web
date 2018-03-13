@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!--/*@thymesVar id="recipes" type="at.kuchel.model.Recipe"*/-->
+<!--/*@thymesVar id="recipe" type="at.kuchel.model.Recipe"*/-->
+
+
 <head>
         <title>Meine Rezepte</title>
         <link rel="stylesheet" href="/resources/css/recipes-listed.css"/>
@@ -14,7 +19,7 @@
 
         <div th:if="${not #lists.isEmpty(recipes)}">
                 <div th:each="recipe : ${recipes}">
-                        <a th:href="@{/recipes/__${recipe.id}__}" th:text="${recipe.name}"/>
+                        <a th:href="@{/recipes/__${recipe.id}__}" th:text="${recipe.name}"></a>
                 </div>
         </div>
         <div th:if="${#lists.isEmpty(recipes)}">

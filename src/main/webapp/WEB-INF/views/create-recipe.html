@@ -1,6 +1,15 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!--/*@thymesVar id="recipe" type="at.kuchel.model.Recipe"*/-->
+<!--/*@thymesVar id="recipes" type="at.kuchel.model.Recipe"*/-->
+<!--/*@thymesVar id="name" type="at.kuchel.model.Recipe"*/-->
+<!--/*@thymesVar id="recipeIngredientType" type="at.kuchel.model.Recipe"*/-->
+<!--/*@thymesVar id="recipeIngredientTypes" type="at.kuchel.model.Recipe"*/-->
+<!--/*@thymesVar id="acceptedIngredient" type="at.kuchel.model.Recipe"*/-->
+<!--/*@thymesVar id="acceptedIngredients" type="at.kuchel.model.Recipe"*/-->
+
+
 <head>
     <title>Rezept erstellen</title>
     <link rel="stylesheet" href="/resources/css/create-recipe.css"/>
@@ -43,6 +52,7 @@
                     <input list="qualifier" class="form-control" placeholder="Stück"
                            th:field="*{recipeIngredients[__${recipeIngredientStat.index}__].qualifier}"/>
                     <datalist id="qualifier">
+
                         <option
                                 th:each="recipeIngredientType : ${recipeIngredientTypes}"
                                 th:value="${recipeIngredientType}"

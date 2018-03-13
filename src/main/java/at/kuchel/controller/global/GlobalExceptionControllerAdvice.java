@@ -1,4 +1,4 @@
-package at.kuchel.config;
+package at.kuchel.controller.global;
 
 import at.kuchel.exception.KuchelException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -7,7 +7,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice
 public class GlobalExceptionControllerAdvice {
-
 
     @ExceptionHandler(KuchelException.class)
     protected ModelAndView handleException(KuchelException ex) {
