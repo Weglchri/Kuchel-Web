@@ -13,8 +13,8 @@ public class Ingredient extends AbstractEntity<Long> {
     @GeneratedValue
     private Long id;
 
-    @Size(min = 2, max = 100, message = "Bitte wähle eine gültigen Namen")
     @Column(name = "NAME")
+    @Size(min = 2, max = 100, message = "Bitte wähle eine gültigen Namen")
     private String name;
 
     @Column(name = "DESCRIPTION")

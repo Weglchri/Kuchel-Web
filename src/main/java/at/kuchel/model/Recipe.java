@@ -3,6 +3,7 @@ package at.kuchel.model;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class Recipe extends AbstractEntity<Long> {
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     @NotEmpty(message="Mindestens ein Schritt wird vorausgesetzt")
+    @Valid
     private List<Instruction> instructions = new ArrayList<>();
 
     @Column(name = "NAME", unique = true)
@@ -29,6 +31,7 @@ public class Recipe extends AbstractEntity<Long> {
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     @NotEmpty(message="Mindestens eine Zutat wird vorausgesetzt")
+    @Valid
     private List<RecipeIngredient> recipeIngredients = new ArrayList<>();
 
     @Override

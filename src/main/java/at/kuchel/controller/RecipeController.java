@@ -57,19 +57,19 @@ public class RecipeController {
 
         if (!Objects.isNull(existingRecipe)) {
             bindingResult
-                    .rejectValue("recipe", "error.recipe",
+                    .rejectValue("name", "error.name",
                             "Es existiert bereits ein Rezept mit diesem Namen");
         }
 
         if(bindingResult.hasErrors()) {
             modelAndView.setViewName("create-recipe");
-            return modelAndView;
+        } else {
+            recipe.setUser(sessionHelper.getCurrentUser());
+            recipeService.createRecipe(recipe);
+            modelAndView.addObject("recipe", recipe);
+            modelAndView.addObject("successMessage", String.format("Rezept %s wurde erfolgreich hinzugefügt", recipe.getName()));
+            modelAndView.setViewName("recipes-detailed");
         }
-        recipe.setUser(sessionHelper.getCurrentUser());
-        recipeService.createRecipe(recipe);
-        modelAndView.addObject("recipe", recipe);
-        modelAndView.addObject("successMessage", String.format("Rezept %s wurde erfolgreich hinzugefügt", recipe.getName()));
-        modelAndView.setViewName("recipes-detailed");
         return modelAndView;
     }
 

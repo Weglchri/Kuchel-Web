@@ -1,7 +1,5 @@
 package at.kuchel.model;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
@@ -14,10 +12,9 @@ public class Instruction extends AbstractEntity<Long> {
     private Long id;
 
     @Column(name = "INSTRUCTION_DESCRIPTION")
-    @Size(min = 5, max = 100, message = "Beschreibe kurz den Vorangen")
+    @Size(min = 5, max = 100, message = "Beschreibe kurz den Vorgang")
     private String description;
 
-    @NotBlank
     @Column(name = "STEP")
     private String step;
 

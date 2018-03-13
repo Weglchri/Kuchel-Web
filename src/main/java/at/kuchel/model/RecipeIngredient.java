@@ -1,6 +1,7 @@
 package at.kuchel.model;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 
 @Entity
 @Table(name = "RECIPE_INGREDIENT")
@@ -15,10 +16,12 @@ public class RecipeIngredient extends AbstractEntity<Long> {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "RECIPE_ID")
+    @Valid
     public Recipe recipe;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "INGREDIENT_ID")
+    @Valid
     public Ingredient ingredient;
 
     @Enumerated(EnumType.STRING)
