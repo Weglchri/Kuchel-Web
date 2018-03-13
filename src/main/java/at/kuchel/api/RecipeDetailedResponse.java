@@ -10,6 +10,6 @@ public class RecipeDetailedResponse {
     private String username;
     private String name;
 
-    private List<IngredientResponse> ingredientResponses;
-    private List<InstructionResponse> instructionResponses;
+    private List<IngredientResponse> ingredients;
+    private List<InstructionResponse> instructions;
 }

@@ -40,11 +40,11 @@ public class RecipeMapper {
         }
         List<InstructionResponse> instructionResponses = new ArrayList<>();
         recipe.getInstructions().forEach(instruction -> instructionResponses.add(instructionMapper.map(instruction)));
-        recipeResponse.setInstructionResponses(instructionResponses);
+        recipeResponse.setInstructions(instructionResponses);
 
         List<IngredientResponse> ingredientResponses = new ArrayList<>();
         recipe.getRecipeIngredients().forEach(recipeIngredient -> ingredientResponses.add(ingredientMapper.map(recipeIngredient)));
-        recipeResponse.setIngredientResponses(ingredientResponses);
+        recipeResponse.setIngredients(ingredientResponses);
 
         return recipeResponse;
     }

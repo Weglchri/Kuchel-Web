@@ -6,5 +6,5 @@ import lombok.Data;
 public class InstructionResponse {
 
     private String step;
-    private String instructionDescription;
+    private String description;
 }

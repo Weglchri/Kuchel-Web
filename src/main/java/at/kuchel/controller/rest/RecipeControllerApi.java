@@ -30,7 +30,7 @@ public class RecipeControllerApi {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public RecipeDetailedResponse getByVoucherCode(@PathVariable String id) {
+    public RecipeDetailedResponse getById(@PathVariable String id) {
         LOG.info("Retrieve recipe with id '{}'", id);
         return recipeService.getRecipeById(id);
     }

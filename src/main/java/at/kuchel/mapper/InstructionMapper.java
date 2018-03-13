@@ -9,7 +9,7 @@ public class InstructionMapper {
 
     public InstructionResponse map(Instruction instruction) {
         InstructionResponse ingredientResponse = new InstructionResponse();
-        ingredientResponse.setInstructionDescription(instruction.getInstruction());
+        ingredientResponse.setDescription(instruction.getDescription());
         ingredientResponse.setStep(instruction.getStep());
         return ingredientResponse;
     }
