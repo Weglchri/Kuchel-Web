@@ -13,9 +13,9 @@ public class Instruction extends AbstractEntity<Long> {
     @GeneratedValue
     private Long id;
 
-    @NotBlank
     @Column(name = "INSTRUCTION_DESCRIPTION")
-    private String instructionDescription;
+    @Size(min = 5, max = 100, message = "Beschreibe kurz den Vorangen")
+    private String description;
 
     @NotBlank
     @Column(name = "STEP")
@@ -30,12 +30,12 @@ public class Instruction extends AbstractEntity<Long> {
         return id;
     }
 
-    public String getInstruction() {
-        return instructionDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setInstruction(String instruction) {
-        this.instructionDescription = instruction;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Recipe getRecipe() {

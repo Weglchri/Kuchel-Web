@@ -1,8 +1,7 @@
 package at.kuchel.model;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,7 +13,7 @@ public class Ingredient extends AbstractEntity<Long> {
     @GeneratedValue
     private Long id;
 
-    @NotBlank
+    @Size(min = 2, max = 100, message = "Bitte wähle eine gültigen Namen")
     @Column(name = "NAME")
     private String name;
 

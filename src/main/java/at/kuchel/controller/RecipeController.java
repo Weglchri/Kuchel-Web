@@ -51,12 +51,19 @@ public class RecipeController {
     @RequestMapping(value = "/recipes", method = RequestMethod.POST)
     public ModelAndView createRecipe(@Valid Recipe recipe, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
-        //todo check befor upload if name exist
+
+        //todo valdiation in work
         Recipe existingRecipe = recipeService.getRecipeByName(recipe.getName());
+
         if (!Objects.isNull(existingRecipe)) {
             bindingResult
                     .rejectValue("recipe", "error.recipe",
                             "Es existiert bereits ein Rezept mit diesem Namen");
+        }
+
+        if(bindingResult.hasErrors()) {
+            modelAndView.setViewName("create-recipe");
+            return modelAndView;
         }
         recipe.setUser(sessionHelper.getCurrentUser());
         recipeService.createRecipe(recipe);
