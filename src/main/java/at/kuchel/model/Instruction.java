@@ -12,7 +12,7 @@ public class Instruction extends AbstractEntity<Long> {
     private Long id;
 
     @Column(name = "INSTRUCTION_DESCRIPTION")
-    @Size(min = 5, max = 100, message = "Beschreibe kurz den Vorgang")
+    @Size(min = 5, max = 500, message = "Beschreibe kurz den Vorgang")
     private String description;
 
     @Column(name = "STEP")
