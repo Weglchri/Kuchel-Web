@@ -76,10 +76,12 @@
                 <!-- Errorfield ingredient empty field-->
                 <div th:if="${#fields.hasErrors('recipeIngredients[__${recipeIngredientStat.index}__].ingredient.name')}"
                      th:errors="*{recipeIngredients[__${recipeIngredientStat.index}__].ingredient.name}"
-                     class="validation-message"></div>
+                     class="validation-message">
+                </div>
                 <!-- Empty space after selection field -->
                 <div class="clearfix"></div>
             </div>
+
             <!-- Errorfield ingredients not selected-->
             <div th:if="${#fields.hasErrors('recipeIngredients')}" th:errors="*{recipeIngredients}"
                  class="validation-message"></div>
@@ -123,7 +125,7 @@
         </div>
 
         <div id="recipe-creation-button">
-            <button type="submit" th:method="post" class="btn btn-primary btn-block">Rezept erstellen
+            <button type="submit" th:method="post" class="btn btn-primary btn-block btn-lg">Rezept erstellen
             </button>
         </div>
 
