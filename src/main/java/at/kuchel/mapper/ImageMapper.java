@@ -13,6 +13,7 @@ public class ImageMapper {
     public ImageDetailResponse mapDetail(Image image) {
         ImageDetailResponse imageResponse = new ImageDetailResponse();
         imageResponse.setId(String.valueOf(image.getId()));
+        imageResponse.setRecipeId(String.valueOf(image.getRecipe().getId()));
         imageResponse.setData(Base64.getEncoder().encode(image.getData()));
         imageResponse.setModifiedDate(image.getModifiedDate());
         return imageResponse;

@@ -30,11 +30,9 @@ public class RecipeMapper {
         }
         recipeResponse.setDifficulty(String.valueOf(recipe.getDifficulty()));
         recipeResponse.setDuration(String.valueOf(recipe.getDuration()));
+
         if (!recipe.getImages().isEmpty()) {
-            ImageOverviewResponse imageResponse = new ImageOverviewResponse();
-            imageResponse.setId(String.valueOf(recipe.getImages().get(0).getId()));
-            imageResponse.setModifiedDate(recipe.getImages().get(0).getModifiedDate());
-            recipeResponse.setImage(imageResponse);
+            recipeResponse.setImage(imageMapper.mapOverview(recipe.getImages().get(0)));
         }
         return recipeResponse;
     }
@@ -50,8 +48,8 @@ public class RecipeMapper {
         recipeResponse.setDifficulty(String.valueOf(recipe.getDifficulty()));
         recipeResponse.setDuration(String.valueOf(recipe.getDuration()));
 
-        List<ImageDetailResponse> imageResponses = new ArrayList<>();
-        recipe.getImages().forEach(image -> imageResponses.add(imageMapper.mapDetail(image)));
+        List<ImageOverviewResponse> imageResponses = new ArrayList<>();
+        recipe.getImages().forEach(image -> imageResponses.add(imageMapper.mapOverview(image)));
         recipeResponse.setImages(imageResponses);
 
         List<InstructionResponse> instructionResponses = new ArrayList<>();

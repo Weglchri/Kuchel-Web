@@ -40,8 +40,8 @@ public class RecipeService {
 
         //todo remove some day when view can add duration and difficulty
         remove(recipe);
-        recipe.setCeationDate(LocalDate.now());
 
+        recipe.setCeationDate(LocalDate.now());
         replaceIngredientIfExist(recipe);
 
         recipeRepository.save(recipe);
