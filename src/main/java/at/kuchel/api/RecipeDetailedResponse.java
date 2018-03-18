@@ -9,6 +9,8 @@ public class RecipeDetailedResponse {
     private String id;
     private String username;
     private String name;
+    private String duration;
+    private String difficulty;
 
     private List<IngredientResponse> ingredients;
     private List<InstructionResponse> instructions;

@@ -28,6 +28,8 @@ public class RecipeMapper {
         if (Objects.nonNull(recipe.getUser())) {
             recipeResponse.setUsername(recipe.getUser().getUsername());
         }
+        recipeResponse.setDifficulty(String.valueOf(recipe.getDifficulty()));
+        recipeResponse.setDuration(String.valueOf(recipe.getDuration()));
         return recipeResponse;
     }
 
@@ -38,6 +40,10 @@ public class RecipeMapper {
         if (Objects.nonNull(recipe.getUser())) {
             recipeResponse.setUsername(recipe.getUser().getUsername());
         }
+
+        recipeResponse.setDifficulty(String.valueOf(recipe.getDifficulty()));
+        recipeResponse.setDuration(String.valueOf(recipe.getDuration()));
+
         List<InstructionResponse> instructionResponses = new ArrayList<>();
         recipe.getInstructions().forEach(instruction -> instructionResponses.add(instructionMapper.map(instruction)));
         recipeResponse.setInstructions(instructionResponses);

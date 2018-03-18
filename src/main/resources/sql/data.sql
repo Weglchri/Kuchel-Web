@@ -22,9 +22,9 @@ INSERT INTO Ingredient(name,status) VALUES ('Mehl (glatt)','APPROVED');
 INSERT INTO Ingredient(name,status) VALUES ('Butter','APPROVED');
 INSERT INTO Ingredient(name,status) VALUES ('Staubzucker','APPROVED');
 
-INSERT INTO Recipe(name, user_id) VALUES ('Obstkuchen', 1);
-INSERT INTO Recipe(name, user_id) VALUES ('Wiener Schnitzel', 2);
-INSERT INTO Recipe(name, user_id) VALUES ('Karotten-Olivenölkuchen im Glas', 1);
+INSERT INTO Recipe(name, user_id,duration,difficulty) VALUES ('Obstkuchen', 1,30,1);
+INSERT INTO Recipe(name, user_id,duration,difficulty) VALUES ('Wiener Schnitzel', 2,40,3);
+INSERT INTO Recipe(name, user_id,duration,difficulty) VALUES ('Karotten-Olivenölkuchen im Glas', 1,60,1);
 
 INSERT INTO INSTRUCTION(INSTRUCTION_DESCRIPTION,step,recipe_id) VALUES ('Banane und Apfel mixen.',1,1);
 INSERT INTO INSTRUCTION(INSTRUCTION_DESCRIPTION,step,recipe_id) VALUES ('Servieren.',2,1);

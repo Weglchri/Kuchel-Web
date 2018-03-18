@@ -11,7 +11,6 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
 
 import static at.kuchel.exception.KuchelErrorCode.RECIPE_NOT_FOUND;
 
@@ -35,9 +34,17 @@ public class RecipeService {
             instruction.setStep(String.valueOf(i + 1));
         }
 
+        //todo remove some day when view can add duration and difficulty
+        remove(recipe);
+
         replaceIngredientIfExist(recipe);
 
         recipeRepository.save(recipe);
+    }
+
+    private void remove(Recipe recipe) {
+        recipe.setDifficulty(2L);
+        recipe.setDuration(70L);
     }
 
     private void replaceIngredientIfExist(Recipe recipe) {
