@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +47,12 @@ public class Recipe extends AbstractEntity<Long> {
     @NotEmpty(message = "Mindestens eine Zutat wird vorausgesetzt")
     @Valid
     private List<RecipeIngredient> recipeIngredients = new ArrayList<>();
+
+    @Column(name = "CREATION_DATE")
+    private LocalDate ceationDate;
+
+    @Column(name = "MODIFIED_DATE")
+    private LocalDate modifiedDate;
 
     @Override
     public Long getId() {
@@ -112,5 +119,22 @@ public class Recipe extends AbstractEntity<Long> {
 
     public void addImage(Image image) {
         images.add(image);
+    }
+
+    public LocalDate getCeationDate() {
+        return ceationDate;
+    }
+
+    public void setCeationDate(LocalDate creationDate) {
+        setModifiedDate(creationDate);
+        this.ceationDate = creationDate;
+    }
+
+    public LocalDate getModifiedDate() {
+        return modifiedDate;
+    }
+
+    public void setModifiedDate(LocalDate modifiedDate) {
+        this.modifiedDate = modifiedDate;
     }
 }

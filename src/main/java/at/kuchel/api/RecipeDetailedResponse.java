@@ -14,5 +14,5 @@ public class RecipeDetailedResponse {
 
     private List<IngredientResponse> ingredients;
     private List<InstructionResponse> instructions;
-    private List<ImageResponse> images;
+    private List<ImageDetailResponse> images;
 }

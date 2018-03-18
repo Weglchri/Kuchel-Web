@@ -1,6 +1,7 @@
 package at.kuchel.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "IMAGE")
@@ -10,8 +11,8 @@ public class Image {
     @GeneratedValue
     private Long id;
 
-    @JoinColumn(name = "NAME")
-    private String name;
+    @Column(name = "MODIFIED_DATE")
+    private LocalDate modifiedDate;
 
     @JoinColumn(name = "DATA")
     @Lob
@@ -45,11 +46,11 @@ public class Image {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public LocalDate getModifiedDate() {
+        return modifiedDate;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setModifiedDate(LocalDate modifiedDate) {
+        this.modifiedDate = modifiedDate;
     }
 }

@@ -9,5 +9,5 @@ public class RecipeOverviewResponse {
     private String name;
     private String duration;
     private String difficulty;
-    private ImageResponse image;
+    private ImageOverviewResponse image;
 }

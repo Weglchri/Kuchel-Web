@@ -31,14 +31,11 @@ public class RecipeMapper {
         recipeResponse.setDifficulty(String.valueOf(recipe.getDifficulty()));
         recipeResponse.setDuration(String.valueOf(recipe.getDuration()));
         if (!recipe.getImages().isEmpty()) {
-            ImageResponse imageResponse = new ImageResponse();
+            ImageOverviewResponse imageResponse = new ImageOverviewResponse();
             imageResponse.setId(String.valueOf(recipe.getImages().get(0).getId()));
-            //todo check if only id or also payload of image should transmitted
-//            imageResponse.setName(String.valueOf(recipe.getImages().get(0).getName()));
-//            imageResponse.setData(Base64.getEncoder().encode(recipe.getImages().get(0).getData()));
+            imageResponse.setModifiedDate(recipe.getImages().get(0).getModifiedDate());
             recipeResponse.setImage(imageResponse);
         }
-
         return recipeResponse;
     }
 
@@ -53,7 +50,7 @@ public class RecipeMapper {
         recipeResponse.setDifficulty(String.valueOf(recipe.getDifficulty()));
         recipeResponse.setDuration(String.valueOf(recipe.getDuration()));
 
-        List<ImageResponse> imageResponses = new ArrayList<>();
+        List<ImageDetailResponse> imageResponses = new ArrayList<>();
         recipe.getImages().forEach(image -> imageResponses.add(imageMapper.mapDetail(image)));
         recipeResponse.setImages(imageResponses);
 

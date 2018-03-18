@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,6 +41,7 @@ public class RecipeService {
 
         //todo remove some day when view can add duration and difficulty
         remove(recipe);
+        recipe.setCeationDate(LocalDate.now());
 
         replaceIngredientIfExist(recipe);
 
@@ -51,7 +53,7 @@ public class RecipeService {
         Path path = Paths.get("C:/Tortelloni.jpg");
         try {
             Image image = new Image();
-            image.setName("test");
+            image.setModifiedDate(LocalDate.now());
 
             image.setData(Files.readAllBytes(path));
             recipe.addImage(image);
