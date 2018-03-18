@@ -10,6 +10,9 @@ public class Image {
     @GeneratedValue
     private Long id;
 
+    @JoinColumn(name = "NAME")
+    private String name;
+
     @JoinColumn(name = "DATA")
     private byte[] data;
 
@@ -17,11 +20,11 @@ public class Image {
     @JoinColumn(name = "RECIPE_ID")
     public Recipe recipe;
 
-    public byte[] getDate() {
+    public byte[] getData() {
         return data;
     }
 
-    public void setDate(byte[] date) {
+    public void setData(byte[] date) {
         this.data = date;
     }
 
@@ -39,5 +42,13 @@ public class Image {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

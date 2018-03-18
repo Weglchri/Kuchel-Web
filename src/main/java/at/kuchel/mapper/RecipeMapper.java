@@ -1,14 +1,12 @@
 package at.kuchel.mapper;
 
-import at.kuchel.api.IngredientResponse;
-import at.kuchel.api.InstructionResponse;
-import at.kuchel.api.RecipeDetailedResponse;
-import at.kuchel.api.RecipeOverviewResponse;
+import at.kuchel.api.*;
 import at.kuchel.model.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,6 +28,14 @@ public class RecipeMapper {
         }
         recipeResponse.setDifficulty(String.valueOf(recipe.getDifficulty()));
         recipeResponse.setDuration(String.valueOf(recipe.getDuration()));
+        if (!recipe.getImage().isEmpty()) {
+            ImageResponse imageResponse = new ImageResponse();
+            imageResponse.setId(String.valueOf(recipe.getImage().get(0).getId()));
+            imageResponse.setName(String.valueOf(recipe.getImage().get(0).getName()));
+            imageResponse.setData(Base64.getEncoder().encode(recipe.getImage().get(0).getData()));
+            recipeResponse.setImage(imageResponse);
+        }
+
         return recipeResponse;
     }
 
