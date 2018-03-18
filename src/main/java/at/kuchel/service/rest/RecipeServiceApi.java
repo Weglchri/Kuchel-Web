@@ -22,7 +22,6 @@ public class RecipeServiceApi {
 
     public List<RecipeOverviewResponse> getAllRecipes() {
         List<Recipe> recipes = recipeService.getAllRecipes();
-
         return recipes.stream().map(recipe -> recipeMapper.mapToOverview(recipe)).collect(Collectors.toList());
     }
 

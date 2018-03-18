@@ -2,13 +2,11 @@ package at.kuchel.controller.rest;
 
 import at.kuchel.Context;
 import at.kuchel.api.ImageDetailResponse;
+import at.kuchel.api.ImageSyncRequest;
 import at.kuchel.service.rest.ImageServiceApi;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,15 +20,15 @@ public class ImageControllerApi {
     @Autowired
     private ImageServiceApi imageService;
 
-    @RequestMapping( method = RequestMethod.GET)
-    public List<ImageDetailResponse> getByArrayOfId(@PathVariable Long recipeId) {
+    @RequestMapping(method = RequestMethod.POST)
+    public List<ImageDetailResponse> getByImagesIds(@RequestBody ImageSyncRequest imageSyncRequest, @PathVariable Long recipeId) {
         LOG.info("Retrieve images with id '{}'", recipeId);
-        return imageService.getImagesByRecipeId(recipeId);
+        return imageService.getImagesByRecipeId(imageSyncRequest, recipeId);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ImageDetailResponse getById(@PathVariable Long recipeId,@PathVariable Long id) {
-        LOG.info("Retrieve image for recipe '{}' with id '{}'",recipeId, id);
-        return imageService.getImages(id);
+    public ImageDetailResponse getByImageId(@PathVariable Long recipeId, @PathVariable Long id) {
+        LOG.info("Retrieve image for recipe '{}' with id '{}'", recipeId, id);
+        return imageService.getImage(id);
     }
 }
