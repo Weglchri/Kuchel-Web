@@ -14,6 +14,7 @@ public class Image {
     private String name;
 
     @JoinColumn(name = "DATA")
+    @Lob
     private byte[] data;
 
     @ManyToOne(fetch = FetchType.LAZY)

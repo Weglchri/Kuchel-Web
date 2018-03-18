@@ -9,6 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 
@@ -43,6 +47,20 @@ public class RecipeService {
     }
 
     private void remove(Recipe recipe) {
+
+        Path path = Paths.get("C:/Tortelloni.jpg");
+        try {
+            Image image = new Image();
+            image.setName("test");
+
+            image.setData(Files.readAllBytes(path));
+            recipe.addImage(image);
+            image.setRecipe(recipe);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
         recipe.setDifficulty(2L);
         recipe.setDuration(70L);
     }

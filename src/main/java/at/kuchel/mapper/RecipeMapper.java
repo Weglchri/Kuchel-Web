@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,6 +18,9 @@ public class RecipeMapper {
     @Autowired
     private IngredientMapper ingredientMapper;
 
+    @Autowired
+    private ImageMapper imageMapper;
+
     public RecipeOverviewResponse mapToOverview(Recipe recipe) {
         RecipeOverviewResponse recipeResponse = new RecipeOverviewResponse();
         recipeResponse.setId(String.valueOf(recipe.getId()));
@@ -28,11 +30,12 @@ public class RecipeMapper {
         }
         recipeResponse.setDifficulty(String.valueOf(recipe.getDifficulty()));
         recipeResponse.setDuration(String.valueOf(recipe.getDuration()));
-        if (!recipe.getImage().isEmpty()) {
+        if (!recipe.getImages().isEmpty()) {
             ImageResponse imageResponse = new ImageResponse();
-            imageResponse.setId(String.valueOf(recipe.getImage().get(0).getId()));
-            imageResponse.setName(String.valueOf(recipe.getImage().get(0).getName()));
-            imageResponse.setData(Base64.getEncoder().encode(recipe.getImage().get(0).getData()));
+            imageResponse.setId(String.valueOf(recipe.getImages().get(0).getId()));
+            //todo check if only id or also payload of image should transmitted
+//            imageResponse.setName(String.valueOf(recipe.getImages().get(0).getName()));
+//            imageResponse.setData(Base64.getEncoder().encode(recipe.getImages().get(0).getData()));
             recipeResponse.setImage(imageResponse);
         }
 
@@ -49,6 +52,10 @@ public class RecipeMapper {
 
         recipeResponse.setDifficulty(String.valueOf(recipe.getDifficulty()));
         recipeResponse.setDuration(String.valueOf(recipe.getDuration()));
+
+        List<ImageResponse> imageResponses = new ArrayList<>();
+        recipe.getImages().forEach(image -> imageResponses.add(imageMapper.mapDetail(image)));
+        recipeResponse.setImages(imageResponses);
 
         List<InstructionResponse> instructionResponses = new ArrayList<>();
         recipe.getInstructions().forEach(instruction -> instructionResponses.add(instructionMapper.map(instruction)));

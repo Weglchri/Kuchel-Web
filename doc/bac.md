@@ -15,6 +15,8 @@
 |<del> 2 | Interceptor für logging|Bernhard</del>
 |<del> 4 | mehr Sampel Daten|Bernhard</del>
 |<del> 1 | Valdiator für Rezepte |Wegl</del>
+| 1 | Image Controller load all images with id (array) | Bernhard
+| 1 | Difficulty and Duration | Wegl
 | 4 | Recommendation of the day |Wegl
 | 4 | Suche implementieren mit Namen des Rezeptes und Ansicht Matches | Wegl
 
@@ -51,3 +53,46 @@ Qualität:
 1# Responsiv von A-Z
 
 Beispiel Commit: [Qalität|Ref] = "[3|2] Rezept Seite überarbeitet"
+
+
+Punkte:
+
+android -> sendet lastSync wenn es schon sync gegeben hat
+Folge -> server sendet response mit 
+		"id": "4",
+        "username": "bernhard",
+        "name": "asdfasdf",
+        "duration": "70",
+        "difficulty": "2",
+        "image": {
+            "id": "1",
+			"modified":"1.2.18"
+            "name": "test",
+            "data": "payload"
+        }
+
+
+[
+    {
+        "id": "1",
+        "username": "bernhard",
+        "name": "Obstkuchen",
+        "duration": "30",
+        "difficulty": "1",
+        "image": null
+    },
+    {
+        "id": "4",
+        "username": "bernhard",
+        "name": "asdfasdf",
+        "duration": "70",
+        "difficulty": "2",
+        "image": {
+            "id": "1",
+			"modified":"1.2.18"   
+        }
+    }
+]
+
+Folge modified im Response ist vor handydate => nichts geändert
+Folge modified im Response ist nach handydate oder es gibt noch kein handydate => async bild nachladen => speichern und anzeigen

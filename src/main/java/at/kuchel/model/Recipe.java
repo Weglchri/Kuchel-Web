@@ -27,7 +27,7 @@ public class Recipe extends AbstractEntity<Long> {
     private Long difficulty;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
-    private List<Image> image = new ArrayList<>();
+    private List<Image> images = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -82,7 +82,7 @@ public class Recipe extends AbstractEntity<Long> {
 
     public List<Ingredient> getIngredients() {
         List<Ingredient> ingredients = new ArrayList<>();
-        recipeIngredients.stream().forEach(recipeIngredient -> ingredients.add(recipeIngredient.getIngredient()));
+        recipeIngredients.forEach(recipeIngredient -> ingredients.add(recipeIngredient.getIngredient()));
         return ingredients;
     }
 
@@ -106,11 +106,11 @@ public class Recipe extends AbstractEntity<Long> {
         this.difficulty = difficulty;
     }
 
-    public List<Image> getImage() {
-        return image;
+    public List<Image> getImages() {
+        return images;
     }
 
-    public void setImage(List<Image> image) {
-        this.image = image;
+    public void addImage(Image image) {
+        images.add(image);
     }
 }
