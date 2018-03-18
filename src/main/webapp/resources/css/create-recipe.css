@@ -3,28 +3,26 @@
     display: inline;
 }
 
-#recipe-name-creation {
-    margin-top: 3%;
-}
+#recipe-name-creation {}
 
-#recipe-ingredients-creation {
-    margin-top: 1%;
+#recipe-ingredients-creation {}
+
+#recipe-ingredients-creation > div > div > div {
+    margin-top: 0.5em;
+    margin-right: 0.5em;
 }
 
 #recipe-instruction-creation {
-    margin-top: 1%;
+   margin-top : 1em;
+}
+
+#recipe-instruction-creation > div > div > div {
+    margin-top: 0.5em;
+    margin-right: 0.5em;
 }
 
 #recipe-creation-button {
-    margin: 5% 0% 10% 0%;
-}
-
-div > input {
-    margin: 1%;
-}
-
-div > textarea {
-    margin: 1%;
+    margin-top: 3%;
 }
 
 .element {

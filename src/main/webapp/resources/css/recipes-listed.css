@@ -9,7 +9,7 @@
     color: #FF1C19;
 }
 
-.recipe-buttons-panel > a {
+.recipe-buttons-panel > div > a {
     margin: 10px;
     width: 50%;
     padding:2%;

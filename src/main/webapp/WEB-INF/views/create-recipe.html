@@ -12,42 +12,36 @@
 <div class="container">
 
     <form autocomplete="off" action="#" th:action="@{/recipes}" th:object="${recipe}" method="post"
-          class="form-horizontal"
-          role="form">
+          class="form-horizontal" role="form">
 
         <h1>Rezept erstellen</h1>
 
         <div id="recipe-name-creation" class="container">
             <!-- Rezeptname -->
-            <h4>Rezeptname</h4>
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    <input type="text" th:field="*{name}" placeholder="Apfelkuchen" class="form-control"/>
-                </div>
-                <div class="form-group col-md-3">
-                    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="validation-message"></div>
-                </div>
-                <div class="clearfix"></div>
+            <div class="form-group col-md-5">
+                <h4>Rezeptname</h4>
+                <input type="text" th:field="*{name}" placeholder="Apfelkuchen" class="form-control"/>
+                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="validation-message"></div>
             </div>
-
-            <!-- Fehlerfeld Name-->
         </div>
 
+
         <div id="recipe-ingredients-creation" class="container">
-            <!-- Zutaten erstellen -->
+            <!-- Create Ingredients-->
             <h4>Zutaten</h4>
             <button type="submit" class="btn btn-success" th:method="get" name="addRowIngredient">Zutat hinzufügen
             </button>
 
-            <!-- Zutatenfelder hinzufügen -->
+            <!-- Add ingredientfield -->
             <div th:each="recipeIngredient : ${recipe.recipeIngredients}">
                 <div class="form-row">
+
                     <div class="form-group col-md-2">
                         <input th:field="*{recipeIngredients[__${recipeIngredientStat.index}__].quantity}"
                                type="text" th:value="${recipeIngredient.quantity}" th:placeholder="Menge"
                                class="form-control"/>
-
                     </div>
+
                     <div class="form-group col-md-2">
                         <input list="qualifier" class="form-control" placeholder="Stück"
                                th:field="*{recipeIngredients[__${recipeIngredientStat.index}__].qualifier}"/>
@@ -59,6 +53,7 @@
                             </option>
                         </datalist>
                     </div>
+
                     <div class="form-group col-md-3">
                         <input list="acceptedIngredients" class="form-control" placeholder="Apfel"
                                th:field="*{recipeIngredients[__${recipeIngredientStat.index}__].ingredient.name}"/>
@@ -71,23 +66,21 @@
                             </option>
                         </datalist>
                     </div>
+
                     <div class="form-group col-md-3">
                         <button type="submit" class="btn btn-warning" name="removeRowIngredient"
                                 th:value="${recipeIngredientStat.index}">entfernen
                         </button>
                     </div>
-
-                    <div class="form-group col-md-5">
-                        <div th:if="${#fields.hasErrors('recipeIngredients')}" th:errors="*{recipeIngredients}"
-                             class="validation-message"></div>
-                    </div>
                 </div>
+                <!-- Errorfield ingredient empty field-->
                 <div th:if="${#fields.hasErrors('recipeIngredients[__${recipeIngredientStat.index}__].ingredient.name')}"
                      th:errors="*{recipeIngredients[__${recipeIngredientStat.index}__].ingredient.name}"
                      class="validation-message"></div>
+                <!-- Empty space after selection field -->
                 <div class="clearfix"></div>
             </div>
-            <!-- Fehlerfeld Ingredients-->
+            <!-- Errorfield ingredients not selected-->
             <div th:if="${#fields.hasErrors('recipeIngredients')}" th:errors="*{recipeIngredients}"
                  class="validation-message"></div>
         </div>
@@ -96,7 +89,8 @@
         <div id="recipe-instruction-creation" class="container">
             <!-- Anweisungen erstellen -->
             <h4>Beschreibung</h4>
-            <button type="submit" class="btn btn-success" th:method="get" name="addRowInstruction">Schritte hinzufügen
+            <button type="submit" class="btn btn-success" th:method="get" name="addRowInstruction">Schritte
+                hinzufügen
             </button>
 
             <!-- Anweisungsfelder hinzufügen -->
@@ -104,33 +98,35 @@
                 <div class="form-row">
                     <!--  <p id="recipe-instruction-counter" th:text="${instructionStat.index+1} + ')'"></p> -->
                     <div class="form-group col-md-5">
-                    <textarea type="text"
-                              th:field="*{instructions[__${instructionStat.index}__].description}"
-                              th:value="${instruction.description}"
-                              th:placeholder="Anweisung" class="form-control"></textarea>
+                        <input type="text" th:field="*{instructions[__${instructionStat.index}__].description}"
+                               th:value="${instruction.description}"
+                               th:placeholder="Anweisung" class="form-control"/>
+
                     </div>
                     <div class="form-group col-md-3">
                         <button type="submit" class="btn btn-warning" name="removeRowInstruction"
                                 th:value="${instructionStat.index}">entfernen
                         </button>
                     </div>
-
-                    <!-- Fehlerfeld Instruction-->
-                    <div th:if="${#fields.hasErrors('instructions[__${instructionStat.index}__].description')}"
-                         th:errors="*{instructions[__${instructionStat.index}__].description}"
-                         class="validation-message"></div>
-                    <div class="clearfix"></div>
                 </div>
+                <!-- Errorfield instruction empty field-->
+                <div th:if="${#fields.hasErrors('instructions[__${instructionStat.index}__].description')}"
+                     th:errors="*{instructions[__${instructionStat.index}__].description}"
+                     class="validation-message">
+                </div>
+                <!-- Empty space after selection field -->
+                <div class="clearfix"></div>
             </div>
-
-            <!-- Fehlerfeld Instruction-->
+            <!-- Errorfield instruction not selected-->
             <div th:if="${#fields.hasErrors('instructions')}" th:errors="*{instructions}"
                  class="validation-message"></div>
         </div>
 
         <div id="recipe-creation-button">
-            <button type="submit" th:method="post" class="btn btn-primary btn-block">Rezept erstellen</button>
+            <button type="submit" th:method="post" class="btn btn-primary btn-block">Rezept erstellen
+            </button>
         </div>
+
     </form>
 
 </div>

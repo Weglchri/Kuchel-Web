@@ -40,7 +40,7 @@ public class Recipe extends AbstractEntity<Long> {
     private List<Instruction> instructions = new ArrayList<>();
 
     @Column(name = "NAME", unique = true)
-    @Size(min = 5, max = 100, message = "der Rezept-Name muss zwischen 5 und 100 Buchstaben haben")
+    @Size(min = 5, max = 100, message = "Der Rezeptname muss zwischen 5 und 100 Buchstaben haben")
     private String name;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)

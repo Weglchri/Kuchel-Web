@@ -17,8 +17,12 @@
 <div class="container">
 
     <h1>Alle Rezepte</h1>
+
     <div class="recipe-buttons-panel" th:each="recipe : ${recipes}">
-        <a class="btn btn-default btn-sm" th:href="@{/recipes/__${recipe.id}__}" th:text="${recipe.name}"></a>
+        <div class="row">
+            <!-- picture -->
+            <a class="btn btn-default btn-sm" th:href="@{/recipes/__${recipe.id}__}" th:text="${recipe.name}"></a>
+        </div>
     </div>
 
 </div>
