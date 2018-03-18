@@ -30,7 +30,6 @@ public class RecipeService {
     private IngredientRepository ingredientRepository;
 
     public void createRecipe(Recipe recipe) {
-        //TODO logic for validating the recipe comes <here>
         //TODO extract someday
         extractToControllerSomeDay(recipe);
 

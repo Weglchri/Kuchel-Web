@@ -11,15 +11,14 @@
 <div th:replace="fragments/header :: header"></div>
 
 <div align="center" th:if="${param.error}">
-    <p style="font-size: 20; color: #FF1C19;">Benutername oder Password stimmen nicht überein</p>
+    <p id="not-logged-in-recipe-overview">Benutzername oder Password stimmen nicht überein</p>
 </div>
 
 <div class="container">
 
     <h1>Alle Rezepte</h1>
-    <div th:each="recipe : ${recipes}">
-        <a th:href="@{/recipes/__${recipe.id}__}" th:text="${recipe.name}"></a>
-        <!--@{/mycontroller/} + ${type}">-->
+    <div class="recipe-buttons-panel" th:each="recipe : ${recipes}">
+        <a class="btn btn-default btn-sm" th:href="@{/recipes/__${recipe.id}__}" th:text="${recipe.name}"></a>
     </div>
 
 </div>

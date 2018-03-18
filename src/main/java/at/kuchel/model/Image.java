@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "IMAGE")
-public class Image {
+public class Image extends AbstractEntity<Long> {
 
     @Id
     @GeneratedValue
@@ -22,6 +22,11 @@ public class Image {
     @JoinColumn(name = "RECIPE_ID")
     public Recipe recipe;
 
+    @Override
+    public Long getId() {
+        return id;
+    }
+
     public byte[] getData() {
         return data;
     }
@@ -36,14 +41,6 @@ public class Image {
 
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public LocalDate getModifiedDate() {

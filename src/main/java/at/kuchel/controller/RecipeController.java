@@ -52,7 +52,6 @@ public class RecipeController {
     public ModelAndView createRecipe(@Valid Recipe recipe, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
 
-        //todo valdiation in work
         Recipe existingRecipe = recipeService.getRecipeByName(recipe.getName());
 
         if (!Objects.isNull(existingRecipe)) {
@@ -77,8 +76,6 @@ public class RecipeController {
     public ModelAndView getNewRecipe() {
         ModelAndView modelAndView = new ModelAndView();
         Recipe recipe = new Recipe();
-        //todo: refactor with dummyingredient
-        //recipe.addRecipeIngredient(buildDummyRecipeIngredient());
         addObjectsForCreateRecipeView(modelAndView, recipe);
         return modelAndView;
     }
@@ -86,14 +83,15 @@ public class RecipeController {
     @RequestMapping(value = "/recipes", params = {"addRowIngredient"})
     public ModelAndView addRowIngredient(Recipe recipe) {
         ModelAndView modelAndView = new ModelAndView();
-        recipe.addRecipeIngredient(buildDummyRecipeIngredient());
+        RecipeIngredient recipeIngredient = new RecipeIngredient();
+        recipeIngredient.setIngredient(new Ingredient());
+        recipe.addRecipeIngredient(recipeIngredient);
         addObjectsForCreateRecipeView(modelAndView, recipe);
         return modelAndView;
     }
 
     @RequestMapping(value = "/recipes", params = {"removeRowIngredient"})
-    public ModelAndView removeRowIngredient(Recipe recipe,
-                                            final HttpServletRequest req, @RequestParam("removeRowIngredient") String id) {
+    public ModelAndView removeRowIngredient(Recipe recipe, final HttpServletRequest req, @RequestParam("removeRowIngredient") String id) {
         ModelAndView modelAndView = new ModelAndView();
         final Integer rowId = Integer.valueOf(id);
         RecipeIngredient recipeIngredient = recipe.getRecipeIngredients().get(rowId);
@@ -111,8 +109,7 @@ public class RecipeController {
     }
 
     @RequestMapping(value = "/recipes", params = {"removeRowInstruction"})
-    public ModelAndView removeRowInstruction(Recipe recipe,
-                                             final HttpServletRequest req, @RequestParam("removeRowInstruction") String id) {
+    public ModelAndView removeRowInstruction(Recipe recipe, final HttpServletRequest req, @RequestParam("removeRowInstruction") String id) {
         ModelAndView modelAndView = new ModelAndView();
         final Integer rowId = Integer.valueOf(id);
         Instruction instruction = recipe.getInstructions().get(rowId);
@@ -128,14 +125,6 @@ public class RecipeController {
         modelAndView.addObject("recipes", recipeService.getRecipeByUser(user));
         modelAndView.setViewName("my-recipes-overview");
         return modelAndView;
-    }
-
-    //todo extract later in builder package
-    private RecipeIngredient buildDummyRecipeIngredient() {
-        Ingredient ingredient = new Ingredient();
-        RecipeIngredient recipeIngredient = new RecipeIngredient();
-        recipeIngredient.setIngredient(ingredient);
-        return recipeIngredient;
     }
 
     private void addObjectsForCreateRecipeView(ModelAndView modelAndView, Recipe recipe) {

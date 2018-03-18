@@ -21,7 +21,6 @@ public class UserUnitTest {
         role = new Role();
         Set<Role> roles = Collections.singleton(role);
 
-        user.setId((long) 1);
         user.setUsername("Random User");
         user.setPassword("***");
         user.setBirthday(LocalDate.now());

@@ -37,7 +37,6 @@ public class User extends AbstractEntity<Long> {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-
     @Override
     public Long getId() {
         return id;
@@ -49,11 +48,6 @@ public class User extends AbstractEntity<Long> {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    //TODO remove this setter after test refactored
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getPassword() {
