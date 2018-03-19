@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:utext="${exception.message}"></title>
+    <div th:replace="fragments/head :: head"></div>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <h1 th:utext="${exception.message}"></h1>
+    <h4><a href="/">Return to Kuchel</a></h4>
+</div>
+</body>
+</html>

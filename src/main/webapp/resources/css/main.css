@@ -1,5 +1,8 @@
 /* Custom Main Stylesheet */
 
-.header-icons > span {
-    margin-right: 3px;
-}
+@import url("create-recipe.css");
+@import url("error.css");
+@import url("header.css");
+@import url("recipe-detailed.css");
+@import url("recipes-listed.css");
+
