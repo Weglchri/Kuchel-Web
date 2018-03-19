@@ -48,13 +48,26 @@ public class RecipeController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/recipes/{id}", method = RequestMethod.DELETE)
+    public ModelAndView deleteRecipe(@PathVariable String id) {
+        ModelAndView modelAndView = new ModelAndView();
+        Recipe recipe = recipeService.getRecipeById(Long.parseLong(id));
+
+        if(Objects.nonNull(recipe))
+            recipeService.deleteRecipe(recipe);
+
+        modelAndView.addObject("recipes", recipeService.getAllRecipes());
+        modelAndView.setViewName("recipes-overview");
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/recipes", method = RequestMethod.POST)
     public ModelAndView createRecipe(@Valid Recipe recipe, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
 
         Recipe existingRecipe = recipeService.getRecipeByName(recipe.getName());
 
-        if (!Objects.isNull(existingRecipe)) {
+        if (Objects.nonNull(existingRecipe)) {
             bindingResult
                     .rejectValue("name", "error.name",
                             "Es existiert bereits ein Rezept mit diesem Namen");
@@ -118,8 +131,8 @@ public class RecipeController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/my-recipes", method = RequestMethod.GET)
-    public ModelAndView listmyRecipes() {
+    @RequestMapping(value = "/myrecipes", method = RequestMethod.GET)
+    public ModelAndView listAllMyRecipes() {
         ModelAndView modelAndView = new ModelAndView();
         User user = sessionHelper.getCurrentUser();
         modelAndView.addObject("recipes", recipeService.getRecipeByUser(user));

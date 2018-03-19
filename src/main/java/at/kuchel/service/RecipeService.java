@@ -115,4 +115,9 @@ public class RecipeService {
     public Recipe getRandomRecipe() {
         throw new NotImplementedException();
     }
+
+    public void deleteRecipe(Recipe recipe) {
+        recipeRepository.delete(recipe);
+    }
+
 }
