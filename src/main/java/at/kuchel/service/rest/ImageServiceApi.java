@@ -1,7 +1,7 @@
 package at.kuchel.service.rest;
 
 import at.kuchel.api.ImageDetailResponse;
-import at.kuchel.api.ImageSyncRequest;
+import at.kuchel.api.ImageIdsRequest;
 import at.kuchel.mapper.ImageMapper;
 import at.kuchel.model.Image;
 import at.kuchel.repostitory.ImageRepository;
@@ -17,7 +17,6 @@ public class ImageServiceApi {
     @Autowired
     private ImageRepository imageRepository;
 
-
     @Autowired
     private ImageMapper imageMapper;
 
@@ -26,9 +25,13 @@ public class ImageServiceApi {
         return imageMapper.mapDetail(image);
     }
 
-    public List<ImageDetailResponse> getImagesByRecipeId(ImageSyncRequest imageSyncRequest, Long recipeId) {
+    public List<ImageDetailResponse> getImagesByRecipeId(ImageIdsRequest imageSyncRequest, Long recipeId) {
         List<Image> images = imageRepository.findByRecipeId(recipeId);
         return images.stream().filter(image -> imageSyncRequest.getImageIds().contains(image.getRecipe().getId().toString()))
                 .map(image -> imageMapper.mapDetail(image)).collect(Collectors.toList());
+    }
+
+    public List<ImageDetailResponse> getImagesByRecipeId(Long recipeId) {
+        return imageRepository.findByRecipeId(recipeId).stream().map(image -> imageMapper.mapDetail(image)).collect(Collectors.toList());
     }
 }

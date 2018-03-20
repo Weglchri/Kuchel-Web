@@ -2,7 +2,7 @@ package at.kuchel.controller.rest;
 
 import at.kuchel.Context;
 import at.kuchel.api.ImageDetailResponse;
-import at.kuchel.api.ImageSyncRequest;
+import at.kuchel.api.ImageIdsRequest;
 import at.kuchel.service.rest.ImageServiceApi;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +20,15 @@ public class ImageControllerApi {
     @Autowired
     private ImageServiceApi imageService;
 
-    @RequestMapping(method = RequestMethod.POST)
-    public List<ImageDetailResponse> getByImagesIds(@RequestBody ImageSyncRequest imageSyncRequest, @PathVariable Long recipeId) {
+    @RequestMapping(method = RequestMethod.GET)
+    public List<ImageDetailResponse> getByImagesIds(@PathVariable Long recipeId) {
         LOG.info("Retrieve images with id '{}'", recipeId);
+        return imageService.getImagesByRecipeId(recipeId);
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public List<ImageDetailResponse> getByImagesIds(@RequestBody ImageIdsRequest imageSyncRequest, @PathVariable Long recipeId) {
+        LOG.info("Retrieve images with ImageIdsRequest and id '{}'", recipeId);
         return imageService.getImagesByRecipeId(imageSyncRequest, recipeId);
     }
 

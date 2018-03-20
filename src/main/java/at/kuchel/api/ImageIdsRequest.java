@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class ImageSyncRequest {
+public class ImageIdsRequest {
 
     List<String> imageIds = new ArrayList<>();
 }

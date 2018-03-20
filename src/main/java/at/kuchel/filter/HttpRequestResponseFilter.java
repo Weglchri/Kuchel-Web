@@ -37,7 +37,7 @@ public class HttpRequestResponseFilter implements Filter {
         HttpServletResponse httpServletResponse = castToHttpServletResponseHttpServletResponse(response);
 
         //todo change when controller for rest exists
-        if (httpServletRequest.getServletPath().contains("/restschnittstelle")) {
+        if (httpServletRequest.getServletPath().contains("kuchel/api")) {
             if (LOG.isDebugEnabled()) {
                 BufferedRequestWrapper bufferedRequest = new BufferedRequestWrapper(httpServletRequest);
                 BufferedResponseWrapper bufferedResponse = new BufferedResponseWrapper(httpServletResponse);
