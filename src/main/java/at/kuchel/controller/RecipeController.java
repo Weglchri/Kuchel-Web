@@ -137,7 +137,8 @@ public class RecipeController {
         ModelAndView modelAndView = new ModelAndView();
         User user = sessionHelper.getCurrentUser();
         modelAndView.addObject("recipes", recipeService.getRecipeByUser(user));
-        modelAndView.setViewName("my-recipes-overview");
+        modelAndView.addObject("personaloverview", true);
+        modelAndView.setViewName("recipes-overview");
         return modelAndView;
     }
 

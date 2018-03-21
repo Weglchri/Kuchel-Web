@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <title>User Liste</title>
@@ -23,6 +23,11 @@
             <!-- picture -->
             <a class="btn btn-default btn-sm" th:href="@{/recipes/__${recipe.id}__}" th:text="${recipe.name}"></a>
         </div>
+    </div>
+
+    <div th:if="${#lists.isEmpty(recipes)} and ${personaloverview == true}">
+            <p>Sieht so aus, als wären noch keine Rezepte von dir vorhanden :(</p>
+            <a class="btn btn-primary btn-lg btn-success" href="/recipes/new">Neues Rezept erstellen</a>
     </div>
 
 </div>
