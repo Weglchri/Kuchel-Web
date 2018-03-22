@@ -35,9 +35,9 @@
     <div class="col-md-2">
         <h2 class="detailed-recipe-headers">Informationen</h2>
         <h4>Dauer</h4>
-        <p th:utext="${recipe.getDuration()} + min"></p>
+        <p th:utext="${recipe.getDuration()} + ' min'"></p>
         <h4>Schwierigeit</h4>
-        <p th:utext="${recipe.getDifficulty()} + '/5'"></p>
+        <p th:utext="${recipe.getDifficulty()} + ' von 5'"></p>
     </div>
 </div>
 

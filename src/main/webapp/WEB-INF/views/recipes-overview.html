@@ -14,10 +14,16 @@
 
     <h1>Alle Rezepte</h1>
 
-    <div class="recipe-buttons-panel" th:each="recipe : ${recipes}">
-        <div class="row">
+    <div id="recipe-overview-panel" class="row">
+        <div class="col-md-5"><h4 class="text-center">Rezept</h4></div>
+        <div class="col-md-2"><h4 class="text-center">Dauer</h4></div>
+        <div class="col-md-2"><h4 class="text-center">Schwierigkeit</h4></div>
+        <div id="recipe-buttons-panel" th:each="recipe : ${recipes}">
             <!-- picture -->
-            <a class="btn btn-default btn-sm" th:href="@{/recipes/__${recipe.id}__}" th:text="${recipe.name}"></a>
+            <div class="col-md-5"><a class="btn btn-default btn-sm" th:href="@{/recipes/__${recipe.id}__}" th:text="${recipe.name}"></a></div>
+            <div class="col-md-2"><p class="text-center" th:utext="${recipe.getDuration() + ' min'}"></p></div>
+            <div class="col-md-2"><p class="text-center" th:utext="${recipe.getDifficulty() + ' von 5'}"></p></div>
+            <div class="clearfix"></div>
         </div>
     </div>
 
