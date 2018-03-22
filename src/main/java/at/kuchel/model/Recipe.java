@@ -1,9 +1,13 @@
 package at.kuchel.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,14 +21,14 @@ public class Recipe extends AbstractEntity<Long> {
     @GeneratedValue
     private Long id;
 
-    //todo remove some day when view can add duration and difficulty
     @Column(name = "DURATION")
-//    @NotEmpty(message = "Dauer muss angegeben werden")
+    @NotNull(message = "Noch keine Dauer angegeben")
     private Long duration;
 
-    //todo remove some day when view can add duration and difficulty
     @Column(name = "DIFFICULTY")
-//    @Range(min = 1, max = 5,message = "Schwierigkeit muss zwischen 1 und 5 liegen")
+    @Min(1)
+    @Max(5)
+    @NotNull(message = "Schwierigkeit muss zwischen 1 und 5 liegen")
     private Long difficulty;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
@@ -134,5 +138,9 @@ public class Recipe extends AbstractEntity<Long> {
 
     public void setModifiedDate(LocalDate modifiedDate) {
         this.modifiedDate = modifiedDate;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

@@ -41,6 +41,16 @@ public class RecipeController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/myrecipes", method = RequestMethod.GET)
+    public ModelAndView listAllMyRecipes() {
+        ModelAndView modelAndView = new ModelAndView();
+        User user = sessionHelper.getCurrentUser();
+        modelAndView.addObject("recipes", recipeService.getRecipeByUser(user));
+        modelAndView.addObject("personaloverview", true);
+        modelAndView.setViewName("recipes-overview");
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/recipes/{id}", method = RequestMethod.GET)
     public ModelAndView listRecipes(@PathVariable String id) {
         ModelAndView modelAndView = new ModelAndView();
@@ -80,7 +90,7 @@ public class RecipeController {
             recipe.setUser(sessionHelper.getCurrentUser());
             recipeService.createRecipe(recipe);
             modelAndView.addObject("recipe", recipe);
-            modelAndView.addObject("successMessage", String.format("Rezept %s wurde erfolgreich hinzugefügt", recipe.getName()));
+            modelAndView.addObject("successMessage", String.format("%s wurde erfolgreich hinzugefügt", recipe.getName()));
             modelAndView.setViewName("recipes-detailed");
         }
         return modelAndView;
@@ -93,6 +103,7 @@ public class RecipeController {
         addObjectsForCreateRecipeView(modelAndView, recipe);
         return modelAndView;
     }
+
 
     @RequestMapping(value = "/recipes", params = {"addRowIngredient"})
     public ModelAndView addRowIngredient(Recipe recipe) {
@@ -132,20 +143,98 @@ public class RecipeController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/myrecipes", method = RequestMethod.GET)
-    public ModelAndView listAllMyRecipes() {
+    /*
+        Update methods
+    */
+
+    @RequestMapping(value = "/recipes/{id}/update", method = RequestMethod.GET)
+    public ModelAndView getUpdateRecipe(@PathVariable String id) {
         ModelAndView modelAndView = new ModelAndView();
-        User user = sessionHelper.getCurrentUser();
-        modelAndView.addObject("recipes", recipeService.getRecipeByUser(user));
-        modelAndView.addObject("personaloverview", true);
-        modelAndView.setViewName("recipes-overview");
+        Recipe recipeToUpdate = recipeService.getRecipeById(Long.parseLong(id));
+        modelAndView.addObject("recipe", recipeToUpdate);
+        modelAndView.setViewName("update-recipe");
         return modelAndView;
     }
+
+    @RequestMapping(value = "/recipes", method = RequestMethod.PUT)
+    public ModelAndView updateRecipe(@Valid Recipe recipe, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView();
+
+        //TODO: check and set id
+
+        if(bindingResult.hasErrors()) {
+            modelAndView.setViewName("update-recipe");
+        } else {
+            recipe.setUser(sessionHelper.getCurrentUser());
+            System.out.printf("RECIPE ID: %s \n", recipe.getId());
+            recipeService.updateRecipe(recipe);
+            modelAndView.addObject("recipe", recipe);
+            modelAndView.addObject("successMessage", String.format("%s wurde erfolgreich geändert", recipe.getName()));
+            modelAndView.setViewName("recipes-detailed");
+        }
+        return modelAndView;
+    }
+
+
+    //TODO: methods are the same as creational methods refactoring in the future necessary
+
+     /*
+         Methods for update view
+     */
+
+    @RequestMapping(value = "/recipes", params = {"updateRowIngredient"})
+    public ModelAndView updateRowIngredient(Recipe recipe) {
+        ModelAndView modelAndView = new ModelAndView();
+        RecipeIngredient recipeIngredient = new RecipeIngredient();
+        recipeIngredient.setIngredient(new Ingredient());
+        recipe.addRecipeIngredient(recipeIngredient);
+        addObjectsForUpdateRecipeView(modelAndView, recipe);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/recipes", params = {"removeUpdateRowIngredient"})
+    public ModelAndView removeUpdateRowIngredient(Recipe recipe, final HttpServletRequest req, @RequestParam("removeUpdateRowIngredient") String id) {
+        ModelAndView modelAndView = new ModelAndView();
+        final Integer rowId = Integer.valueOf(id);
+        RecipeIngredient recipeIngredient = recipe.getRecipeIngredients().get(rowId);
+        recipe.getRecipeIngredients().remove(recipeIngredient);
+        addObjectsForUpdateRecipeView(modelAndView, recipe);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/recipes", params = {"updateRowInstruction"})
+    public ModelAndView updateRowInstruction(Recipe recipe) {
+        ModelAndView modelAndView = new ModelAndView();
+        recipe.addInstruction(new Instruction());
+        addObjectsForUpdateRecipeView(modelAndView, recipe);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/recipes", params = {"removeUpdateRowInstruction"})
+    public ModelAndView removeUpdateRowInstruction(Recipe recipe, final HttpServletRequest req, @RequestParam("removeUpdateRowInstruction") String id) {
+        ModelAndView modelAndView = new ModelAndView();
+        final Integer rowId = Integer.valueOf(id);
+        Instruction instruction = recipe.getInstructions().get(rowId);
+        recipe.getInstructions().remove(instruction);
+        addObjectsForUpdateRecipeView(modelAndView, recipe);
+        return modelAndView;
+    }
+
+    /*
+        Helper methods for create and update view
+    */
 
     private void addObjectsForCreateRecipeView(ModelAndView modelAndView, Recipe recipe) {
         modelAndView.addObject("acceptedIngredients", ingredientService.getAllIngredientsWithStatusReducedByChosenOnes(Ingredient.Status.APPROVED,recipe));
         modelAndView.addObject("recipeIngredientTypes", Arrays.asList(RecipeIngredient.Type.values()));
         modelAndView.addObject("recipe", recipe);
         modelAndView.setViewName("create-recipe");
+    }
+
+    private void addObjectsForUpdateRecipeView(ModelAndView modelAndView, Recipe recipe) {
+        modelAndView.addObject("acceptedIngredients", ingredientService.getAllIngredientsWithStatusReducedByChosenOnes(Ingredient.Status.APPROVED,recipe));
+        modelAndView.addObject("recipeIngredientTypes", Arrays.asList(RecipeIngredient.Type.values()));
+        modelAndView.addObject("recipe", recipe);
+        modelAndView.setViewName("update-recipe");
     }
 }

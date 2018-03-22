@@ -32,18 +32,24 @@ public class RecipeService {
     public void createRecipe(Recipe recipe) {
         //TODO extract someday
         extractToControllerSomeDay(recipe);
-
         for (int i = 0; i < recipe.getInstructions().size(); i++) {
             Instruction instruction = recipe.getInstructions().get(i);
             instruction.setStep(String.valueOf(i + 1));
         }
-
-        //todo remove some day when view can add duration and difficulty
-        remove(recipe);
-
         recipe.setCeationDate(LocalDate.now());
         replaceIngredientIfExist(recipe);
+        recipeRepository.save(recipe);
+    }
 
+    public void updateRecipe(Recipe recipe) {
+        //TODO extract someday
+        extractToControllerSomeDay(recipe);
+        for (int i = 0; i < recipe.getInstructions().size(); i++) {
+            Instruction instruction = recipe.getInstructions().get(i);
+            instruction.setStep(String.valueOf(i + 1));
+        }
+        recipe.setModifiedDate(LocalDate.now());
+        replaceIngredientIfExist(recipe);
         recipeRepository.save(recipe);
     }
 
