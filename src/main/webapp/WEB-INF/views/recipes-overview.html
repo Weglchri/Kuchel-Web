@@ -10,10 +10,6 @@
 
 <div th:replace="fragments/header :: header"></div>
 
-<div align="center" th:if="${param.error}">
-    <p id="not-logged-in-recipe-overview">Benutzername oder Password stimmen nicht überein</p>
-</div>
-
 <div class="container">
 
     <h1>Alle Rezepte</h1>
@@ -26,8 +22,8 @@
     </div>
 
     <div th:if="${#lists.isEmpty(recipes)} and ${personaloverview == true}">
-            <p>Sieht so aus, als wären noch keine Rezepte von dir vorhanden :(</p>
-            <a class="btn btn-primary btn-lg btn-success" href="/recipes/new">Neues Rezept erstellen</a>
+        <p>Sieht so aus, als wären noch keine Rezepte von dir vorhanden :(</p>
+        <a class="btn btn-primary btn-lg btn-success" href="/recipes/new">Neues Rezept erstellen</a>
     </div>
 
 </div>

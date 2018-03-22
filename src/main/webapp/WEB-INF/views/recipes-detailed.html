@@ -10,30 +10,39 @@
 
 <div class="container">
     <h1 th:utext="${recipe.name}"></h1>
+
     <div class="col-md-4">
-        <h2>Zutaten</h2>
-        <div th:each="recipeIngredient : ${recipe.getRecipeIngredients()}"
-             class="recipe-instructions margin-0-auto">
-            <div class="col-md-1"><p th:utext="${recipeIngredient.quantity}"></p></div>
-            <div class="col-md-3"><p th:utext="${recipeIngredient.qualifier}"></p></div>
-            <div class="col-md-7"><p th:utext="${recipeIngredient.ingredient.name}"></p></div>
+        <h2 class="detailed-recipe-headers" >Zutaten</h2>
+        <div th:each="recipeIngredient : ${recipe.getRecipeIngredients()}" class="recipe-instructions margin-0-auto">
+            <div class="row">
+                <div class="col-md-1"><p th:utext="${recipeIngredient.quantity}"></p></div>
+                <div class="col-md-2"><p th:utext="${recipeIngredient.qualifier}"></p></div>
+                <div class="col-md-4"><p th:utext="${recipeIngredient.ingredient.name}"></p></div>
+            </div>
         </div>
     </div>
 
-    <div class="col-md-8">
-        <h2>Zubereitung</h2>
+    <div class="col-md-6">
+        <h2 class="detailed-recipe-headers">Zubereitung</h2>
         <div th:each="instruction : ${recipe.getInstructions()}" class="recipe-instructions margin-0-auto">
-            <div class="col-md-2">
-                <div class="title-text" th:inline="text">Schritt [[${instruction.step}]]</div>
+            <div class="row">
+                <div class="col-md-3"><p th:utext="'Schritt ' + ${instruction.step}"></p></div>
+                <div class="col-md-6"><p th:utext="${instruction.getDescription()}"></p></div>
             </div>
-            <div class="col-md-10"><p th:utext="${instruction.getDescription()}"></p></div>
         </div>
+    </div>
+
+    <div class="col-md-2">
+        <h2 class="detailed-recipe-headers">Informationen</h2>
+        <h4>Dauer</h4>
+        <p th:utext="${recipe.getDuration()} + min"></p>
+        <h4>Schwierigeit</h4>
+        <p th:utext="${recipe.getDifficulty()} + '/5'"></p>
     </div>
 </div>
 
 
 <div class="container">
-
     <div th:if="${#authentication.name} == ${recipe.getUser().getUsername()}">
         <form th:action="@{/recipes/__${recipe.id}__}" th:method="delete" role="form" class="form-horizontal">
             <button type="submit" class="btn btn-default">Löschen</button>

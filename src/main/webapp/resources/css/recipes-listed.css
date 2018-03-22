@@ -1,12 +1,9 @@
 
-.not-logged-in-recipe-overview {
-    font-size: 20px;
-    color: #FF1C19;
-}
-
 .recipe-buttons-panel > div > a {
     margin: 10px;
     width: 50%;
     padding:2%;
     font-size: 1em;
+    min-width:205px;
+    white-space:normal !important;
 }

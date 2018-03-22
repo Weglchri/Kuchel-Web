@@ -97,9 +97,7 @@ public class Recipe extends AbstractEntity<Long> {
         recipeIngredients.add(recipeIngredient);
     }
 
-    public Long getDuration() {
-        return duration;
-    }
+    public Long getDuration() { return duration; }
 
     public void setDuration(Long duration) {
         this.duration = duration;
