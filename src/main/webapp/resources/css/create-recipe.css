@@ -3,25 +3,27 @@
     display: inline;
 }
 
-#recipe-name-creation {}
+#recipe-top-panel > div {
+    margin-right: 0.5em;
+}
 
-#recipe-ingredients-creation {}
+#recipe-ingredients {}
 
-#recipe-ingredients-creation > div > div > div {
+#recipe-ingredients > div > div > div {
     margin-top: 0.5em;
     margin-right: 0.5em;
 }
 
-#recipe-instruction-creation {
+#recipe-instruction {
    margin-top : 1em;
 }
 
-#recipe-instruction-creation > div > div > div {
+#recipe-instruction > div > div > div {
     margin-top: 0.5em;
     margin-right: 0.5em;
 }
 
-#recipe-creation-button {
+#recipe-button {
     margin-top: 5%;
 }
 

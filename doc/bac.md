@@ -16,7 +16,9 @@
 |<del> 4 | mehr Sampel Daten|Bernhard</del>
 |<del> 1 | Valdiator für Rezepte |Wegl</del>
 | 1 | Image Controller load all images with id (array) | Bernhard
-| 1 | Difficulty and Duration | Wegl
+|<del> 1 | Delete and Update Button| Wegl </del>
+|<del> 2 | User see only delete and update on their own recipe| Wegl </del>
+|<del> 1 | Difficulty and Duration | Wegl </del>
 | 4 | Recommendation of the day |Wegl
 | 4 | Suche implementieren mit Namen des Rezeptes und Ansicht Matches | Wegl
 
