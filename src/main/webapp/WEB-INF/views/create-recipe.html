@@ -16,21 +16,33 @@
 
         <h1>Rezept erstellen</h1>
 
-        <div id="recipe-name-creation" class="container">
+        <div id="recipe-top-panel" class="container">
             <!-- Rezeptname -->
             <div class="form-group col-md-5">
                 <h4>Rezeptname</h4>
                 <input type="text" th:field="*{name}" placeholder="Apfelkuchen" class="form-control"/>
                 <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="validation-message"></div>
             </div>
+
+            <div class="form-group col-md-1">
+                <h4>Dauer</h4>
+                <input type="text" th:field="*{duration}" placeholder="20" class="form-control"/>
+                <div th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}" class="validation-message"></div>
+            </div>
+
+            <div class="form-group col-md-1">
+                <h4>Schwierigkeit</h4>
+                <input type="text" th:field="*{difficulty}" placeholder="2" class="form-control"/>
+                <div th:if="${#fields.hasErrors('difficulty')}" th:errors="*{difficulty}" class="validation-message"></div>
+            </div>
         </div>
 
 
-        <div id="recipe-ingredients-creation" class="container">
+
+        <div id="recipe-ingredients" class="container">
             <!-- Create Ingredients-->
             <h4>Zutaten</h4>
-            <button type="submit" class="btn btn-success" th:method="get" name="addRowIngredient">Zutat hinzufügen
-            </button>
+            <button type="submit" class="btn btn-success" th:method="get" name="addRowIngredient">Zutat hinzufügen</button>
 
             <!-- Add ingredientfield -->
             <div th:each="recipeIngredient : ${recipe.recipeIngredients}">
@@ -88,7 +100,7 @@
         </div>
 
 
-        <div id="recipe-instruction-creation" class="container">
+        <div id="recipe-instruction" class="container">
             <!-- Anweisungen erstellen -->
             <h4>Beschreibung</h4>
             <button type="submit" class="btn btn-success" th:method="get" name="addRowInstruction">Schritte
@@ -124,7 +136,7 @@
                  class="validation-message"></div>
         </div>
 
-        <div id="recipe-creation-button">
+        <div id="recipe-button">
             <button type="submit" th:method="post" class="btn btn-primary btn-block btn-lg">Rezept erstellen
             </button>
         </div>
