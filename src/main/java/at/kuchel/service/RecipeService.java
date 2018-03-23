@@ -14,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,7 +37,7 @@ public class RecipeService {
             Instruction instruction = recipe.getInstructions().get(i);
             instruction.setStep(String.valueOf(i + 1));
         }
-        recipe.setCeationDate(LocalDate.now());
+        recipe.setCreationDate(new Date());
         replaceIngredientIfExist(recipe);
         recipeRepository.save(recipe);
     }
@@ -48,7 +49,7 @@ public class RecipeService {
             Instruction instruction = recipe.getInstructions().get(i);
             instruction.setStep(String.valueOf(i + 1));
         }
-        recipe.setModifiedDate(LocalDate.now());
+        recipe.setModifiedDate(new Date());
         replaceIngredientIfExist(recipe);
         recipeRepository.save(recipe);
     }

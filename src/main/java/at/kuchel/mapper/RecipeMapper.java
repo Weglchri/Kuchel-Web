@@ -41,6 +41,7 @@ public class RecipeMapper {
         RecipeDetailedResponse recipeResponse = new RecipeDetailedResponse();
         recipeResponse.setId(String.valueOf(recipe.getId()));
         recipeResponse.setName(recipe.getName());
+        recipeResponse.setModifiedDate(recipe.getModifiedDate());
         if (Objects.nonNull(recipe.getUser())) {
             recipeResponse.setUsername(recipe.getUser().getUsername());
         }
