@@ -1,16 +1,18 @@
 package at.kuchel.api;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 @Data
 public class LastSyncDateRequest {
 
-    @NotEmpty
-    List<String> redeemVoucherCodes = new ArrayList<>();
+    @ApiModelProperty(required = true)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private Date lastSyncDate;
+
 }
 
 

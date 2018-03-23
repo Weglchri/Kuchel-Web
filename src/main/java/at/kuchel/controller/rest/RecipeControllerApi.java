@@ -1,8 +1,8 @@
 package at.kuchel.controller.rest;
 
 import at.kuchel.Context;
+import at.kuchel.api.LastSyncDateRequest;
 import at.kuchel.api.RecipeDetailedResponse;
-import at.kuchel.api.RecipeOverviewResponse;
 import at.kuchel.service.rest.RecipeServiceApi;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +24,15 @@ public class RecipeControllerApi {
     private RecipeServiceApi recipeService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<RecipeOverviewResponse> list() {
+    public List<RecipeDetailedResponse> list() {
         LOG.info("Retrieving all recipes");
         return recipeService.getAllRecipes();
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public List<RecipeDetailedResponse> list(LastSyncDateRequest lastSyncDateRequest ) {
+        LOG.info("Retrieving all recipes");
+        return recipeService.getAllRecipes(lastSyncDateRequest);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
