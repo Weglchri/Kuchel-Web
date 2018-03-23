@@ -50,4 +50,8 @@ public class Instruction extends AbstractEntity<Long> {
     public void setStep(String step) {
         this.step = step;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

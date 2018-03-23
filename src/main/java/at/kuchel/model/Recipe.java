@@ -51,11 +51,9 @@ public class Recipe extends AbstractEntity<Long> {
     @Valid
     private List<RecipeIngredient> recipeIngredients = new ArrayList<>();
 
-    @NotNull
     @Column(name = "CREATION_DATE")
     private Date creationDate;
 
-    @NotNull
     @Column(name = "MODIFIED_DATE")
     private Date modifiedDate;
 
@@ -102,7 +100,9 @@ public class Recipe extends AbstractEntity<Long> {
         recipeIngredients.add(recipeIngredient);
     }
 
-    public Long getDuration() { return duration; }
+    public Long getDuration() {
+        return duration;
+    }
 
     public void setDuration(Long duration) {
         this.duration = duration;
@@ -122,6 +122,10 @@ public class Recipe extends AbstractEntity<Long> {
 
     public void addImage(Image image) {
         images.add(image);
+    }
+
+    public void setImage(List<Image> images) {
+        this.images = images;
     }
 
     public Date getCreationDate() {

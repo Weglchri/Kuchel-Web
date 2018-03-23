@@ -27,6 +27,10 @@ public class RecipeIngredient extends AbstractEntity<Long> {
     @Enumerated(EnumType.STRING)
     private Type qualifier;
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public enum Type {
         Stück,
         Gramm,
