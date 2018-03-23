@@ -1,0 +1,71 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Kuchel",
+		"_postman_id": "43b9cc62-4658-ddc8-15ef-b92fbd9b129b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/api/recipes",
+			"request": {
+				"url": "http://localhost:8080/kuchel/api/recipes",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"lastSyncDate\": \"2017-05-05T00:00:00.000+0000\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/recipes",
+			"request": {
+				"url": "http://localhost:8080/kuchel/api/recipes",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"lastSyncDate\": \"2017-05-05T00:00:00.000+0000\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/api/recipes/{id}",
+			"request": {
+				"url": "http://localhost:8080/kuchel/api/recipes",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"lastSyncDate\": \"2017-05-05T00:00:00.000+0000\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
