@@ -33,11 +33,21 @@
     </div>
 
     <div class="col-md-2">
-        <h2 class="detailed-recipe-headers">Informationen</h2>
-        <h4>Dauer</h4>
-        <p th:utext="${recipe.getDuration()} + ' min'"></p>
-        <h4>Schwierigeit</h4>
-        <p th:utext="${recipe.getDifficulty()} + ' von 5'"></p>
+        <div>
+            <h2 class="detailed-recipe-headers">Informationen</h2>
+            <h4>Dauer</h4>
+            <p th:utext="${recipe.getDuration()} + ' min'"></p>
+            <h4>Schwierigeit</h4>
+            <p th:utext="${recipe.getDifficulty()} + ' von 5'"></p>
+        </div>
+        <div id="creator-panel">
+            <h4>Ersteller</h4>
+            <p th:utext="${recipe.getUser().getUsername()}"></p>
+            <h4>Erstellt am</h4>
+            <p th:utext="${recipe.getCeationDate()}"></p>
+            <h4 th:if="${recipe.getModifiedDate()}" >Verändert</h4>
+            <p th:utext="${recipe.getModifiedDate()}"></p>
+        </div>
     </div>
 </div>
 
