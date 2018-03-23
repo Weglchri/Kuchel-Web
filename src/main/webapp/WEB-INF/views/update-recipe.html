@@ -11,7 +11,8 @@
 
 <div class="container">
 
-    <form autocomplete="off" th:action="@{/recipes}" th:object="${recipe}" method="put" th:method="put" class="form-horizontal" role="form">
+    <form autocomplete="off" th:action="@{/recipes/__${recipe.id}__}" th:object="${recipe}" method="post"
+          class="form-horizontal" role="form">
 
         <h1>Rezept ändern</h1>
 
@@ -34,17 +35,22 @@
             <div class="form-group col-md-1">
                 <h4>Schwieigkeit</h4>
                 <input type="text" th:field="*{difficulty}" placeholder="2" class="form-control"/>
-                <div th:if="${#fields.hasErrors('difficulty')}" th:errors="*{difficulty}" class="validation-message"></div>
+                <div th:if="${#fields.hasErrors('difficulty')}" th:errors="*{difficulty}"
+                     class="validation-message"></div>
             </div>
         </div>
 
         <div id="recipe-ingredients" class="container">
             <!-- Create Ingredients-->
             <h4>Zutaten</h4>
-            <button type="submit" class="btn btn-success" th:method="get" name="updateRowIngredient">Zutat hinzufügen</button>
+            <button type="submit" class="btn btn-success" th:method="get" name="updateRowIngredient">Zutat hinzufügen
+            </button>
 
             <!-- Add ingredientfield -->
             <div th:each="recipeIngredient : ${recipe.recipeIngredients}">
+                <input th:type="hidden" th:field="*{recipeIngredients[__${recipeIngredientStat.index}__].id}"
+                       th:value="${recipeIngredient.id}"/>
+
                 <div class="form-row">
 
                     <div class="form-group col-md-2">
@@ -107,14 +113,17 @@
             </button>
 
             <!-- Anweisungsfelder hinzufügen -->
-            <div th:each="instruction : ${recipe.instructions}">
+            <div th:each="instruction : *{getInstructions()}">
                 <div class="form-row">
                     <!--  <p id="recipe-instruction-counter" th:text="${instructionStat.index+1} + ')'"></p> -->
                     <div class="form-group col-md-5">
                         <input type="text" th:field="*{instructions[__${instructionStat.index}__].description}"
                                th:value="${instruction.description}"
                                th:placeholder="Anweisung" class="form-control"/>
-
+                        <input th:type="hidden" th:field="*{instructions[__${instructionStat.index}__].step}"
+                               th:value="${instruction.step}"/>
+                        <input th:type="hidden" th:field="*{instructions[__${instructionStat.index}__].id}"
+                               th:value="${instruction.id}"/>
                     </div>
                     <div class="form-group col-md-3">
                         <button type="submit" class="btn btn-warning" name="removeUpdateRowInstruction"
@@ -136,7 +145,9 @@
         </div>
 
         <div id="recipe-button">
-            <button type="submit" th:action="@{/recipes}" th:method="PUT" class="btn btn-warning btn-block btn-lg">Rezept ändern</button>
+            <button type="submit" th:action="@{/recipes/__${recipe.id}__}" th:method="post"
+                    class="btn btn-warning btn-block btn-lg">Rezept ändern
+            </button>
         </div>
 
     </form>

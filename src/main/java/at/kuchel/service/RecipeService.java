@@ -3,7 +3,9 @@ package at.kuchel.service;
 import at.kuchel.exception.KuchelException;
 import at.kuchel.model.*;
 import at.kuchel.repostitory.IngredientRepository;
+import at.kuchel.repostitory.InstructionRepository;
 import at.kuchel.repostitory.RecipeRepository;
+import at.kuchel.util.SessionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -29,6 +33,12 @@ public class RecipeService {
     @Autowired
     private IngredientRepository ingredientRepository;
 
+    @Autowired
+    private InstructionRepository instructionRepository;
+
+    @Autowired
+    private SessionHelper sessionHelper;
+
     public void createRecipe(Recipe recipe) {
         //TODO extract someday
         extractToControllerSomeDay(recipe);
@@ -36,21 +46,83 @@ public class RecipeService {
             Instruction instruction = recipe.getInstructions().get(i);
             instruction.setStep(String.valueOf(i + 1));
         }
-        recipe.setCeationDate(LocalDate.now());
+        recipe.setCreationDate(new Date());
         replaceIngredientIfExist(recipe);
         recipeRepository.save(recipe);
     }
 
     public void updateRecipe(Recipe recipe) {
-        //TODO extract someday
+
+        Recipe storedRecipe = getRecipeById(recipe.getId());
+        updateFieldValues(recipe, storedRecipe);
+
+
         extractToControllerSomeDay(recipe);
+        //todo number steps now
         for (int i = 0; i < recipe.getInstructions().size(); i++) {
             Instruction instruction = recipe.getInstructions().get(i);
             instruction.setStep(String.valueOf(i + 1));
         }
-        recipe.setModifiedDate(LocalDate.now());
+
         replaceIngredientIfExist(recipe);
         recipeRepository.save(recipe);
+    }
+
+    private void updateFieldValues(Recipe recipe, Recipe storedRecipe) {
+        recipe.setCreationDate(storedRecipe.getCreationDate());
+        recipe.setImage(storedRecipe.getImages());
+        recipe.setModifiedDate(new Date());
+        recipe.setUser(sessionHelper.getCurrentUser());
+
+        updateInstructionValues(recipe.getInstructions(), storedRecipe.getInstructions());
+        updateRecipeIngredientValues(recipe.getRecipeIngredients(), storedRecipe.getRecipeIngredients());
+    }
+
+    private void updateRecipeIngredientValues(List<RecipeIngredient> recipeIngredients, List<RecipeIngredient> recipeIngredients1) {
+
+
+    }
+
+    private void updateInstructionValues(List<Instruction> instructions, List<Instruction> storedInstructions) {
+        List<Instruction> instructionsToDelete = new ArrayList<>();
+        List<Instruction> instructionsToUpdate = new ArrayList<>();
+
+        //todo find entries to remove
+        //find entries to keep
+        //find entries to update
+
+
+        for (Instruction storedInstruction : storedInstructions) {
+            boolean remove = true;
+            for (Instruction instruction : instructions) {
+                if (instruction.getId().equals(storedInstruction.getId())) {
+                    remove = false;
+
+                    if (isUpdateNeeded(instruction, storedInstruction)) {
+                        instructionsToUpdate.add(instruction);
+                    }
+                }
+            }
+            if (remove) {
+                instructionsToDelete.add(storedInstruction);
+            }
+        }
+
+        instructionRepository.delete(instructionsToDelete);
+//        ingredientRepository.save(in)
+
+    }
+
+    private boolean isUpdateNeeded(Instruction instruction, Instruction storedInstruction) {
+        if (!instruction.getStep().equals(storedInstruction.getStep())) {
+            return true;
+        }
+
+        if (!instruction.getDescription().equals(storedInstruction.getDescription())) {
+            return true;
+        }
+
+        return false;
     }
 
     private void remove(Recipe recipe) {

@@ -5,6 +5,7 @@ import at.kuchel.model.*;
 import at.kuchel.service.IngredientService;
 import at.kuchel.service.RecipeService;
 import at.kuchel.util.SessionHelper;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,16 +14,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.Objects;
 
+import static org.slf4j.LoggerFactory.getLogger;
+
 @Controller
 @RequestMapping(Context.GUI_API)
 public class RecipeController {
+    private static final Logger LOG = getLogger(RecipeController.class);
 
     @Autowired
     private RecipeService recipeService;
@@ -64,7 +67,7 @@ public class RecipeController {
         ModelAndView modelAndView = new ModelAndView();
         Recipe recipe = recipeService.getRecipeById(Long.parseLong(id));
 
-        if(Objects.nonNull(recipe))
+        if (Objects.nonNull(recipe))
             recipeService.deleteRecipe(recipe);
 
         modelAndView.addObject("recipes", recipeService.getAllRecipes());
@@ -84,7 +87,7 @@ public class RecipeController {
                             "Es existiert bereits ein Rezept mit diesem Namen");
         }
 
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             modelAndView.setViewName("create-recipe");
         } else {
             recipe.setUser(sessionHelper.getCurrentUser());
@@ -156,17 +159,22 @@ public class RecipeController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/recipes", method = RequestMethod.PUT)
-    public ModelAndView updateRecipe(@Valid Recipe recipe, BindingResult bindingResult) {
+    @RequestMapping(value = "/recipes/{id}", method = RequestMethod.POST)
+    public ModelAndView updateRecipe( @Valid Recipe recipe, BindingResult bindingResult) {
+        LOG.info("updateRowInstruction");
+
         ModelAndView modelAndView = new ModelAndView();
+        Recipe existingRecipe = recipeService.getRecipeByName(recipe.getName());
 
-        //TODO: check and set id
+        if (Objects.nonNull(existingRecipe) && !existingRecipe.getId().equals(recipe.getId())) {
+            bindingResult
+                    .rejectValue("name", "error.name",
+                            "Es existiert bereits ein anderes Rezept mit diesem Namen");
+        }
 
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             modelAndView.setViewName("update-recipe");
         } else {
-            recipe.setUser(sessionHelper.getCurrentUser());
-            System.out.printf("RECIPE ID: %s \n", recipe.getId());
             recipeService.updateRecipe(recipe);
             modelAndView.addObject("recipe", recipe);
             modelAndView.addObject("successMessage", String.format("%s wurde erfolgreich geändert", recipe.getName()));
@@ -182,8 +190,9 @@ public class RecipeController {
          Methods for update view
      */
 
-    @RequestMapping(value = "/recipes", params = {"updateRowIngredient"})
+    @RequestMapping(value = "/recipes/{id}", params = {"updateRowIngredient"})
     public ModelAndView updateRowIngredient(Recipe recipe) {
+        LOG.info("updateRowIngredient");
         ModelAndView modelAndView = new ModelAndView();
         RecipeIngredient recipeIngredient = new RecipeIngredient();
         recipeIngredient.setIngredient(new Ingredient());
@@ -192,8 +201,9 @@ public class RecipeController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/recipes", params = {"removeUpdateRowIngredient"})
+    @RequestMapping(value = "/recipes/{id}", params = {"removeUpdateRowIngredient"})
     public ModelAndView removeUpdateRowIngredient(Recipe recipe, final HttpServletRequest req, @RequestParam("removeUpdateRowIngredient") String id) {
+        LOG.info("removeUpdateRowIngredient");
         ModelAndView modelAndView = new ModelAndView();
         final Integer rowId = Integer.valueOf(id);
         RecipeIngredient recipeIngredient = recipe.getRecipeIngredients().get(rowId);
@@ -202,16 +212,18 @@ public class RecipeController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/recipes", params = {"updateRowInstruction"})
+    @RequestMapping(value = "/recipes/{id}", params = {"updateRowInstruction"})
     public ModelAndView updateRowInstruction(Recipe recipe) {
+        LOG.info("updateRowInstruction");
         ModelAndView modelAndView = new ModelAndView();
         recipe.addInstruction(new Instruction());
         addObjectsForUpdateRecipeView(modelAndView, recipe);
         return modelAndView;
     }
 
-    @RequestMapping(value = "/recipes", params = {"removeUpdateRowInstruction"})
+    @RequestMapping(value = "/recipes/{id}", params = {"removeUpdateRowInstruction"})
     public ModelAndView removeUpdateRowInstruction(Recipe recipe, final HttpServletRequest req, @RequestParam("removeUpdateRowInstruction") String id) {
+        LOG.info("removeUpdateRowInstruction");
         ModelAndView modelAndView = new ModelAndView();
         final Integer rowId = Integer.valueOf(id);
         Instruction instruction = recipe.getInstructions().get(rowId);
@@ -225,14 +237,14 @@ public class RecipeController {
     */
 
     private void addObjectsForCreateRecipeView(ModelAndView modelAndView, Recipe recipe) {
-        modelAndView.addObject("acceptedIngredients", ingredientService.getAllIngredientsWithStatusReducedByChosenOnes(Ingredient.Status.APPROVED,recipe));
+        modelAndView.addObject("acceptedIngredients", ingredientService.getAllIngredientsWithStatusReducedByChosenOnes(Ingredient.Status.APPROVED, recipe));
         modelAndView.addObject("recipeIngredientTypes", Arrays.asList(RecipeIngredient.Type.values()));
         modelAndView.addObject("recipe", recipe);
         modelAndView.setViewName("create-recipe");
     }
 
     private void addObjectsForUpdateRecipeView(ModelAndView modelAndView, Recipe recipe) {
-        modelAndView.addObject("acceptedIngredients", ingredientService.getAllIngredientsWithStatusReducedByChosenOnes(Ingredient.Status.APPROVED,recipe));
+        modelAndView.addObject("acceptedIngredients", ingredientService.getAllIngredientsWithStatusReducedByChosenOnes(Ingredient.Status.APPROVED, recipe));
         modelAndView.addObject("recipeIngredientTypes", Arrays.asList(RecipeIngredient.Type.values()));
         modelAndView.addObject("recipe", recipe);
         modelAndView.setViewName("update-recipe");
