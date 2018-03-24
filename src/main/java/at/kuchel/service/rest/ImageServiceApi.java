@@ -2,6 +2,7 @@ package at.kuchel.service.rest;
 
 import at.kuchel.api.ImageDetailResponse;
 import at.kuchel.api.ImageIdsRequest;
+import at.kuchel.api.LastSyncDateRequest;
 import at.kuchel.mapper.ImageMapper;
 import at.kuchel.model.Image;
 import at.kuchel.repostitory.ImageRepository;
@@ -33,5 +34,10 @@ public class ImageServiceApi {
 
     public List<ImageDetailResponse> getImagesByRecipeId(Long recipeId) {
         return imageRepository.findByRecipeId(recipeId).stream().map(image -> imageMapper.mapDetail(image)).collect(Collectors.toList());
+    }
+
+    public ImageDetailResponse getImageWithLastSyncDate(Long id, LastSyncDateRequest lastSyncDateRequest) {
+        ImageDetailResponse image = getImage(id);
+        return image.getModifiedDate().after(lastSyncDateRequest.getLastSyncDate()) ? image : null;
     }
 }

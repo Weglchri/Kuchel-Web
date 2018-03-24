@@ -27,7 +27,7 @@ public class RecipeControllerApi {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public List<RecipeDetailedResponse> list(@RequestBody LastSyncDateRequest lastSyncDateRequest ) {
+    public List<RecipeDetailedResponse> list(@RequestBody LastSyncDateRequest lastSyncDateRequest) {
         LOG.info("Retrieving all recipes");
         return recipeService.getAllRecipes(lastSyncDateRequest);
     }

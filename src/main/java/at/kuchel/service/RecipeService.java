@@ -11,11 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -123,25 +118,6 @@ public class RecipeService {
         }
 
         return false;
-    }
-
-    private void remove(Recipe recipe) {
-
-        Path path = Paths.get("C:/Tortelloni.jpg");
-        try {
-            Image image = new Image();
-            image.setModifiedDate(LocalDate.now());
-
-            image.setData(Files.readAllBytes(path));
-            recipe.addImage(image);
-            image.setRecipe(recipe);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        recipe.setDifficulty(2L);
-        recipe.setDuration(70L);
     }
 
     private void replaceIngredientIfExist(Recipe recipe) {

@@ -2,13 +2,13 @@ package at.kuchel.api;
 
 import lombok.Data;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 public class ImageDetailResponse {
 
     private String id;
     private String recipeId;
-    private LocalDate modifiedDate;
+    private Date modifiedDate;
     private byte[] data;
 }
