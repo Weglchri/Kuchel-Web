@@ -2,18 +2,15 @@ package at.kuchel.service;
 
 import at.kuchel.exception.KuchelException;
 import at.kuchel.model.*;
-import at.kuchel.repostitory.ImageRepository;
 import at.kuchel.repostitory.IngredientRepository;
 import at.kuchel.repostitory.InstructionRepository;
 import at.kuchel.repostitory.RecipeRepository;
 import at.kuchel.util.SessionHelper;
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,20 +22,21 @@ import static at.kuchel.exception.KuchelErrorCode.RECIPE_NOT_FOUND;
 @Service
 public class RecipeService {
 
-    @Autowired
-    private RecipeRepository recipeRepository;
+    private final RecipeRepository recipeRepository;
+
+    private final IngredientRepository ingredientRepository;
+
+    private final InstructionRepository instructionRepository;
+
+    private final SessionHelper sessionHelper;
 
     @Autowired
-    private IngredientRepository ingredientRepository;
-
-    @Autowired
-    private InstructionRepository instructionRepository;
-
-    @Autowired
-    private ImageRepository imageRepository;
-
-    @Autowired
-    private SessionHelper sessionHelper;
+    public RecipeService(RecipeRepository recipeRepository, IngredientRepository ingredientRepository, InstructionRepository instructionRepository, SessionHelper sessionHelper) {
+        this.recipeRepository = recipeRepository;
+        this.ingredientRepository = ingredientRepository;
+        this.instructionRepository = instructionRepository;
+        this.sessionHelper = sessionHelper;
+    }
 
     public void createRecipe(Recipe recipe) {
         //TODO extract someday
@@ -147,11 +145,6 @@ public class RecipeService {
     }
 
     public List<Recipe> getAllRecipes() {
-        List<Recipe> all = recipeRepository.findAll();
-        for (Recipe recipe : all) {
-            storeImage(recipe);
-        }
-
         return recipeRepository.findAll();
     }
 
@@ -184,23 +177,4 @@ public class RecipeService {
     public void deleteRecipe(Recipe recipe) {
         recipeRepository.delete(recipe);
     }
-
-    private void storeImage(Recipe recipe) {
-
-        java.io.File file;
-        byte[] bytes = null;
-        try {
-            file = new java.io.File("testfile.jpg");
-
-            bytes = FileUtils.readFileToByteArray(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        recipe.getImages().get(0).setModifiedDate(new Date());
-        recipe.getImages().get(0).setData(bytes);
-
-        imageRepository.saveAndFlush(recipe.getImages().get(0));
-
-    }
-
 }
