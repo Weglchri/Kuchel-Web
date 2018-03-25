@@ -5,16 +5,13 @@ import at.kuchel.api.ImageOverviewResponse;
 import at.kuchel.model.Image;
 import org.springframework.stereotype.Service;
 
-import java.util.Base64;
-
 @Service
 public class ImageMapper {
 
     public ImageDetailResponse mapDetail(Image image) {
         ImageDetailResponse imageResponse = new ImageDetailResponse();
         imageResponse.setId(String.valueOf(image.getId()));
-        imageResponse.setRecipeId(String.valueOf(image.getRecipe().getId()));
-        imageResponse.setData(Base64.getEncoder().encode(image.getData()));
+        imageResponse.setData(image.getData());
         imageResponse.setModifiedDate(image.getModifiedDate());
         return imageResponse;
     }

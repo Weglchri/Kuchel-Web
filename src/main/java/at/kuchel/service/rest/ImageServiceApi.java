@@ -22,8 +22,7 @@ public class ImageServiceApi {
     private ImageMapper imageMapper;
 
     public ImageDetailResponse getImage(Long imageId) {
-        Image image = imageRepository.findOne(imageId);
-        return imageMapper.mapDetail(image);
+        return imageMapper.mapDetail(imageRepository.findOne(imageId));
     }
 
     public List<ImageDetailResponse> getImagesByRecipeId(ImageIdsRequest imageSyncRequest, Long recipeId) {

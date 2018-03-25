@@ -8,7 +8,6 @@ import java.util.Date;
 public class ImageDetailResponse {
 
     private String id;
-    private String recipeId;
     private Date modifiedDate;
     private byte[] data;
 }
