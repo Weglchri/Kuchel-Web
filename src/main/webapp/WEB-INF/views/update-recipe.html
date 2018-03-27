@@ -16,6 +16,8 @@
 
         <h1>Rezept ändern</h1>
 
+        <div class="well">
+
         <div th:utext="${recipe.getId()}"></div>
 
         <div id="recipe-top-panel" class="container">
@@ -143,7 +145,7 @@
             <div th:if="${#fields.hasErrors('instructions')}" th:errors="*{instructions}"
                  class="validation-message"></div>
         </div>
-
+        </div>
         <div id="recipe-button">
             <button type="submit" th:action="@{/recipes/__${recipe.id}__}" th:method="post"
                     class="btn btn-warning btn-block btn-lg">Rezept ändern

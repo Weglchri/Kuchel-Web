@@ -12,9 +12,13 @@
 
 <div class="container">
 
+
+
     <h1>Alle Rezepte</h1>
 
-    <div id="recipe-overview-panel" class="row">
+    <div class="well">
+
+    <div id="recipe-overview-panel" th:if="${!#lists.isEmpty(recipes)}" class="row">
         <div class="col-md-5"><h4 class="text-center">Rezept</h4></div>
         <div class="col-md-2"><h4 class="text-center">Dauer</h4></div>
         <div class="col-md-2"><h4 class="text-center">Schwierigkeit</h4></div>
@@ -32,6 +36,7 @@
         <a class="btn btn-primary btn-lg btn-success" href="/recipes/new">Neues Rezept erstellen</a>
     </div>
 
+    </div>
 </div>
 </body>
 </html>

@@ -3,6 +3,7 @@ package at.kuchel.controller.rest;
 import at.kuchel.Context;
 import at.kuchel.api.ImageDetailResponse;
 import at.kuchel.api.ImageIdsRequest;
+import at.kuchel.api.LastSyncDateRequest;
 import at.kuchel.service.rest.ImageServiceApi;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,11 @@ public class ImageControllerApi {
     public ImageDetailResponse getByImageId(@PathVariable Long recipeId, @PathVariable Long id) {
         LOG.info("Retrieve image for recipe '{}' with id '{}'", recipeId, id);
         return imageService.getImage(id);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
+    public ImageDetailResponse getByImageId(@PathVariable Long recipeId, @PathVariable Long id, @RequestBody LastSyncDateRequest lastSyncDateRequest) {
+        LOG.info("Retrieve image for recipe '{}' with id '{}'", recipeId, id);
+        return imageService.getImageWithLastSyncDate(id, lastSyncDateRequest);
     }
 }

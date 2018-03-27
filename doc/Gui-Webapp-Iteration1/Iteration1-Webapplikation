@@ -1,0 +1,27 @@
+
+Userinput der ersten Usability-Iteration! (Webapplikation)
+
+
+Registrierung:
+
+    - Passwort-Bestätigung fehlt
+    - Username != Benutzername
+    - Keine Bestätigung dass Registriereung erfolgreich
+
+Login:
+
+    - "Login" steht nicht auf der Loginpage
+    - Message bei erfolgreichem einloggen?!
+
+Rezept anlegen:
+
+    - Platzhalter falls nicht verändert bei Erstellen übernhemen
+    - Schwierigkeit nicht verständlich 1 von 5 (kleinste/größte)
+    - optisch passen die Abstände der Zeilen nicht (zu groß)
+    - "Zutat hinzufügen"-Button nicht klar (eventuell auf + ändern)
+    - Rezept hinzufügen Felder verkleinern (unklarheit bei kg/gramm usw)
+    - dag und kg offensichtlich doch übernehmen
+
+Dashboard:
+
+    - Header-Control-Panel-Schrift könnte etwas größer sein

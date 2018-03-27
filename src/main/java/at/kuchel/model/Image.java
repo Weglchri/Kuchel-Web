@@ -1,7 +1,7 @@
 package at.kuchel.model;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "IMAGE")
@@ -12,7 +12,7 @@ public class Image extends AbstractEntity<Long> {
     private Long id;
 
     @Column(name = "MODIFIED_DATE")
-    private LocalDate modifiedDate;
+    private Date modifiedDate;
 
     @JoinColumn(name = "DATA")
     @Lob
@@ -43,11 +43,11 @@ public class Image extends AbstractEntity<Long> {
         this.recipe = recipe;
     }
 
-    public LocalDate getModifiedDate() {
+    public Date getModifiedDate() {
         return modifiedDate;
     }
 
-    public void setModifiedDate(LocalDate modifiedDate) {
+    public void setModifiedDate(Date modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
 }

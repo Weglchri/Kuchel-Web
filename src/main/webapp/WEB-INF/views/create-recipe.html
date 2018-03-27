@@ -16,6 +16,8 @@
 
         <h1>Rezept erstellen</h1>
 
+        <div class="well">
+
         <div id="recipe-top-panel" class="container">
             <!-- Rezeptname -->
             <div class="form-group col-md-5">
@@ -135,11 +137,12 @@
             <div th:if="${#fields.hasErrors('instructions')}" th:errors="*{instructions}"
                  class="validation-message"></div>
         </div>
-
+        </div>
         <div id="recipe-button">
             <button type="submit" th:method="post" class="btn btn-primary btn-block btn-lg">Rezept erstellen
             </button>
         </div>
+
 
     </form>
 

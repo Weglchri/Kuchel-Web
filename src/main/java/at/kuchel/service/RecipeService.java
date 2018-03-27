@@ -11,11 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,17 +22,21 @@ import static at.kuchel.exception.KuchelErrorCode.RECIPE_NOT_FOUND;
 @Service
 public class RecipeService {
 
-    @Autowired
-    private RecipeRepository recipeRepository;
+    private final RecipeRepository recipeRepository;
+
+    private final IngredientRepository ingredientRepository;
+
+    private final InstructionRepository instructionRepository;
+
+    private final SessionHelper sessionHelper;
 
     @Autowired
-    private IngredientRepository ingredientRepository;
-
-    @Autowired
-    private InstructionRepository instructionRepository;
-
-    @Autowired
-    private SessionHelper sessionHelper;
+    public RecipeService(RecipeRepository recipeRepository, IngredientRepository ingredientRepository, InstructionRepository instructionRepository, SessionHelper sessionHelper) {
+        this.recipeRepository = recipeRepository;
+        this.ingredientRepository = ingredientRepository;
+        this.instructionRepository = instructionRepository;
+        this.sessionHelper = sessionHelper;
+    }
 
     public void createRecipe(Recipe recipe) {
         //TODO extract someday
@@ -125,25 +124,6 @@ public class RecipeService {
         return false;
     }
 
-    private void remove(Recipe recipe) {
-
-        Path path = Paths.get("C:/Tortelloni.jpg");
-        try {
-            Image image = new Image();
-            image.setModifiedDate(LocalDate.now());
-
-            image.setData(Files.readAllBytes(path));
-            recipe.addImage(image);
-            image.setRecipe(recipe);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        recipe.setDifficulty(2L);
-        recipe.setDuration(70L);
-    }
-
     private void replaceIngredientIfExist(Recipe recipe) {
 
         for (RecipeIngredient recipeIngredient : recipe.getRecipeIngredients()) {
@@ -197,5 +177,4 @@ public class RecipeService {
     public void deleteRecipe(Recipe recipe) {
         recipeRepository.delete(recipe);
     }
-
 }
