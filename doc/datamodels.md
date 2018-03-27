@@ -9,23 +9,22 @@ Was für Entitäten:
     * Mailadresse
     * Username
     * Password
-* Kochbuch
+* Cookbook
     * anlegen()
     * öffnen()
     * Kapitel
-* Rezept
+* Recipe
     * List(Zutat)
     * Beschreibung
     * Bild
     * Dauer
     * Menge pro Einheit
     * Kategorie
-* Zutat
+* Ingredient
     * Beschreibung
     * Namen
-    * Foto
-    
-    
-### Nice to have
-* Logging (Log4j or Logrotate)
-
+    * Foto  
+* Role
+* RecipeIngredient
+* Instruction
+* Image
