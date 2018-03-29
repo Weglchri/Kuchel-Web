@@ -14,12 +14,16 @@ import java.util.List;
 import static org.slf4j.LoggerFactory.getLogger;
 
 @RestController
-@RequestMapping(Context.REST_API + "/recipes/{recipeId}/images")
+@RequestMapping(Context.REST_API + "recipes/{recipeId}/images")
 public class ImageControllerApi {
     private static final Logger LOG = getLogger(ImageControllerApi.class);
 
+    private final ImageServiceApi imageService;
+
     @Autowired
-    private ImageServiceApi imageService;
+    public ImageControllerApi(ImageServiceApi imageService) {
+        this.imageService = imageService;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public List<ImageDetailResponse> getByImagesIds(@PathVariable Long recipeId) {

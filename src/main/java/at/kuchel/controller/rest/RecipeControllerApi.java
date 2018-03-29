@@ -13,12 +13,16 @@ import java.util.List;
 import static org.slf4j.LoggerFactory.getLogger;
 
 @RestController
-@RequestMapping(Context.REST_API + "/recipes")
+@RequestMapping(Context.REST_API + "recipes")
 public class RecipeControllerApi {
     private static final Logger LOG = getLogger(RecipeControllerApi.class);
 
+    private final RecipeServiceApi recipeService;
+
     @Autowired
-    private RecipeServiceApi recipeService;
+    public RecipeControllerApi(RecipeServiceApi recipeService) {
+        this.recipeService = recipeService;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public List<RecipeDetailedResponse> list() {
