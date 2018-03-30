@@ -4,15 +4,15 @@ import at.kuchel.exception.KuchelException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
-@ControllerAdvice
-@Order(Ordered.LOWEST_PRECEDENCE)
-public class GlobalControllerExceptionHandler {
+@RestControllerAdvice
+@Order(Ordered.HIGHEST_PRECEDENCE)
+public class GlobalRestControllerExceptionHandler {
 
     @ExceptionHandler(KuchelException.class)
     protected ModelAndView handleKuchelException(KuchelException klex) {
@@ -25,10 +25,8 @@ public class GlobalControllerExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)  // 404
     @ExceptionHandler(NoHandlerFoundException.class)
     public ModelAndView handleNotFoundException(final NoHandlerFoundException nhfex) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("exception", nhfex);
-        modelAndView.setViewName("error/notfoundexception");
-        return modelAndView;
+System.out.println("bla");
+return null;
     }
 
     @ExceptionHandler(Throwable.class)

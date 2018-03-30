@@ -40,21 +40,38 @@ public class MultiHttpSecurityConfig {
 
     @Configuration
     @Order(1)
-    public class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
+    public class MainWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
+
+        @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http
-                    .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                    .and()
-                    .csrf().disable()
-                    .authorizeRequests()
-                    .antMatchers(REST_API + "recipes/**").permitAll()
-                    .antMatchers(REST_API + "users").hasRole("USER")
-                    .and()
-                    .jee()
-                    .and()
-                    .httpBasic();
+            http.
+                    authorizeRequests()
+                    .antMatchers("/").permitAll()
+                    .antMatchers("/login").permitAll()
+                    .antMatchers("/registration").permitAll()
+                    .antMatchers("/recipes").permitAll()
+                    .antMatchers("/recipes/**").permitAll()
+                    .antMatchers("/dashboard").permitAll()
+                    .anyRequest()
+                    .authenticated().and().csrf().disable().formLogin()
+                    .loginPage("/login").failureUrl("/login?error=true")
+                    .defaultSuccessUrl("/dashboard")
+                    .usernameParameter("username")
+                    .passwordParameter("password")
+                    .and().logout()
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/").and().exceptionHandling()
+                    .accessDeniedPage("/access-denied");
+            super.configure(http);
         }
+
+        @Override
+        public void configure(WebSecurity web) throws Exception {
+            web
+                    .ignoring()
+                    .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**", "/h2/**");
+        }
+
         @Override
         protected void configure(AuthenticationManagerBuilder auth)
                 throws Exception {
@@ -67,35 +84,24 @@ public class MultiHttpSecurityConfig {
     }
 
     @Configuration
-    public class MainWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
+    @Order(2)
+    public class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
+
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-
-            http.
-                    authorizeRequests()
-                    .antMatchers("/").permitAll()
-                    .antMatchers("/login").permitAll()
-                    .antMatchers("/registration").permitAll()
-                    .antMatchers("/recipes").permitAll()
-                    .antMatchers("/recipes/**").permitAll()
-                    .antMatchers("/dashboard").permitAll()
-                    .antMatchers("/user/**").hasAuthority("USER").anyRequest()
-                    .authenticated().and().csrf().disable().formLogin()
-                    .loginPage("/login").failureUrl("/login?error=true")
-                    .defaultSuccessUrl("/dashboard")
-                    .usernameParameter("username")
-                    .passwordParameter("password")
-                    .and().logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/").and().exceptionHandling()
-                    .accessDeniedPage("/access-denied");
-        }
-
-        @Override
-        public void configure(WebSecurity web) throws Exception {
-            web
-                    .ignoring()
-                    .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**", "/h2/**");
+            http
+                    .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .and()
+                    .csrf().disable()
+                    .authorizeRequests()
+                    .antMatchers(REST_API + "recipes/**").permitAll()
+                    .antMatchers(REST_API + "users").hasRole("USER")
+                    .antMatchers(REST_API + "users/**").hasRole("USER")
+                    .and()
+                    .jee()
+                    .and()
+                    .httpBasic();
         }
 
         @Override
