@@ -24,7 +24,7 @@ public class MultiHttpSecurityConfig {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    final DataSource dataSource;
+    private final DataSource dataSource;
 
     @Value("${spring.queries.users-query}")
     private String usersQuery;
