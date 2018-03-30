@@ -4,8 +4,7 @@ package at.kuchel.model;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -26,7 +25,7 @@ public class User extends AbstractEntity<Long> {
     private String password;
 
     @Column(name = "BIRTHDAY")
-    private LocalDate birthday;
+    private Date birthday;
 
     @Column(name = "MAIL_ADDRESS")
     private String mailAddress;
@@ -59,11 +58,11 @@ public class User extends AbstractEntity<Long> {
         this.password = password;
     }
 
-    public LocalDate getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(LocalDate birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 

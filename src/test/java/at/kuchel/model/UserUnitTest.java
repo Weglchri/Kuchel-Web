@@ -4,8 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.time.LocalDate;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Set;
 
 public class UserUnitTest {
@@ -23,7 +23,7 @@ public class UserUnitTest {
 
         user.setUsername("Random User");
         user.setPassword("***");
-        user.setBirthday(LocalDate.now());
+        user.setBirthday(new Date());
         user.setMailAddress("radnom.user@gmail.com");
         user.setRoles(roles);
     }
