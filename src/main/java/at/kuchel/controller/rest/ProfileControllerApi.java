@@ -24,6 +24,6 @@ public class ProfileControllerApi {
     @RequestMapping(method = RequestMethod.GET)
     public ProfileResponse getProfileForUser(@AuthenticationPrincipal User user) {
         LOG.info("Return Profile for user '{}'", user.getUsername());
-        return userService.getUserprofile(user);
+        return userService.getUserProfile(user);
     }
 }

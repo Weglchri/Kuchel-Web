@@ -19,7 +19,7 @@ public class UserServiceApi {
         this.userService = userService;
     }
 
-    public ProfileResponse getUserprofile(User user) {
+    public ProfileResponse getUserProfile(User user) {
         return profileMapper.map(userService.getUserByUsername(user.getUsername()));
     }
 
