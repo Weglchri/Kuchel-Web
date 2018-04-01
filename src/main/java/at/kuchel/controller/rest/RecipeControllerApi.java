@@ -26,13 +26,13 @@ public class RecipeControllerApi {
 
     @RequestMapping(method = RequestMethod.GET)
     public List<RecipeDetailedResponse> list() {
-        LOG.info("Retrieving all recipes");
+        LOG.info("Retrieving all recipes via GET");
         return recipeService.getAllRecipes();
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public List<RecipeDetailedResponse> list(@RequestBody LastSyncDateRequest lastSyncDateRequest) {
-        LOG.info("Retrieving all recipes");
+        LOG.info("Retrieving all recipes via POST");
         return recipeService.getAllRecipes(lastSyncDateRequest);
     }
 

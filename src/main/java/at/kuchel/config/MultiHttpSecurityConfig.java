@@ -39,7 +39,7 @@ public class MultiHttpSecurityConfig {
     }
 
     @Configuration
-    @Order(1)
+    @Order(2)
     public class MainWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
 
         @Override
@@ -62,7 +62,6 @@ public class MultiHttpSecurityConfig {
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                     .logoutSuccessUrl("/").and().exceptionHandling()
                     .accessDeniedPage("/access-denied");
-            super.configure(http);
         }
 
         @Override
@@ -84,20 +83,19 @@ public class MultiHttpSecurityConfig {
     }
 
     @Configuration
-    @Order(2)
+    @Order(1)
     public class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http
+            http .antMatcher(REST_API+"**")
                     .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
                     .csrf().disable()
                     .authorizeRequests()
                     .antMatchers(REST_API + "recipes").permitAll()
-                    .antMatchers(REST_API + "profiles").hasRole("USER")
-                    .antMatchers(REST_API + "profiles/**").hasRole("USER")
+                    .antMatchers(REST_API + "profiles",REST_API + "profiles/**").hasAuthority("USER")
                     .and()
                     .jee()
                     .and()
