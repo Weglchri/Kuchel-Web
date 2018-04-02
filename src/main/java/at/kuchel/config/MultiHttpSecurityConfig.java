@@ -39,6 +39,37 @@ public class MultiHttpSecurityConfig {
     }
 
     @Configuration
+    @Order(1)
+    public class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
+
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            http.antMatcher(REST_API + "**")
+                    .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .and()
+                    .csrf().disable()
+                    .authorizeRequests()
+                    .antMatchers(REST_API + "recipes").permitAll()
+                    .antMatchers(REST_API + "profiles", REST_API + "profiles/**").hasAuthority("USER")
+                    .and()
+                    .jee()
+                    .and()
+                    .httpBasic();
+        }
+
+        @Override
+        protected void configure(AuthenticationManagerBuilder auth)
+                throws Exception {
+            auth.
+                    jdbcAuthentication().dataSource(dataSource)
+                    .usersByUsernameQuery(usersQuery)
+                    .authoritiesByUsernameQuery(rolesQuery)
+                    .passwordEncoder(bCryptPasswordEncoder);
+        }
+    }
+
+    @Configuration
     @Order(2)
     public class MainWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
 
@@ -69,37 +100,6 @@ public class MultiHttpSecurityConfig {
             web
                     .ignoring()
                     .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**", "/h2/**");
-        }
-
-        @Override
-        protected void configure(AuthenticationManagerBuilder auth)
-                throws Exception {
-            auth.
-                    jdbcAuthentication().dataSource(dataSource)
-                    .usersByUsernameQuery(usersQuery)
-                    .authoritiesByUsernameQuery(rolesQuery)
-                    .passwordEncoder(bCryptPasswordEncoder);
-        }
-    }
-
-    @Configuration
-    @Order(1)
-    public class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
-
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            http .antMatcher(REST_API+"**")
-                    .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                    .and()
-                    .csrf().disable()
-                    .authorizeRequests()
-                    .antMatchers(REST_API + "recipes").permitAll()
-                    .antMatchers(REST_API + "profiles",REST_API + "profiles/**").hasAuthority("USER")
-                    .and()
-                    .jee()
-                    .and()
-                    .httpBasic();
         }
 
         @Override
