@@ -1,6 +1,11 @@
+
+#create-recipe-form {
+    margin-bottom: 10%;
+}
+
 /* general panels */
 
-#recipe-top-panel {
+#recipe-top-panel{
     margin-bottom: 1em;
 }
 
@@ -34,6 +39,10 @@
 
 /* distance between ingredient/instruction text and their fields */
 
+#recipe-top-panel > div {
+    margin-right: 0.1em;
+}
+
 #recipe-ingredients-panel > div > div > div {
     margin-top: -0.5em;
     margin-right: -0.5em;
@@ -48,7 +57,7 @@
 
 #recipe-button {
     margin-top: 2%;
-    margin-bottom: 10%;
+    margin-bottom: 2%;
 }
 
 /* clearfix after every field*/

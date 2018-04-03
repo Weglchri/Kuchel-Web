@@ -9,7 +9,7 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 
-<div class="container">
+<div id="create-recipe-form" class="container">
 
     <form autocomplete="off" action="#" th:action="@{/recipes}" th:object="${recipe}" method="post"
           class="form-horizontal" role="form">
@@ -140,11 +140,10 @@
                 <div th:if="${#fields.hasErrors('instructions')}" th:errors="*{instructions}"
                      class="validation-message"></div>
             </div>
-        </div>
 
-
-        <div id="recipe-button">
-            <button type="submit" th:method="post" class="btn btn-primary btn-block btn-lg">Rezept erstellen</button>
+            <div id="recipe-button">
+                <button type="submit" th:method="post" class="btn btn-primary btn-block btn-lg">Rezept erstellen</button>
+            </div>
         </div>
     </form>
 </div>
