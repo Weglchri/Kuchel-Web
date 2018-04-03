@@ -1,6 +1,7 @@
 package at.kuchel.model;
 
 
+import at.kuchel.constraint.FieldMatch;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -8,21 +9,27 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+
 @Entity
 @Table(name = "USER")
+@FieldMatch(first = "password", second = "confirmPassword", message = "Die Passwörter müssen übereinstimmen!")
 public class User extends AbstractEntity<Long> {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @NotBlank
+    @NotBlank (message = "Benutzername darf nicht leer sein!")
     @Column(name = "USERNAME")
     private String username;
 
-    @NotBlank
+    @NotBlank (message = "Passwort darf nicht leer sein!")
     @Column(name = "PASSWORD")
     private String password;
+
+    @NotBlank
+    @Transient
+    private String confirmPassword;
 
     @Column(name = "BIRTHDAY")
     private Date birthday;
@@ -56,6 +63,14 @@ public class User extends AbstractEntity<Long> {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public Date getBirthday() {

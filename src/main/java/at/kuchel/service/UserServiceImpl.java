@@ -29,7 +29,11 @@ public class UserServiceImpl implements UserService {
     }
 
     public void addUser(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+
+        user.setPassword(encodedPassword); //set password for validation
+        user.setConfirmPassword(encodedPassword); //purposes at persistence
+
         Role userRole = roleRepository.findByRole("USER");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
