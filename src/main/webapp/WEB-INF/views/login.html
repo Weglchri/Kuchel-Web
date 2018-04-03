@@ -13,7 +13,7 @@
 <div class="container">
 
     <div id="image-container">
-        <img th:src="@{/resources/images/lunch.jpg}" id="kuchel-front-logo" class="img-responsive" alt="Logo"/>
+        <img th:src="@{/resources/images/lunchy.jpg}" id="kuchel-front-logo" class="img-responsive" alt="Logo"/>
         <div id="centered-image-text">Kuchel</div>
     </div>
 
@@ -26,7 +26,7 @@
         <div align="center" th:if="${param.error}">
             <p style="font-size: 20; color: #FF1C19;">Benutername oder Password stimmen nicht überein</p>
         </div>
-        <button class="btn btn-primary btn-block" name="Submit" value="Anmelden" type="Submit" th:text="Anmelden"></button>
+        <button id="login-button" class="btn btn-success btn-block btn-lg" name="Submit" value="Anmelden" type="Submit" th:text="Anmelden"></button>
         <div th:replace="fragments/alert :: alert (type='danger', message=${alertMessage})"></div>
     </form>
 </div>
