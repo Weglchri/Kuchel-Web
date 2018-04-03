@@ -1,33 +1,60 @@
+/* general panels */
 
-#recipe-instruction-counter {
-    display: inline;
+#recipe-top-panel {
+    margin-bottom: 1em;
 }
 
-#recipe-top-panel > div {
-    margin-right: 0.5em;
+#recipe-ingredients-panel {
+    margin-bottom: 1em;
 }
 
-#recipe-ingredients {}
-
-#recipe-ingredients > div > div > div {
-    margin-top: 0.5em;
-    margin-right: 0.5em;
+#recipe-instruction-panel {
+    margin-bottom: 1em;
 }
 
-#recipe-instruction {
-   margin-top : 1em;
+/* add-button-panels */
+
+#recipe-ingredients-add {
+    margin-bottom: 1em;
 }
 
-#recipe-instruction > div > div > div {
-    margin-top: 0.5em;
-    margin-right: 0.5em;
+#recipe-instruction-add {
+    margin-bottom: 1em;
 }
+
+/* buttons beside add button text */
+
+#recipe-instruction-add > div > button {
+    margin-left: 50%;
+}
+
+#recipe-ingredients-add > div > button {
+    margin-left: -30%;
+}
+
+/* distance between ingredient/instruction text and their fields */
+
+#recipe-ingredients-panel > div > div > div {
+    margin-top: -0.5em;
+    margin-right: -0.5em;
+}
+
+#recipe-instruction-panel > div > div > div {
+    margin-top: -0.5em;
+    margin-right: -0.5em;
+}
+
+/* recipe button */
 
 #recipe-button {
     margin-top: 2%;
     margin-bottom: 10%;
 }
 
+/* clearfix after every field*/
+
 .element {
-@include clearfix;
+ @include clearfix;
 }
+
+

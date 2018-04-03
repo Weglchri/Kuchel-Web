@@ -43,10 +43,12 @@
         <div id="creator-panel">
             <h4>Ersteller</h4>
             <p th:utext="${recipe.getUser().getUsername()}"></p>
+            <!--
             <h4>Erstellt am</h4>
-            <p th:utext="${recipe.getCreationDate()}"></p>
+            <p th:utext="${Calendar.getInstance()}"></p>
             <h4 th:if="${recipe.getModifiedDate()}" >Verändert</h4>
             <p th:utext="${recipe.getModifiedDate()}"></p>
+            -->
         </div>
     </div>
 </div>
