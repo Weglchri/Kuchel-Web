@@ -15,12 +15,12 @@ Login:
 
 Rezept anlegen:
 
-    - Platzhalter falls nicht verändert bei Erstellen übernehmen
-    - Schwierigkeit nicht verständlich 1 von 5 (kleinste/größte)
+    - Platzhalter falls nicht verändert bei Erstellen übernehmen x
+    - Schwierigkeit nicht verständlich 1 von 5 (kleinste/größte) x
     - optisch passen die Abstände der Zeilen nicht (zu groß) ✓
     - "Zutat hinzufügen"-Button nicht klar (eventuell auf + ändern) ✓
     - Rezept hinzufügen Felder verkleinern ✓
-    - dag und kg und Becher offensichtlich doch übernehmen
+    - dag und kg und Becher offensichtlich doch übernehmen ✓
 
 Dashboard:
 

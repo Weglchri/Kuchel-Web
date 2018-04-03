@@ -3,3 +3,7 @@
     margin-right: 3px;
 }
 
+.navbar > nav > div > ul > li > a {
+    font-size: 1.1em;
+    font-weight: 400;
+}
