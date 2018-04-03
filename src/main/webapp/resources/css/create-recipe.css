@@ -27,14 +27,10 @@
     margin-bottom: 1em;
 }
 
-/* buttons beside add button text */
+/* validation message */
 
-#recipe-instruction-add > div > button {
-    margin-left: 50%;
-}
-
-#recipe-ingredients-add > div > button {
-    margin-left: -30%;
+.validation-message {
+    margin: 2px;
 }
 
 /* distance between ingredient/instruction text and their fields */
@@ -65,5 +61,7 @@
 .element {
  @include clearfix;
 }
+
+
 
 
