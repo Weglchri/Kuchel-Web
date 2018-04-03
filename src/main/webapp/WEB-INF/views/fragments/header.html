@@ -23,7 +23,8 @@
                         <li sec:authorize="isAuthenticated()"><a class="header-icons" href="/logout"><span class="glyphicon glyphicon-log-out"></span><span>Logout</span></a></li>
                         <li sec:authorize="isAnonymous()"><a class="header-icons" href="/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                         <li sec:authorize="isAnonymous()"><a class="header-icons" href="/registration"><span class="glyphicon glyphicon-registration-mark"> </span> Registration</a></li>
-                        <li sec:authorize="hasAuthority('ADMIN')"><a class="header-icons" href="/h2"><span class="glyphicon glyphicon-floppy-disk"></span>H2</a></li>
+                        <li sec:authorize="hasAuthority('ADMIN')"><a class="header-icons" href="/swagger-ui.html"><span class="glyphicon glyphicon-floppy-disk"></span>Swagger-UI</a></li>
+                        <li sec:authorize="hasAuthority('ADMIN')"><a class="header-icons" href="/h2"><span class="glyphicon glyphicon glyphicon-phone"></span>H2</a></li>
                     </ul>
                 </div>
             </nav>

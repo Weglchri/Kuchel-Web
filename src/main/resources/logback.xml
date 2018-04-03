@@ -54,7 +54,7 @@
 
     <root level="INFO">
         <appender-ref ref="SERVER"/>
-        <appender-ref ref="STDOUT"/>
+        <!--<appender-ref ref="STDOUT"/>-->
     </root>
 
     <logger name="org.springframework.web" level="INFO"/>

@@ -51,6 +51,7 @@ public class MultiHttpSecurityConfig {
                     .csrf().disable()
                     .authorizeRequests()
                     .antMatchers(REST_API + "recipes").permitAll()
+                    .antMatchers(REST_API + "images").hasAuthority("USER")
                     .antMatchers(REST_API + "profiles", REST_API + "profiles/**").hasAuthority("USER")
                     .and()
                     .jee()
