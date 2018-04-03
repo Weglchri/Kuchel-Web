@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,6 +60,8 @@ public class ImageServiceApi {
             throw new KuchelApiException(RECIPE_NOT_FOUND);
         } else if (recipe.getUser().getUsername().equals(user.getUsername())) {
             imageRepository.save(imageMapper.mapToEntity(imageRequest, recipe));
+            recipe.setModifiedDate(new Date());
+            recipeRepository.save(recipe);
         } else {
             throw new KuchelApiException(RECIPE_BELONGS_TO_ANOTHER_USER);
         }

@@ -1,6 +1,7 @@
 package at.kuchel.controller.global;
 
 import at.kuchel.api.ErrorResponse;
+import at.kuchel.exception.KuchelApiException;
 import at.kuchel.exception.KuchelException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -26,6 +27,17 @@ public class GlobalExceptionHandler {
         modelAndView.addObject("exception", klex);
         modelAndView.setViewName("error/kuchelerror");
         return modelAndView;
+    }
+
+
+    @ExceptionHandler(KuchelApiException.class)
+    protected Object handleKuchelApiException(KuchelException klex) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setTimestamp(new Date());
+        errorResponse.setError(klex.getMessage());
+        errorResponse.setStatus(50);
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)  // 404
