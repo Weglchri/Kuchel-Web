@@ -47,54 +47,11 @@
 | 3 |5| Speichern von Einstellungen| Bernhard|
 | 5 |6| Suche| |
 
-Qualität:
-5# Rudimentär
-4# schon verbessert aber grobe Schnitzer vorhanden
-3# mittlere Detail
-2# Teil Responsiv - hoche Details
-1# Responsiv von A-Z
-
-Beispiel Commit: [Qalität|Ref] = "[3|2] Rezept Seite überarbeitet"
 
 
-Punkte:
-
-android -> sendet lastSync wenn es schon sync gegeben hat
-Folge -> server sendet response mit 
-		"id": "4",
-        "username": "bernhard",
-        "name": "asdfasdf",
-        "duration": "70",
-        "difficulty": "2",
-        "image": {
-            "id": "1",
-			"modified":"1.2.18"
-            "name": "test",
-            "data": "payload"
-        }
-
-
-[
-    {
-        "id": "1",
-        "username": "bernhard",
-        "name": "Obstkuchen",
-        "duration": "30",
-        "difficulty": "1",
-        "image": null
-    },
-    {
-        "id": "4",
-        "username": "bernhard",
-        "name": "asdfasdf",
-        "duration": "70",
-        "difficulty": "2",
-        "image": {
-            "id": "1",
-			"modified":"1.2.18"   
-        }
-    }
-]
-
-Folge modified im Response ist vor handydate => nichts geändert
-Folge modified im Response ist nach handydate oder es gibt noch kein handydate => async bild nachladen => speichern und anzeigen
+<!-- TODO: Recipe of the to implement
+        <div th:if="${recipe}">
+            <p>Die Empfehlung des Tages:</p>
+            <a th:href="@{/recipes/__${recipe.id}__}" th:text="${recipe.name}"></a>
+        </div>
+-->

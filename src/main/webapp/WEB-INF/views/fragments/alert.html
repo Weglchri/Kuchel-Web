@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="alert (type, message)" >
+        <div class="text-center" id="alert-message" th:utext="${message}"></div>
+    </div>
+</html>

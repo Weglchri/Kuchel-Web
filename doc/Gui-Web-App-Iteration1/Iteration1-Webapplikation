@@ -6,7 +6,7 @@ Registrierung:
 
     - Passwort-Bestätigung fehlt ✓
     - Username != Benutzername ✓
-    - Keine Bestätigung dass Registrierung erfolgreich ✓
+    - Keine Bestätigung dass die Registrierung erfolgreich ist ✓
 
 Login:
 
@@ -15,7 +15,7 @@ Login:
 
 Rezept anlegen:
 
-    - Platzhalter falls nicht verändert bei Erstellen übernhemen
+    - Platzhalter falls nicht verändert bei Erstellen übernehmen
     - Schwierigkeit nicht verständlich 1 von 5 (kleinste/größte)
     - optisch passen die Abstände der Zeilen nicht (zu groß)
     - "Zutat hinzufügen"-Button nicht klar (eventuell auf + ändern)

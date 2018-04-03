@@ -25,16 +25,19 @@ import static org.slf4j.LoggerFactory.getLogger;
 @Controller
 @RequestMapping(Context.GUI_API)
 public class RecipeController {
+
     private static final Logger LOG = getLogger(RecipeController.class);
 
-    @Autowired
     private RecipeService recipeService;
-
-    @Autowired
     private IngredientService ingredientService;
+    private SessionHelper sessionHelper;
 
     @Autowired
-    private SessionHelper sessionHelper;
+    public RecipeController(RecipeService recipeService, IngredientService ingredientService, SessionHelper sessionHelper) {
+        this.recipeService = recipeService;
+        this.ingredientService = ingredientService;
+        this.sessionHelper = sessionHelper;
+    }
 
     @RequestMapping(value = "/recipes", method = RequestMethod.GET)
     public ModelAndView listRecipes() {
@@ -93,7 +96,7 @@ public class RecipeController {
             recipe.setUser(sessionHelper.getCurrentUser());
             recipeService.createRecipe(recipe);
             modelAndView.addObject("recipe", recipe);
-            modelAndView.addObject("successMessage", String.format("%s wurde erfolgreich hinzugefügt", recipe.getName()));
+            modelAndView.addObject("alertMessage", String.format("%s wurde erfolgreich hinzugefügt", recipe.getName()));
             modelAndView.setViewName("recipes-detailed");
         }
         return modelAndView;
@@ -177,7 +180,7 @@ public class RecipeController {
         } else {
             recipeService.updateRecipe(recipe);
             modelAndView.addObject("recipe", recipe);
-            modelAndView.addObject("successMessage", String.format("%s wurde erfolgreich geändert", recipe.getName()));
+            modelAndView.addObject("alertMessage", String.format("%s wurde erfolgreich geändert", recipe.getName()));
             modelAndView.setViewName("recipes-detailed");
         }
         return modelAndView;

@@ -3,8 +3,6 @@ package at.kuchel.controller;
 import at.kuchel.model.User;
 import at.kuchel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,21 +47,10 @@ public class LoginController {
             modelAndView.setViewName("registration");
         } else {
             userService.addUser(user);
-            modelAndView.addObject("successMessage", user.getUsername() + " erfolgreich registriert");
+            modelAndView.addObject("alertMessage", user.getUsername() + " erfolgreich registriert");
             modelAndView.addObject("user", new User());
             modelAndView.setViewName("login");
         }
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/user/home", method = RequestMethod.GET)
-    public ModelAndView home() {
-        ModelAndView modelAndView = new ModelAndView();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.getUserByUsername(auth.getName());
-        modelAndView.addObject("username", "Hallo " + user.getUsername());
-        modelAndView.addObject("userMessage", "Content Available Only for Users with Admin Role");
-        modelAndView.setViewName("user/home");
         return modelAndView;
     }
 
@@ -73,5 +60,16 @@ public class LoginController {
         modelAndView.setViewName("login");
         return modelAndView;
     }
+
+    /*@RequestMapping(value = "/user/home", method = RequestMethod.GET)
+    public ModelAndView home() {
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.getUserByUsername(auth.getName());
+        modelAndView.addObject("username", "Hallo " + user.getUsername());
+        modelAndView.addObject("alertMessage", "Content Available Only for Users with Admin Role");
+        modelAndView.setViewName("user/home");
+        return modelAndView;
+    }*/
 
 }

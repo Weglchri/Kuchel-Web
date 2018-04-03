@@ -26,8 +26,7 @@
         <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="validation-message"></div>
         <div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="validation-message"></div>
 
-
-        <button type="submit" class="btn btn-primary btn-block">Registrieren</button>
+        <button type="submit" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-block">Registrieren</button>
     </form>
 </div>
 

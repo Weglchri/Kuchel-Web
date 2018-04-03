@@ -4,6 +4,7 @@
 <head>
     <title>Login</title>
     <div th:replace="fragments/head :: head"></div>
+
 </head>
 
 <body>
@@ -25,9 +26,11 @@
         <div align="center" th:if="${param.error}">
             <p style="font-size: 20; color: #FF1C19;">Benutername oder Password stimmen nicht überein</p>
         </div>
-        <span th:utext="${successMessage}"></span>
         <button class="btn btn-primary btn-block" name="Submit" value="Anmelden" type="Submit" th:text="Anmelden"></button>
+        <div th:replace="fragments/alert :: alert (type='danger', message=${alertMessage})"></div>
     </form>
 </div>
 </body>
+<!-- custom javascript -->
+<script src="/resources/js/alert.js"></script>
 </html>

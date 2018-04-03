@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <title>Dashboard</title>
@@ -7,19 +7,9 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
-
-<div class="container">
-    <h1>Willkommen auf Kuchel</h1>
-    <div><p>Viel Spaß mit unseren Rezepten</p></div>
-
-    <!-- TODO: Recipe of the to implement
-    <div th:if="${recipe}">
-        <p>Die Empfehlung des Tages:</p>
-        <a th:href="@{/recipes/__${recipe.id}__}" th:text="${recipe.name}"></a>
+    <div class="container">
+        <h1> Willkommen bei Kuchel</h1>
+        <h3>Viel Spaß mit unseren Rezepten</h3>
     </div>
-   -->
-
-</div>
-
 </body>
 </html>
