@@ -11,6 +11,11 @@ public class KuchelApiException extends RuntimeException {
         this.arguments = arguments;
     }
 
+    public KuchelApiException(KuchelException ex) {
+        this.arguments= ex.getArguments();
+        this.errorCode= ex.getErrorCode();
+    }
+
     public KuchelErrorCode getErrorCode() {
         return errorCode;
     }

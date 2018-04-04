@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
 
 
     @ExceptionHandler(KuchelApiException.class)
-    protected Object handleKuchelApiException(KuchelException klex) {
+    protected Object handleKuchelApiException(KuchelApiException klex) {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setTimestamp(new Date());
         errorResponse.setError(klex.getMessage());

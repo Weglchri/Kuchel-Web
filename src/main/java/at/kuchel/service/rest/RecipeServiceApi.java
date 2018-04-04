@@ -2,6 +2,8 @@ package at.kuchel.service.rest;
 
 import at.kuchel.api.LastSyncDateRequest;
 import at.kuchel.api.RecipeDetailedResponse;
+import at.kuchel.exception.KuchelApiException;
+import at.kuchel.exception.KuchelException;
 import at.kuchel.mapper.RecipeMapper;
 import at.kuchel.model.Recipe;
 import at.kuchel.service.RecipeService;
@@ -32,8 +34,14 @@ public class RecipeServiceApi {
 
     public RecipeDetailedResponse getRecipeById(String id) {
         LOG.info("Retrieve recipe with id '{}'", id);
-        Recipe recipe = recipeService.getRecipeById(Long.parseLong(id));
-        return recipeMapper.mapToDetail(recipe);
+
+        try {
+            Recipe recipe = recipeService.getRecipeById(Long.parseLong(id));
+            return recipeMapper.mapToDetail(recipe);
+        } catch (KuchelException ex) {
+            throw new KuchelApiException(ex);
+
+        }
     }
 
     public List<RecipeDetailedResponse> getAllRecipes(LastSyncDateRequest lastSyncDateRequest) {
