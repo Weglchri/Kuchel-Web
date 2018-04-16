@@ -34,6 +34,11 @@ INSERT INTO Ingredient (name, status) VALUES ('Kreuzkümmel (gemahlen)', 'APPROV
 INSERT INTO Ingredient (name, status) VALUES ('Kurkuma (gemahlen)', 'APPROVED');
 INSERT INTO Ingredient (name, status) VALUES ('Garam masala', 'APPROVED');
 INSERT INTO Ingredient (name, status) VALUES ('Hühnersuppe', 'APPROVED');
+INSERT INTO Ingredient (name, status) VALUES ('Rinderfleisch', 'APPROVED');
+INSERT INTO Ingredient (name, status) VALUES ('Tomaten', 'APPROVED');
+INSERT INTO Ingredient (name, status) VALUES ('Zwiebeln', 'APPROVED');
+INSERT INTO Ingredient (name, status) VALUES ('Salat', 'APPROVED');
+
 
 -- Karotten-Olivenölkuchen im Glas
 INSERT INTO Recipe (name, user_id, duration, difficulty, modified_date, CREATION_DATE)
@@ -155,3 +160,31 @@ VALUES
 INSERT INTO Image (RECIPE_ID, data, modified_date)
 VALUES
   ('3', FILE_READ('C:/ingwer.jpg'), parsedatetime('23-02-2018 11:42:21.544', 'dd-MM-yyyy hh:mm:ss.SS'));
+
+
+-- Gedämpfte Huscheln
+INSERT INTO Recipe (name, user_id, duration, difficulty, modified_date, CREATION_DATE)
+VALUES
+  ('Gedämpfte Huscheln', 2, 10, 1, parsedatetime('23-02-2018 11:42:21.544', 'dd-MM-yyyy hh:mm:ss.SS'),
+   parsedatetime('23-02-2018 11:42:21.544', 'dd-MM-yyyy hh:mm:ss.SS'));
+
+INSERT INTO RECIPE_INGREDIENT (INGREDIENT_ID, RECIPE_ID, QUANTITY, QUALIFIER) VALUES (37, 4, 300, 'Gramm');
+INSERT INTO RECIPE_INGREDIENT (INGREDIENT_ID, RECIPE_ID, QUANTITY, QUALIFIER) VALUES (38, 4, 200, 'Gramm');
+INSERT INTO RECIPE_INGREDIENT (INGREDIENT_ID, RECIPE_ID, QUANTITY, QUALIFIER) VALUES (39, 4, 100, 'Stück');
+INSERT INTO RECIPE_INGREDIENT (INGREDIENT_ID, RECIPE_ID, QUANTITY, QUALIFIER) VALUES (40, 4, 300, 'Gramm');
+
+INSERT INTO INSTRUCTION (INSTRUCTION_DESCRIPTION, step, recipe_id)
+VALUES ('Den Braten im Ofen verbrennen lassen.', 1, 4);
+
+INSERT INTO INSTRUCTION (INSTRUCTION_DESCRIPTION, step, recipe_id)
+VALUES ('Isometrische Übungen am Fensterbrett.', 2, 4);
+
+INSERT INTO INSTRUCTION (INSTRUCTION_DESCRIPTION, step, recipe_id)
+VALUES ('Hambuger bei örtlicher Fastfoodkette besorgen.', 3, 4);
+
+INSERT INTO INSTRUCTION (INSTRUCTION_DESCRIPTION, step, recipe_id)
+VALUES ('Gedämpfte Huscheln servieren.', 4, 4);
+
+INSERT INTO Image (RECIPE_ID, data, modified_date)
+VALUES
+  ('4', FILE_READ('C:/huscheln.jpg'), parsedatetime('23-02-2018 11:42:21.544', 'dd-MM-yyyy hh:mm:ss.SS'));
