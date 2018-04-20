@@ -2,19 +2,19 @@ package at.kuchel.controller.rest;
 
 import at.kuchel.Context;
 import at.kuchel.api.ImageDetailResponse;
-import at.kuchel.api.ImageIdsRequest;
-import at.kuchel.api.LastSyncDateRequest;
+import at.kuchel.api.ImageRequest;
 import at.kuchel.service.rest.ImageServiceApi;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
 @RestController
-@RequestMapping(Context.REST_API + "recipes/{recipeId}/images")
+@RequestMapping(Context.REST_API + "images")
 public class ImageControllerApi {
     private static final Logger LOG = getLogger(ImageControllerApi.class);
 
@@ -25,27 +25,16 @@ public class ImageControllerApi {
         this.imageService = imageService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public List<ImageDetailResponse> getByImagesIds(@PathVariable Long recipeId) {
-        LOG.info("Retrieve images with id '{}'", recipeId);
-        return imageService.getImagesByRecipeId(recipeId);
-    }
-
-    @RequestMapping(method = RequestMethod.POST)
-    public List<ImageDetailResponse> getByImagesIds(@RequestBody ImageIdsRequest imageSyncRequest, @PathVariable Long recipeId) {
-        LOG.info("Retrieve images with ImageIdsRequest and id '{}'", recipeId);
-        return imageService.getImagesByRecipeId(imageSyncRequest, recipeId);
-    }
-
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ImageDetailResponse getByImageId(@PathVariable Long recipeId, @PathVariable Long id) {
-        LOG.info("Retrieve image for recipe '{}' with id '{}'", recipeId, id);
+    public ImageDetailResponse getByImageId(@PathVariable Long id) {
+        LOG.info("Retrieve image with id '{}'", id);
         return imageService.getImage(id);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-    public ImageDetailResponse getByImageId(@PathVariable Long recipeId, @PathVariable Long id, @RequestBody LastSyncDateRequest lastSyncDateRequest) {
-        LOG.info("Retrieve image for recipe '{}' with id '{}'", recipeId, id);
-        return imageService.getImageWithLastSyncDate(id, lastSyncDateRequest);
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(method = RequestMethod.PUT)
+    public void postImage(@AuthenticationPrincipal User user, @RequestBody ImageRequest imageRequest) {
+        LOG.info("Got new Image from user '{}' for recipe '{}'", user.getUsername(), imageRequest.getRecipeId());
+        imageService.storeImage(imageRequest, user);
     }
 }

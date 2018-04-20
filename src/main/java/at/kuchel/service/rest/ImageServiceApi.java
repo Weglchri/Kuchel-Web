@@ -1,12 +1,9 @@
 package at.kuchel.service.rest;
 
 import at.kuchel.api.ImageDetailResponse;
-import at.kuchel.api.ImageIdsRequest;
 import at.kuchel.api.ImageRequest;
-import at.kuchel.api.LastSyncDateRequest;
 import at.kuchel.exception.KuchelApiException;
 import at.kuchel.mapper.ImageMapper;
-import at.kuchel.model.Image;
 import at.kuchel.model.Recipe;
 import at.kuchel.repostitory.ImageRepository;
 import at.kuchel.repostitory.RecipeRepository;
@@ -15,8 +12,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static at.kuchel.exception.KuchelErrorCode.RECIPE_BELONGS_TO_ANOTHER_USER;
 import static at.kuchel.exception.KuchelErrorCode.RECIPE_NOT_FOUND;
@@ -24,32 +19,21 @@ import static at.kuchel.exception.KuchelErrorCode.RECIPE_NOT_FOUND;
 @Service
 public class ImageServiceApi {
 
-    @Autowired
-    private ImageRepository imageRepository;
+    private final ImageRepository imageRepository;
+
+    private final RecipeRepository recipeRepository;
+
+    private final ImageMapper imageMapper;
 
     @Autowired
-    private RecipeRepository recipeRepository;
-
-    @Autowired
-    private ImageMapper imageMapper;
+    public ImageServiceApi(ImageRepository imageRepository, RecipeRepository recipeRepository, ImageMapper imageMapper) {
+        this.imageRepository = imageRepository;
+        this.recipeRepository = recipeRepository;
+        this.imageMapper = imageMapper;
+    }
 
     public ImageDetailResponse getImage(Long imageId) {
         return imageMapper.mapDetail(imageRepository.findOne(imageId));
-    }
-
-    public List<ImageDetailResponse> getImagesByRecipeId(ImageIdsRequest imageSyncRequest, Long recipeId) {
-        List<Image> images = imageRepository.findByRecipeId(recipeId);
-        return images.stream().filter(image -> imageSyncRequest.getImageIds().contains(image.getRecipe().getId().toString()))
-                .map(image -> imageMapper.mapDetail(image)).collect(Collectors.toList());
-    }
-
-    public List<ImageDetailResponse> getImagesByRecipeId(Long recipeId) {
-        return imageRepository.findByRecipeId(recipeId).stream().map(image -> imageMapper.mapDetail(image)).collect(Collectors.toList());
-    }
-
-    public ImageDetailResponse getImageWithLastSyncDate(Long id, LastSyncDateRequest lastSyncDateRequest) {
-        ImageDetailResponse image = getImage(id);
-        return image.getModifiedDate().after(lastSyncDateRequest.getLastSyncDate()) ? image : null;
     }
 
     public void storeImage(ImageRequest imageRequest,  User user) {
