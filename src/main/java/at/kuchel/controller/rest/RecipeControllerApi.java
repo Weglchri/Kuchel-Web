@@ -32,8 +32,10 @@ public class RecipeControllerApi {
 
     @RequestMapping(method = RequestMethod.POST)
     public List<RecipeDetailedResponse> list(@RequestBody LastSyncDateRequest lastSyncDateRequest) {
-        LOG.info("Retrieving all recipes via POST");
-        return recipeService.getAllRecipes(lastSyncDateRequest);
+        LOG.info("Retrieving all recipes via POST with sync date '{}'", lastSyncDateRequest.getLastSyncDate());
+        List<RecipeDetailedResponse> recipes = recipeService.getAllRecipes(lastSyncDateRequest);
+        LOG.info("Returned '{}' recipes via POST and sync date", recipes.size());
+        return recipes;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

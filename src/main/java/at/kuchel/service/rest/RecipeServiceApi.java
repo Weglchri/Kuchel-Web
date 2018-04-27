@@ -45,7 +45,6 @@ public class RecipeServiceApi {
     }
 
     public List<RecipeDetailedResponse> getAllRecipes(LastSyncDateRequest lastSyncDateRequest) {
-        LOG.info("Retrieve recipe with sync date '{}'", lastSyncDateRequest.getLastSyncDate());
         List<Recipe> recipes = recipeService.getAllRecipes();
         return recipes.stream()
                 .filter(recipe -> recipe.getModifiedDate().after(lastSyncDateRequest.getLastSyncDate()))
