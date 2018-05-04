@@ -69,7 +69,7 @@ INSERT INTO INSTRUCTION (INSTRUCTION_DESCRIPTION, step, recipe_id)
 VALUES ('Karotten-Olivenölkuchen im Glas mit Staubzucker bestreut servieren.', 3, 1);
 
 INSERT INTO Image (id, RECIPE_ID, data, modified_date)
-VALUES ('1', '1', FILE_READ('C:/karotten.jpg'), parsedatetime('23-02-2018 11:42:21.544', 'dd-MM-yyyy hh:mm:ss.SS'));
+VALUES ('1', '1', FILE_READ('/Users/Wegls/Downloads/sampleImages/karotten.jpg'), parsedatetime('23-02-2018 11:42:21.544', 'dd-MM-yyyy hh:mm:ss.SS'));
 
 -- Knusprige Erdäpfel-Roulade mit Hendl
 INSERT INTO Recipe (name, user_id, duration, difficulty, modified_date, CREATION_DATE)
@@ -120,7 +120,7 @@ VALUES
 
 INSERT INTO Image (RECIPE_ID, data, modified_date)
 VALUES
-  ('2', FILE_READ('C:/knusprigeerdaepfel.jpg'), parsedatetime('23-02-2018 11:42:21.544', 'dd-MM-yyyy hh:mm:ss.SS'));
+  ('2', FILE_READ('/Users/Wegls/Downloads/sampleImages/knusprigeerdaepfel.jpg'), parsedatetime('23-02-2018 11:42:21.544', 'dd-MM-yyyy hh:mm:ss.SS'));
 
 -- Indisches Hühnercurry mit Zuckerschoten und Ingwer
 INSERT INTO Recipe (name, user_id, duration, difficulty, modified_date, CREATION_DATE)
@@ -159,7 +159,7 @@ VALUES
 
 INSERT INTO Image (RECIPE_ID, data, modified_date)
 VALUES
-  ('3', FILE_READ('C:/ingwer.jpg'), parsedatetime('23-02-2018 11:42:21.544', 'dd-MM-yyyy hh:mm:ss.SS'));
+  ('3', FILE_READ('/Users/Wegls/Downloads/sampleImages/ingwer.jpg'), parsedatetime('23-02-2018 11:42:21.544', 'dd-MM-yyyy hh:mm:ss.SS'));
 
 
 -- Gedämpfte Huscheln
@@ -187,4 +187,4 @@ VALUES ('Gedämpfte Huscheln servieren.', 4, 4);
 
 INSERT INTO Image (RECIPE_ID, data, modified_date)
 VALUES
-  ('4', FILE_READ('C:/huscheln.jpg'), parsedatetime('23-02-2018 11:42:21.544', 'dd-MM-yyyy hh:mm:ss.SS'));
+  ('4', FILE_READ('/Users/Wegls/Downloads/sampleImages/huscheln.jpg'), parsedatetime('23-02-2018 11:42:21.544', 'dd-MM-yyyy hh:mm:ss.SS'));

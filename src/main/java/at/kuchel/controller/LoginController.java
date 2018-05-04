@@ -41,7 +41,7 @@ public class LoginController {
         if (Objects.nonNull(userExists)) {
             bindingResult
                     .rejectValue("username", "error.user",
-                            "Es existiert bereits ein Benutzer mit diesem Usernamen");
+                            "Es existiert bereits ein User mit diesem Benutzernamen");
         }
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("registration");

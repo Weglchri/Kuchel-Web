@@ -43,6 +43,7 @@ public class RecipeController {
     public ModelAndView listRecipes() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("recipes", recipeService.getAllRecipes());
+        modelAndView.addObject("header", "Alle Rezepte");
         modelAndView.setViewName("recipes-overview");
         return modelAndView;
     }
@@ -53,6 +54,7 @@ public class RecipeController {
         User user = sessionHelper.getCurrentUser();
         modelAndView.addObject("recipes", recipeService.getRecipeByUser(user));
         modelAndView.addObject("personaloverview", true);
+        modelAndView.addObject("header", "Meine Rezepte");
         modelAndView.setViewName("recipes-overview");
         return modelAndView;
     }
