@@ -1,22 +1,4 @@
 
-#create-recipe-form {
-    margin-bottom: 10%;
-}
-
-/* general panels */
-
-#recipe-top-panel{
-    margin-bottom: 1em;
-}
-
-#recipe-ingredients-panel {
-    margin-bottom: 1em;
-}
-
-#recipe-instruction-panel {
-    margin-bottom: 1em;
-}
-
 /* add-button-panels */
 
 #recipe-ingredients-panel > div > button {
@@ -40,24 +22,35 @@
 }
 
 #recipe-ingredients-panel > div > div > div {
-    margin-top: -0.5em;
-    margin-right: -0.5em;
+    margin-bottom: 0.5em;
+    margin-right: -0.5%;
+
+}
+
+#recipe-ingredients-text {
+    margin-bottom: -0.2%;
 }
 
 #recipe-instruction-panel > div > div > div {
-    margin-top: -0.5em;
-    margin-right: -0.5em;
+    margin-bottom: 0.5em;
+    margin-right: -0.5%;
 }
 
-recipe-ingredients-panel > div > div > div > input {
+#recipe-instruction-text {
+    margin-bottom: -0.2%;
+}
+
+#recipe-ingredients-panel > div > div > div > input {
     font-size: 3em;
 }
+
+
 
 /* recipe button */
 
 #recipe-button {
     margin-top: 2%;
-    margin-bottom: 2%;
+    margin-bottom: 1%;
 }
 
 /* font size adjustment in form */
@@ -76,10 +69,10 @@ recipe-ingredients-panel > div > div > div > input {
 
 /* clearfix after every field*/
 
-.element {
- @include clearfix;
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
 }
-
-
 
 
