@@ -20,6 +20,7 @@
 |<del> 2 | User see only delete and update on their own recipe| Wegl </del>
 |<del> 1 | Difficulty and Duration | Wegl </del>
 | 4 | Recommendation of the day |Wegl
+| 2 | Einheiten sollen dynamisch hinzugefügt werden können wie Zutaten
 | 4 | Suche implementieren mit Namen des Rezeptes und Ansicht Matches | Wegl
 
 
