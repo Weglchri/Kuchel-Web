@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Login</title>
+    <div th:replace="fragments/head :: head"></div>
+
+</head>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container" style=" width: 80%;">
+
+    <div id="image-container">
+        <img th:src="@{/resources/images/lunchy.jpg}" id="kuchel-front-logo" class="img-responsive" alt="Logo"/>
+        <div id="centered-image-text">Kuchel</div>
+    </div>
+
+    <form th:action="@{/login}" method="POST" class="form-signin">
+        <h3 class="form-signin-heading">Login</h3>
+
+        <input type="text" id="username" name="username" th:placeholder="Benutzername" class="form-control"/> <br/>
+        <input type="password" th:placeholder="Passwort" id="password" name="password" class="form-control"/> <br/>
+
+        <div align="center" th:if="${param.error}">
+            <p style="font-size: 20; color: #FF1C19;">Benutername oder Password stimmen nicht überein</p>
+        </div>
+        <button id="login-button" class="btn btn-success btn-block btn-lg" name="Submit" value="Anmelden" type="Submit" th:text="Anmelden"></button>
+        <div th:replace="fragments/alert :: alert (type='danger', message=${alertMessage})"></div>
+    </form>
+</div>
+</body>
+<!-- custom javascript -->
+<script src="/resources/js/alert.js"></script>
+</html>

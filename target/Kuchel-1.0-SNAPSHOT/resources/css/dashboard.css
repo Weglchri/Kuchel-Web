@@ -1,0 +1,20 @@
+
+#image-container {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+#kuchel-front-logo {
+    width: 100%;
+}
+
+#centered-image-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 8em;
+    font-weight: 900;
+    font-family: serif;
+}

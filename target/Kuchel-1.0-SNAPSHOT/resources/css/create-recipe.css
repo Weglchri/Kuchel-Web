@@ -1,0 +1,78 @@
+
+/* add-button-panels */
+
+#recipe-ingredients-panel > div > button {
+    width:100%;
+}
+
+#recipe-instruction-panel > div > button {
+    width:100%;
+}
+
+/* validation message */
+
+.validation-message {
+    margin: 2px;
+}
+
+/* distance between ingredient/instruction text and their fields */
+
+#recipe-top-panel > div {
+    margin-right: 0.1em;
+}
+
+#recipe-ingredients-panel > div > div > div {
+    margin-bottom: 0.5em;
+    margin-right: -0.5%;
+
+}
+
+#recipe-ingredients-text {
+    margin-bottom: -0.2%;
+}
+
+#recipe-instruction-panel > div > div > div {
+    margin-bottom: 0.5em;
+    margin-right: -0.5%;
+}
+
+#recipe-instruction-text {
+    margin-bottom: -0.2%;
+}
+
+#recipe-ingredients-panel > div > div > div > input {
+    font-size: 3em;
+}
+
+
+
+/* recipe button */
+
+#recipe-button {
+    margin-top: 2%;
+    margin-bottom: 1%;
+}
+
+/* font size adjustment in form */
+
+#recipe-ingredients-panel > div > div > div >input{
+    font-size: 0.9em;
+}
+
+#recipe-instruction-panel > div > div > div >input{
+    font-size: 0.9em;
+}
+
+#recipe-top-panel > div >input {
+    font-size: 0.9em;
+}
+
+/* clearfix after every field*/
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+

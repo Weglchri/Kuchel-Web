@@ -1,0 +1,26 @@
+
+#recipe-overview-panel > div > h4 {
+    text-align: center;
+}
+
+#recipe-buttons-panel > div {
+    margin-top: 0.5em;
+}
+
+#recipe-buttons-panel > div > a {
+    width: 100%;
+    padding:2%;
+    font-size: 1em;
+    min-width:205px;
+    white-space:normal !important;
+}
+
+#recipe-buttons-panel > div {
+     text-align: center;
+     vertical-align: middle;
+}
+
+#recipe-buttons-panel > div > p {
+    margin: 5%;
+}
+

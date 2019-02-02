@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>User Liste</title>
+    <div th:replace="fragments/head :: head"></div>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+    <h1 th:utext="${recipe.name}"></h1>
+
+    <div class="col-md-4">
+        <h2 class="detailed-recipe-headers">Zutaten</h2>
+        <div th:each="recipeIngredient : ${recipe.getRecipeIngredients()}" class="recipe-instructions margin-0-auto">
+            <div class="row">
+                <div class="col-md-1"><p th:utext="${recipeIngredient.quantity}"></p></div>
+                <div class="col-md-2"><p th:utext="${recipeIngredient.qualifier}"></p></div>
+                <div class="col-md-4"><p th:utext="${recipeIngredient.ingredient.name}"></p></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <h2 class="detailed-recipe-headers">Zubereitung</h2>
+        <div th:each="instruction : ${recipe.getInstructions()}" class="recipe-instructions margin-0-auto">
+            <div class="row">
+                <div class="col-md-3"><p th:utext="'Schritt ' + ${instruction.step}"></p></div>
+                <div class="col-md-6"><p th:utext="${instruction.getDescription()}"></p></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div>
+            <h2 class="detailed-recipe-headers">Informationen</h2>
+            <h4>Dauer</h4>
+            <p th:utext="${recipe.getDuration()} + ' min'"></p>
+            <h4>Schwierigeit</h4>
+            <p th:utext="${recipe.getDifficulty()} + ' von 5'"></p>
+        </div>
+        <div id="creator-panel">
+            <h4>Ersteller</h4>
+            <p th:utext="${recipe.getUser().getUsername()}"></p>
+            <!--
+            <h4>Erstellt am</h4>
+            <p th:utext="${Calendar.getInstance()}"></p>
+            <h4 th:if="${recipe.getModifiedDate()}" >Verändert</h4>
+            <p th:utext="${recipe.getModifiedDate()}"></p>
+            -->
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div th:if="${#authentication.name} == ${recipe.getUser().getUsername()}">
+        <div class="row">
+            <div class="col-md-1">
+                <form th:action="@{/recipes/__${recipe.id}__}" th:method="delete" role="form">
+                    <button type="submit" class="btn btn-default">Löschen</button>
+                </form>
+            </div>
+            <div class="col-md-1">
+                <a class="btn btn-default" th:href="@{/recipes/__${recipe.id}__/update}">Ändern</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/alert :: alert (type='danger', message=${alertMessage})"></div>
+</body>
+<!-- custom javascript -->
+<script src="/resources/js/alert.js"></script>
+</html>
